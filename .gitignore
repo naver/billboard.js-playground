@@ -1,0 +1,14 @@
+# npm modules
+components
+build
+.sass-cache
+
+
+# coverage report
+coverage/
+.DS_Store
+#dist/
+doc/
+node_modules
+.idea/
+*.log
