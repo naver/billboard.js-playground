@@ -2,7 +2,8 @@
 components
 build
 .sass-cache
-
+npm-debug.log
+npm-debug.log*
 
 # coverage report
 coverage/
