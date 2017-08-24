@@ -41,6 +41,10 @@ const config = {
 		inline: true
 	},
 	plugins: [
+		new webpack.ProvidePlugin({
+			$: "jquery",
+			jQuery: "jquery"
+		}),
 		new ExtractTextPlugin("app.bundle.css"),
 		new webpack.HotModuleReplacementPlugin()
 	]
