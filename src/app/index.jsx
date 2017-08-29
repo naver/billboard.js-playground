@@ -1,26 +1,31 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import {
+	Provider
+} from "react-redux";
+import {
+	createStore
+} from "redux";
+
+
 import * as option from "./document.json";
-import { Config, Chart, Data } from "./view";
+import { Config } from "./component/config";
+import { Chart } from "./component/chart";
+import { Data } from "./component/data";
+import playgroundApp from "./reducers";
 
-const config = document.querySelector("#config");
-const chart = document.querySelector("#chart");
-const data = document.querySelector("#data");
+const store = createStore(playgroundApp);
+const app = document.querySelector("#app");
 
-ReactDOM.render(
-	<Config
-		options={option}
-	/>,
-	config
-);
-
-ReactDOM.render(
-	<Chart />,
-	chart
-);
-
+const App = () => (<div>
+	<Chart />
+	<Data />
+	<Config options={option} />
+</div>);
 
 ReactDOM.render(
-	<Data />,
-	data
+	<Provider store={store}>
+		<App />
+	</Provider>,
+	app
 );

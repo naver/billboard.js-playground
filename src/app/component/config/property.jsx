@@ -6,18 +6,17 @@ class Property extends React.Component {
 		const option = this.props;
 		const type = option.type ? option.type.names.join(", ") : "";
 
-		return (<div data-id={option.name}>
-			<p>id : {option.name}</p>
-			<p>
-				<span>type : {type} && default : {Property.getInputType(type, option.defaultvalue)}</span>
-			</p>
-		</div>);
+		return (<li data-id={option.name}>
+			<span className="name"> {option.name} </span>
+			<span className="type"> {type} </span>
+			<span> {Property.getInputType(type, option.defaultvalue, option.name)} </span>
+		</li>);
 	}
 
-	static getInputType(type, defaultvalue = ""){
+	static getInputType(type, defaultvalue = "", name) {
 		switch (type.toLocaleLowerCase()) {
 			case "boolean" :
-				return input.checkbox(defaultvalue);
+				return <input.checkbox defaultvalue={defaultvalue} name={name} />;
 			case "string" :
 				return input.string(defaultvalue);
 			case "number" :
@@ -27,6 +26,5 @@ class Property extends React.Component {
 		}
 	}
 }
-
 
 export default Property;

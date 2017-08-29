@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --open",
     "build": "webpack --env production --config ./webpack.production.config.js",
-    "extract": "jsdoc2md --json node_modules/billboard.js/src/config/Options.js > src/app/document.json"
+    "extract:document": "jsdoc2md --json node_modules/billboard.js/src/config/Options.js > src/app/document.json"
   },
   "repository": {
     "type": "git",
@@ -25,7 +25,9 @@
     "jsdoc-to-markdown": "^3.0.0",
     "moment": "^2.18.1",
     "react": "^0.14.7",
-    "react-dom": "^0.14.7"
+    "react-dom": "^0.14.7",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",
