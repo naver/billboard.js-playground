@@ -7,25 +7,21 @@ import {
 	createStore
 } from "redux";
 
-
-import * as option from "./document.json";
-import { Config } from "./component/config";
+import { DefaultConfigure } from "./component/defaultConfigure";
 import { Chart } from "./component/chart";
-import { Data } from "./component/data";
+import { UserConfigure } from "./component/userConfigure";
 import playgroundApp from "./reducers";
 
 const store = createStore(playgroundApp);
-const app = document.querySelector("#app");
-
-const App = () => (<div>
-	<Chart />
-	<Data />
-	<Config options={option} />
-</div>);
+const root = document.querySelector("#app");
 
 ReactDOM.render(
 	<Provider store={store}>
-		<App />
+		<div>
+			<Chart />
+			<UserConfigure />
+			<DefaultConfigure />
+		</div>
 	</Provider>,
-	app
+	root
 );

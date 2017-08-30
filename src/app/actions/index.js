@@ -1,22 +1,13 @@
-let config = {
-	data : {
-		columns: [
-			["data1", 30, 200, 100, 400, 150, 250],
-			["data2", 50, 20, 10, 40, 15, 25],
-			["data3", 50, 20, 10, 40, 15, 25]
-		]
-	}
-}
+export const CHANGE_OPTIONS = "CHANGE_OPTIONS";
+export const CHANGE_USER_OPTIONS = "CHANGE_USER_OPTIONS";
 
-export const changeCheckbox = name => ({
-	type: "CHANGE_OPTIONS",
+export const changeCheckbox = (name, value) => ({
+	type: CHANGE_OPTIONS,
 	name,
+	value
 });
 
-export const updateConfig = config => {
-	return {
-		type: "UPDATE_CONFIG",
-		config,
-	};
-};
-
+export const changeUserConfigure = value => ({
+	type: CHANGE_USER_OPTIONS,
+	value
+});

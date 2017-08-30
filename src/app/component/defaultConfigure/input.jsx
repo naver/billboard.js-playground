@@ -16,8 +16,10 @@ const number = defaultvalue => (<input type="number" defaultValue={defaultvalue}
 
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-	onChange: () => {
-		dispatch(changeCheckbox(ownProps.name));
+	onChange: e => {
+		const name = ownProps.name.replace(/\:/g, ".");
+
+		dispatch(changeCheckbox(name, e.target.checked));
 	},
 });
 

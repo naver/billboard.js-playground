@@ -9,14 +9,14 @@ class Property extends React.Component {
 		return (<li data-id={option.name}>
 			<span className="name"> {option.name} </span>
 			<span className="type"> {type} </span>
-			<span> {Property.getInputType(type, option.defaultvalue, option.name)} </span>
+			<span> {Property.getInputType(type, option.defaultvalue, option)} </span>
 		</li>);
 	}
 
-	static getInputType(type, defaultvalue = "", name) {
+	static getInputType(type, defaultvalue = "", option) {
 		switch (type.toLocaleLowerCase()) {
 			case "boolean" :
-				return <input.checkbox defaultvalue={defaultvalue} name={name} />;
+				return <input.checkbox defaultvalue={defaultvalue} {...option} />;
 			case "string" :
 				return input.string(defaultvalue);
 			case "number" :

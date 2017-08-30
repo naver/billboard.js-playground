@@ -1,9 +1,10 @@
 import React from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import _ from "underscore";
 import Property from "./property";
 
-class Config extends React.Component {
+class Configure extends React.Component {
 	property(properties) {
 		return (<ul>
 			{_.map(properties, (prop, idx) => <Property key={idx} {...prop} />)}
@@ -25,11 +26,20 @@ class Config extends React.Component {
 	}
 }
 
-Config.propTypes = {
+Configure.propTypes = {
 	options: PropTypes.object.isRequired,
 };
 
-export {
-	Config,
+const mapStateToProps = state => {
+	return {
+		options: state.document
+	};
 };
-export default Config;
+
+
+const DefaultConfigure = connect(mapStateToProps)(Configure);
+
+export {
+	DefaultConfigure,
+};
+export default DefaultConfigure;
