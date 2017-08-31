@@ -1,11 +1,9 @@
-import React from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import React, { PropTypes } from "react";
 import _ from "underscore";
+import { connect } from "react-redux";
 import Property from "./property";
 
-class Configure extends React.Component {
-
+class Control extends React.Component {
 	child(properties) {
 		return _.map(properties, (p, i) => {
 			if (p.properties) {
@@ -17,7 +15,7 @@ class Configure extends React.Component {
 	}
 
 	member(option, index) {
-		return (<div key={index} >
+		return (<div key={index}>
 			<Property {...option} />
 			{option.properties ? <ul>{this.child(option.properties)}</ul> : ""}
 		</div>);
@@ -31,18 +29,17 @@ class Configure extends React.Component {
 	}
 }
 
-Configure.propTypes = {
+Control.propTypes = {
 	options: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-	options: state.document
+	options: state.gui
 });
 
-
-const DefaultConfigure = connect(mapStateToProps)(Configure);
+const GUI = connect(mapStateToProps)(Control);
 
 export {
-	DefaultConfigure,
+	GUI,
 };
-export default DefaultConfigure;
+export default GUI;

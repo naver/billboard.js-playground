@@ -7,9 +7,10 @@ import {
 	createStore
 } from "redux";
 
-import { DefaultConfigure } from "./component/defaultConfigure";
 import { Chart } from "./component/chart";
-import { UserConfigure } from "./component/userConfigure";
+import { GUI } from "./component/gui";
+import { Command } from "./component/command";
+
 import playgroundApp from "./reducers";
 
 const store = createStore(playgroundApp);
@@ -19,9 +20,9 @@ ReactDOM.render(
 	<Provider store={store}>
 		<div id="wrapper">
 			<Chart />
-			<UserConfigure />
+			<Command />
 			<div className="scroll">
-				<DefaultConfigure />
+				<GUI />
 			</div>
 		</div>
 	</Provider>,

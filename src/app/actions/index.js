@@ -1,13 +1,13 @@
-export const CHANGE_OPTIONS = "CHANGE_OPTIONS";
-export const CHANGE_USER_OPTIONS = "CHANGE_USER_OPTIONS";
+export const UPDATE_GUI = "UPDATE_GUI";
+export const UPDATE_COMMAND = "UPDATE_COMMAND";
 
-export const changeCheckbox = (name, value) => ({
-	type: CHANGE_OPTIONS,
+export const updateGui = (name, value) => ({
+	type: UPDATE_GUI,
 	name,
 	value
 });
 
-export const changeUserConfigure = value => ({
-	type: CHANGE_USER_OPTIONS,
+export const updateCommand = value => ({
+	type: UPDATE_COMMAND,
 	value
 });

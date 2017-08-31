@@ -1,9 +1,10 @@
-import {bb} from "billboard.js";
 import React, {PropTypes} from "react";
-import connect from 'react-watcher';
-import {deepCopy} from './util';
+import connect from "react-watcher";
+import { bb } from "billboard.js";
+import CONFIGURE_PROPTYPES from "./proptypes";
+import { deepCopy } from "./util";
 
-class BB extends React.Component {
+class Billboard extends React.Component {
 
 	static get displayName() {
 		return "BB";
@@ -123,43 +124,10 @@ class BB extends React.Component {
 	}
 }
 
-BB.propTypes = {
-	size : PropTypes.object,
-	padding: PropTypes.object,
-	color: PropTypes.object,
-	interaction: PropTypes.object,
-	transition: PropTypes.object,
-	oninit: PropTypes.func,
-	onrendered: PropTypes.func,
-	onmouseover: PropTypes.func,
-	onmouseout: PropTypes.func,
-	onresize: PropTypes.func,
-	onresized: PropTypes.func,
-	axis: PropTypes.object,
-	grid: PropTypes.object,
-	regions: PropTypes.array,
-	legend: PropTypes.object,
-	tooltip: PropTypes.object,
-	subchart: PropTypes.object,
-	zoom: PropTypes.object,
-	point: PropTypes.object,
-	line: PropTypes.object,
-	area: PropTypes.object,
-	bar: PropTypes.object,
-	pie: PropTypes.object,
-	donut: PropTypes.object,
-	gauge: PropTypes.object,
-	data : PropTypes.object,
-	title: PropTypes.object,
-	className: PropTypes.string,
-	style: PropTypes.object,
-	unloadBeforeLoad: PropTypes.bool
-};
+Billboard.propTypes = CONFIGURE_PROPTYPES;
 
 export {
-	BB
+	Billboard
 };
-BB = connect(BB);
-export default BB;
-
-
+Billboard = connect(Billboard);
+export default Billboard;

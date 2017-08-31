@@ -12,7 +12,7 @@ export const namespaceToObject = (keys, lastValue, obj = {}) => {
 
 export const deepCopy = (target, ...sources) => {
 	const isObject = (item) =>{
-		return (item && typeof item === 'object' && !Array.isArray(item));
+		return (item && typeof item === "object" && !Array.isArray(item));
 	};
 
 	if (!sources.length) return target;

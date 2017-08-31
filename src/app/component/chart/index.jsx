@@ -1,13 +1,7 @@
-import React, {
-	PropTypes
-} from "react";
-import {
-	connect
-} from "react-redux";
-import ConfigureProptypes from "./configureProptypes";
-import {
-	BB as Billboard
-} from "./BB";
+import React, { PropTypes } from "react";
+import { connect } from "react-redux";
+import CONFIGURE_PROPTYPES from "./billboard/proptypes";
+import { Billboard } from "./billboard";
 
 class RawChart extends React.Component {
 	render() {
@@ -23,16 +17,17 @@ class RawChart extends React.Component {
 }
 
 RawChart.propTypes = {
-	chartConfigure: PropTypes.shape(ConfigureProptypes).isRequired
+	chartConfigure: PropTypes.shape(CONFIGURE_PROPTYPES).isRequired
 };
 
 const mapStateToProps = state => ({
-	chartConfigure: state.options
+	chartConfigure: state.command.original
 });
 
 const Chart = connect(mapStateToProps)(RawChart);
 
 export {
-	Chart
+	Chart,
+	CONFIGURE_PROPTYPES
 };
 export default Chart;

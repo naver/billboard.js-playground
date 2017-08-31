@@ -3,7 +3,7 @@ import {
 	connect
 } from "react-redux";
 import {
-	changeCheckbox
+	updateGui
 } from "../../actions";
 
 const inputCheck = ({ defaultvalue, onChange }) => {
@@ -19,7 +19,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 	onChange: e => {
 		const name = ownProps.name.replace(/\:/g, ".");
 
-		dispatch(changeCheckbox(name, e.target.checked));
+		dispatch(updateGui(name, e.target.checked));
 	},
 });
 

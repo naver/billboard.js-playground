@@ -2,7 +2,7 @@ import {
 	PropTypes
 } from "react";
 
-const ConfigureProptypes = {
+const CONFIGURE_PROPTYPES = {
 	size : PropTypes.object,
 	padding: PropTypes.object,
 	color: PropTypes.object,
@@ -35,4 +35,4 @@ const ConfigureProptypes = {
 	unloadBeforeLoad: PropTypes.bool
 };
 
-export default ConfigureProptypes;
+export default CONFIGURE_PROPTYPES;
