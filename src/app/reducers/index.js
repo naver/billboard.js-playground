@@ -10,8 +10,10 @@ const userState = {
 			["data2", 50, 20, 10, 40, 15, 25],
 			["data3", 50, 20, 10, 40, 15, 25]
 		]
-	}
+	},
 };
+
+
 
 // name => AAA.bbb
 // description => hello world
@@ -19,18 +21,69 @@ const userState = {
 // type { names : ["Number"] }
 const documentToObject = () => {
 	let obj = {};
-
+	let copy = {};
 	_.map(defaultDocumentOption).forEach((e) => {
 		if(e.kind === "member"){
 			if(e.name.indexOf(":") > -1){
-				// todo
+				const keys = e.name.split(":");
+				const target = namespaceToObject(keys.slice(0), {
+					type: e.type,
+					name: keys.join("."),
+					defaultvalue : e.defaultvalue,
+					description: e.description
+				});
+
+				copy = deepCopy(copy, target);
 			} else {
+
 				obj[e.name] = e;
 			}
 		}
 	});
-	return defaultDocumentOption;
+
+	_.each(copy, (target, key) => {
+		obj[key] = objectToProperty(target, key);
+		obj[key].kind = "member";
+	});
+
+	console.log(obj)
+
+	return obj;
 };
+
+const objectToProperty = (obj, prefix) => {
+	const properties = [];
+	_.each(obj , (data, key) => {
+		const keys = _.keys(data);
+		const filtered = _.filter(keys, structure => {
+			return ["type", "name", "defaultvalue", "description"].indexOf(structure) < 0;
+		});
+
+		if(filtered.length > 0){
+			const child = {};
+			const full = (prefix + "." + key);
+
+			_.each(filtered, (prpk) => {
+				child[prpk] = data[prpk];
+			});
+			const props = objectToProperty(child, full);
+			properties.push(props);
+
+		} else {
+			properties.push(data);
+		}
+	});
+
+	return {
+		properties,
+		defaultvalue: "undefined",
+		type: {
+			names: ["Object"]
+		},
+		name: prefix,
+	};
+};
+
 const option = documentToObject();
 
 const filteredState = (name, value) => {

@@ -13,10 +13,12 @@ class RawChart extends React.Component {
 	render() {
 		const chartConfigure = this.props.chartConfigure;
 
-		return (<Billboard
-			id="reactChart"
-			{...chartConfigure}
-		/>);
+		return (<div className="chart">
+			<Billboard
+				id="reactChart"
+				{...chartConfigure}
+			/>
+		</div>);
 	}
 }
 

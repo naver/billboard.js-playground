@@ -5,16 +5,21 @@ import _ from "underscore";
 import Property from "./property";
 
 class Configure extends React.Component {
-	property(properties) {
-		return (<ul>
-			{_.map(properties, (prop, idx) => <Property key={idx} {...prop} />)}
-		</ul>);
+
+	child(properties) {
+		return _.map(properties, (p, i) => {
+			if (p.properties) {
+				return this.member(p, i);
+			} else {
+				return <Property key={i} {...p} />;
+			}
+		});
 	}
 
 	member(option, index) {
-		return (<div key={index}>
+		return (<div key={index} >
 			<Property {...option} />
-			{option.properties ? this.property(option.properties) : ""}
+			{option.properties ? <ul>{this.child(option.properties)}</ul> : ""}
 		</div>);
 	}
 
@@ -22,19 +27,17 @@ class Configure extends React.Component {
 		const rendered = _.map(this.props.options, (option, idx) => {
 			return option.kind === "member" ? this.member(option, idx) : "";
 		});
-		return <ul>{rendered}</ul>;
+		return <div className="inputConfigure">{rendered}</div>;
 	}
 }
 
 Configure.propTypes = {
-	options: PropTypes.object.isRequired,
+	options: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => {
-	return {
-		options: state.document
-	};
-};
+const mapStateToProps = state => ({
+	options: state.document
+});
 
 
 const DefaultConfigure = connect(mapStateToProps)(Configure);

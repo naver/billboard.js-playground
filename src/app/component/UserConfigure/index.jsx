@@ -17,7 +17,7 @@ class RawUserData extends React.Component {
 	render() {
 		const value = `${this.props.userConfigure}`;
 
-		return (<div>
+		return (<div className="textConfigure">
 			<textarea value={value} onChange={this.onChangeText} className={this.state.error ? "err" : ""} />
 		</div>);
 	}

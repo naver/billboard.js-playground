@@ -17,10 +17,12 @@ const root = document.querySelector("#app");
 
 ReactDOM.render(
 	<Provider store={store}>
-		<div>
+		<div id="wrapper">
 			<Chart />
 			<UserConfigure />
-			<DefaultConfigure />
+			<div className="scroll">
+				<DefaultConfigure />
+			</div>
 		</div>
 	</Provider>,
 	root
