@@ -19,20 +19,20 @@ class Billboard extends React.Component {
 	watchConfig() {
 		const { watch } = this.props;
 
-		watch('axis.x.labels', (data) => this.instance.axis.label({x : data}));
-		watch('axis.y.labels', (data) => this.instance.axis.label({y : data}));
-		watch('axis.x.categories', (data) => this.instance.axis.x.categories(data));
-		watch('legend.show', (data) => this.instance.legend.show(data));
-		watch('legend.hide', (data) => this.instance.legend.hide(data));
-		watch('regions', (data) => this.instance.regions(data));
-		watch('size.width', (data) => this.instance.resize({ width : data}));
-		watch('size.height', (data) => this.instance.resize({ height : data}));
-		watch('grid.x.lines', (data) => this.instance.xgrids(data));
-		watch('grid.y.lines', (data) => this.instance.ygrids(data));
-		watch('zoom.enable', (data) => this.instance.zoom.enable(data));
+		watch("axis.x.labels", (data) => this.instance.axis.label({x : data}));
+		watch("axis.y.labels", (data) => this.instance.axis.label({y : data}));
+		watch("axis.x.categories", (data) => this.instance.axis.x.categories(data));
+		watch("legend.show", (data) => this.instance.legend.show(data));
+		watch("legend.hide", (data) => this.instance.legend.hide(data));
+		watch("regions", (data) => this.instance.regions(data));
+		watch("size.width", (data) => this.instance.resize({ width : data}));
+		watch("size.height", (data) => this.instance.resize({ height : data}));
+		watch("grid.x.lines", (data) => this.instance.xgrids(data));
+		watch("grid.y.lines", (data) => this.instance.ygrids(data));
+		watch("zoom.enable", (data) => this.instance.zoom.enable(data));
 
 		// using custom
-		watch('zoom.domain', (data) => {
+		watch("zoom.domain", (data) => {
 			if(data === null){
 				this.instance.unzoom();
 			} else {
@@ -40,15 +40,9 @@ class Billboard extends React.Component {
 			}
 		});
 
-		watch("interaction", (data) => {
-			this.destroy();
-		});
+		watch("interaction", () => this.destroy());
 
-		watch('data.columns', (data) => {
-			this.instance.load({
-				columns: data
-			});
-		});
+		watch("data.columns", data => this.instance.load({ columns: data }));
 		// watch('data', (data) => this.instance.unload(data));
 		// watch('data.hide', (data) => this.instance.hide(data));
 		// watch('data.hide', (data) => this.instance.show(data));

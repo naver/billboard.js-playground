@@ -1,6 +1,5 @@
 import React, { PropTypes } from "react";
 import { connect } from "react-redux";
-import CONFIGURE_PROPTYPES from "../chart";
 import { updateCommand } from "../../actions";
 
 class Controller extends React.Component {
@@ -21,6 +20,12 @@ class Controller extends React.Component {
 		});
 	}
 
+	componentWillReceiveProps(nextProps) {
+		this.setState({
+			text: nextProps.text
+		});
+	}
+
 	render() {
 		const value = `${this.state.text}`;
 
@@ -31,19 +36,25 @@ class Controller extends React.Component {
 
 	onChangeText(e) {
 		const value = e.target.value;
+		let parsed;
 
 		try {
-			JSON.parse(value);
-			this.setState({
-				error: false,
-				text: value
-			});
-			this.props.onChange(value);
-		} catch(e){
+			parsed = JSON.parse(value);
+		} catch (e) {
+			parsed = null;
+		}
+
+		if(parsed === null){
 			this.setState({
 				error: true,
 				text: value
 			});
+		} else {
+			this.setState({
+				error: false,
+				text: value
+			});
+			this.props.onChange(parsed);
 		}
 	}
 }

@@ -3,7 +3,7 @@ import {
 } from "react";
 
 const CONFIGURE_PROPTYPES = {
-	size : PropTypes.object,
+	size: PropTypes.object,
 	padding: PropTypes.object,
 	color: PropTypes.object,
 	interaction: PropTypes.object,
@@ -28,7 +28,7 @@ const CONFIGURE_PROPTYPES = {
 	pie: PropTypes.object,
 	donut: PropTypes.object,
 	gauge: PropTypes.object,
-	data : PropTypes.object,
+	data: PropTypes.object,
 	title: PropTypes.object,
 	className: PropTypes.string,
 	style: PropTypes.object,

@@ -22,20 +22,17 @@ class Control extends React.Component {
 	}
 
 	render() {
-		const rendered = _.map(this.props.options, (option, idx) => {
+		console.log("Render");
+		const rendered = _.map(this.props,  (option, idx) => {
 			return option.kind === "member" ? this.member(option, idx) : "";
 		});
 		return <div className="inputConfigure">{rendered}</div>;
 	}
 }
 
-Control.propTypes = {
-	options: PropTypes.object.isRequired
+const mapStateToProps = state => {
+	return state.gui;
 };
-
-const mapStateToProps = state => ({
-	options: state.gui
-});
 
 const GUI = connect(mapStateToProps)(Control);
 

@@ -19,7 +19,6 @@ export const documentToObject = () => {
 
 				copy = deepCopy(copy, target);
 			} else {
-
 				obj[e.name] = e;
 			}
 		}

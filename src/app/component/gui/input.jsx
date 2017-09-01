@@ -6,8 +6,12 @@ import {
 	updateGui
 } from "../../actions";
 
-const inputCheck = ({ defaultvalue, onChange }) => {
-	return (<input type="checkbox" defaultChecked={defaultvalue} onChange={onChange} />);
+const inputCheck = ({ defaultvalue, onChange, name }) => {
+	if(defaultvalue){
+		return (<input type="checkbox" checked onChange={onChange} />);
+	} else {
+		return (<input type="checkbox" onChange={onChange} />);
+	}
 };
 
 const string = defaultvalue => (<input type="text" defaultValue={defaultvalue} />);
@@ -26,7 +30,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 const checkbox = connect(
 	null, mapDispatchToProps
 )(inputCheck);
-
 
 export {
 	checkbox,
