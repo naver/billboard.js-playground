@@ -49,8 +49,7 @@ const updateGuiState = (state, updated) => {
 	_.each(updated, (value, key) => {
 		if(key !== "data"){
 			const member = state[key];
-			const updatedMember = changeMemberProperty(member, value, key);
-			newObj[key] = updatedMember;
+			newObj[key] = changeMemberProperty(member, value, key);
 		}
 	});
 
@@ -74,13 +73,19 @@ const command = (state = commandState, action) => {
 	}
 
 	commandState = returnState;
+	returnState.lastUpdate = new Date();
 	return returnState;
 };
 
 const gui = (state = guiState, action) => {
-	let returnState;
+	let returnState = {};
 
 	switch (action.type) {
+		case UPDATE_GUI : {
+			const value = namespaceToObject(action.name.split("."), action.value);
+			returnState = updateGuiState(state, value);
+			break;
+		}
 		case UPDATE_COMMAND :
 			returnState = updateGuiState(state, action.value);
 			break;
@@ -88,6 +93,7 @@ const gui = (state = guiState, action) => {
 			returnState = state;
 	}
 
+	returnState.lastUpdate = new Date();
 	return returnState;
 };
 

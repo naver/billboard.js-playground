@@ -3,13 +3,26 @@ import _ from "underscore";
 import { connect } from "react-redux";
 import Property from "./property";
 
+
 class Control extends React.Component {
+	constructor() {
+		super();
+	}
+
+	componentWillMount() {
+		this.setState(this.props);
+	}
+
+	componentWillReceiveProps(nextProps) {
+		this.setState(nextProps);
+	}
+
 	child(properties) {
 		return _.map(properties, (p, i) => {
 			if (p.properties) {
 				return this.member(p, i);
 			} else {
-				return <Property key={i} {...p} />;
+				return <Property key={p.name} {...p} />;
 			}
 		});
 	}
@@ -22,8 +35,7 @@ class Control extends React.Component {
 	}
 
 	render() {
-		console.log("Render");
-		const rendered = _.map(this.props,  (option, idx) => {
+		const rendered = _.map(this.state,  (option, idx) => {
 			return option.kind === "member" ? this.member(option, idx) : "";
 		});
 		return <div className="inputConfigure">{rendered}</div>;

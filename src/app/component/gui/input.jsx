@@ -1,18 +1,25 @@
 import React from "react";
-import {
-	connect
-} from "react-redux";
+import { connect } from "react-redux";
 import {
 	updateGui
 } from "../../actions";
 
-const inputCheck = ({ defaultvalue, onChange, name }) => {
-	if(defaultvalue){
-		return (<input type="checkbox" checked onChange={onChange} />);
-	} else {
-		return (<input type="checkbox" onChange={onChange} />);
+class inputCheck extends React.Component {
+	constructor() {
+		super();
+
 	}
-};
+
+	render() {
+		const { defaultvalue, onChange } = this.props;
+
+		if(defaultvalue){
+			return (<input type="checkbox" checked onChange={onChange} />);
+		} else {
+			return (<input type="checkbox" onChange={onChange} />);
+		}
+	}
+}
 
 const string = defaultvalue => (<input type="text" defaultValue={defaultvalue} />);
 
@@ -27,12 +34,12 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 	},
 });
 
-const checkbox = connect(
+const Checkbox = connect(
 	null, mapDispatchToProps
 )(inputCheck);
 
 export {
-	checkbox,
+	Checkbox,
 	string,
 	number,
 };
