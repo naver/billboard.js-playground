@@ -73,6 +73,8 @@ const command = (state = commandState, action) => {
 	}
 
 	commandState = returnState;
+
+	// react connect check shallow key
 	returnState.lastUpdate = new Date();
 	return returnState;
 };

@@ -2,9 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import {
 	Checkbox,
-	string,
-	number,
-} from "./input";
+	Text,
+	Number,
+} from "./input/index";
 
 class Property extends React.Component {
 	componentWillMount() {
@@ -32,9 +32,9 @@ class Property extends React.Component {
 			case "boolean" :
 				return <Checkbox {...option} />;
 			case "string" :
-				return string(defaultvalue);
+				return <Text {...option} />;
 			case "number" :
-				return number(isNaN(defaultvalue) ? null : defaultvalue);
+				return <Number {...option} />;
 			default :
 				return "";
 		}
