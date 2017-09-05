@@ -1,7 +1,7 @@
 import React, { PropTypes } from "react";
 import { connect } from "react-redux";
 import CONFIGURE_PROPTYPES from "./billboard/proptypes";
-import { Billboard } from "./billboard";
+import { Billboard } from "./billboard/index";
 
 class RawChart extends React.Component {
 	render() {

@@ -1,16 +1,19 @@
+import * as _ from "lodash";
 import { combineReducers } from "redux";
 import { namespaceToObject, deepCopy } from "../util";
 import { UPDATE_COMMAND, UPDATE_GUI } from "../actions";
-import { initCommandConfigure, initDocumentConfigure } from "../configure";
+import { initCommandConfigure, initDocumentConfigure, changeMemberProperty } from "../configure";
 
+// 커맨드창
 let commandState = {
 	original: initCommandConfigure,
 	text: JSON.stringify(initCommandConfigure)
 };
+// GUI 옵션
 let guiState = initDocumentConfigure;
 
 
-const updateOriginal = (state, updated) => {
+const updateCommandState = (state, updated) => {
 	const original = deepCopy({}, state.original, updated);
 	const text = JSON.stringify(original);
 
@@ -19,41 +22,10 @@ const updateOriginal = (state, updated) => {
 	};
 };
 
-const changeMemberProperty = (member, target, root) => {
-	const key = _.keys(target)[0];
-	const filter = root + "." + key;
-	let updatedProperty;
-	let updatedIdx;
-
-	_.each(member.properties, (property,  idx) => {
-		if(property.name == filter){
-			if(property.properties){
-				updatedProperty = changeMemberProperty(property, target[key], filter);
-			} else {
-				property.defaultvalue = target[key];
-				updatedProperty = property;
-				updatedIdx = idx;
-
-				member.properties[updatedIdx] = updatedProperty;
-			}
-		}
-	});
-
-	return member;
-};
-
-
 const updateGuiState = (state, updated) => {
-	const newObj = {};
+	const newObj = changeMemberProperty(state, updated);
 
-	_.each(updated, (value, key) => {
-		if(key !== "data"){
-			const member = state[key];
-			newObj[key] = changeMemberProperty(member, value, key);
-		}
-	});
-
-	return newObj;
+	return deepCopy({}, newObj);
 };
 
 const command = (state = commandState, action) => {
@@ -62,11 +34,11 @@ const command = (state = commandState, action) => {
 	switch (action.type) {
 		case UPDATE_GUI : {
 			const conf = namespaceToObject(action.name.split("."), action.value);
-			returnState = updateOriginal(state, conf);
+			returnState = updateCommandState(state, conf);
 			break;
 		}
 		case UPDATE_COMMAND :
-			returnState = updateOriginal(state, action.value);
+			returnState = updateCommandState(state, action.value);
 			break;
 		default :
 			returnState = state;
@@ -95,7 +67,10 @@ const gui = (state = guiState, action) => {
 			returnState = state;
 	}
 
-	returnState.lastUpdate = new Date();
+	guiState = returnState;
+
+	// react connect check shallow key
+	returnState.lastUpdate = (new Date()).getTime();
 	return returnState;
 };
 

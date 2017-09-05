@@ -3,7 +3,6 @@ import _ from "underscore";
 import { connect } from "react-redux";
 import Property from "./property";
 
-
 class Control extends React.Component {
 	constructor() {
 		super();
@@ -18,18 +17,18 @@ class Control extends React.Component {
 	}
 
 	child(properties) {
-		return _.map(properties, (p, i) => {
-			if (p.properties) {
-				return this.member(p, i);
+		return _.map(properties, (option, key) => {
+			if (option.properties) {
+				return this.member(option, key);
 			} else {
-				return <Property key={p.name} {...p} />;
+				return <Property key={option.attributes.name} {...option.attributes} />;
 			}
 		});
 	}
 
-	member(option, index) {
-		return (<div key={index}>
-			<Property {...option} />
+	member(option, key) {
+		return (<div key={key}>
+			<Property {...option.attributes} />
 			{option.properties ? <ul>{this.child(option.properties)}</ul> : ""}
 		</div>);
 	}
@@ -42,7 +41,7 @@ class Control extends React.Component {
 	}
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
 	return state.gui;
 };
 
