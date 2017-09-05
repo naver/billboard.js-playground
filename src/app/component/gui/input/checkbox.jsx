@@ -4,7 +4,6 @@ import {
 	updateGui
 } from "../../../actions";
 
-
 class InputCheckbox extends React.Component {
 	render() {
 		const { defaultvalue, onChange } = this.props;

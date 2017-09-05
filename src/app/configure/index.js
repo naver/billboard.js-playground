@@ -8,6 +8,7 @@ import * as extractedDocument from "./document.json";
 import { namespaceToObject, deepCopy } from "../util";
 
 const defaultAttributes = ["type", "name", "defaultvalue", "description"];
+const keysFromDocument = [];
 
 /*
 
@@ -135,6 +136,7 @@ export const documentToObject = (defaultDocumentOption) => {
 			copy = newCopy;
 		});
 		member = deepCopy(member, copy);
+		keysFromDocument.push(p.name);
 	});
 
 	const newObj = {};
@@ -173,20 +175,21 @@ export const changeMemberProperty = (original, object) => {
 	const fkeys = objectToKeys(object);
 
 	ldEach(fkeys, (keyPath) => {
-		const value = _.get(object, keyPath);
-		const targetPath = keyPath.replace(/\./g, ".properties.") + ".attributes.defaultvalue";
-		_.update(original, targetPath, () => {
+		const targetPath = keyPath.replace(/\./g, ".properties.") + ".attributes";
+		const type = _.get(original, targetPath + ".type");
+		let value = _.get(object, keyPath);
+
+		if(type.names[0].toLowerCase() === "number"){
+			value = value * 1;
+		}
+
+		_.update(original, targetPath + ".defaultvalue", () => {
 			return value;
 		});
 	});
 
 	return original;
 };
-const getKey = (obj) =>{
-	return _.keys(obj)[0];
-};
-
-
 export const initCommandConfigure = {
 	data: {
 		columns: [
@@ -198,15 +201,23 @@ export const initCommandConfigure = {
 };
 
 
-const flattenKey = (object, root) => {
-	const key = getKey(object);
-	const newTarget = object[key];
+const hasProperty = (name) => {
+	const keys = name.split(".");
+	let configure = initDocumentConfigure;
+	let attr = {};
 
-	if(typeof newTarget == "object"){
-		return flattenKey(newTarget, root + "." + key);
-	} else {
-		return root + "." + key;
-	}
+	ldEach(keys, (key) => {
+		if(configure !== undefined){
+			const cof = configure[key] || {};
+
+			attr = cof.attributes;
+			configure = cof.properties;
+		} else {
+			attr = undefined;
+		}
+	});
+
+	return !!attr;
 };
 
 const objectToKeys = (obj, root = "") => {
@@ -215,11 +226,17 @@ const objectToKeys = (obj, root = "") => {
 
 	if(keys.length > 0){
 		ldEach(keys, key => {
-			arr.push(objectToKeys(obj[key], root == "" ? key : root + "." + key));
+			const parent = root == "" ? key : root + "." + key;
+			if(hasProperty(parent)){
+				arr.push(objectToKeys(obj[key], parent));
+			} else {
+				arr.indexOf(root) < 0 && arr.push(root);
+			}
 		});
 	} else {
 		arr.push(root);
 	}
+
 
 	return _.flatten(arr);
 };

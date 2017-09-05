@@ -19,7 +19,7 @@ class InputNumber extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-	onChange: e => (dispatch(updateGui(ownProps.name.replace(/\:/g, "."), e.target.value)))
+	onChange: e => (dispatch(updateGui(ownProps.name.replace(/\:/g, "."), e.target.value*1)))
 });
 
 const Number = connect(
