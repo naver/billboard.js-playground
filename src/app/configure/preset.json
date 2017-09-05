@@ -1,0 +1,11 @@
+{
+  "data" : {
+    "properties" : {
+      "type" : {
+        "attributes" : {
+          "valueoptions" : ["line", "spline", "step", "area", "area-spine", "area-step", "bar", "scatter", "pie", "donut", "gauge"]
+        }
+      }
+    }
+  }
+}

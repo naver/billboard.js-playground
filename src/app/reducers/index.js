@@ -14,7 +14,7 @@ let guiState = initDocumentConfigure;
 
 
 const updateCommandState = (state, updated) => {
-	const original = deepCopy({}, state.original, updated);
+	const original = deepCopy({}, state.original, deepCopy({}, updated));
 	const text = JSON.stringify(original);
 
 	return {
@@ -23,8 +23,7 @@ const updateCommandState = (state, updated) => {
 };
 
 const updateGuiState = (state, updated) => {
-	const newObj = changeMemberProperty(state, updated);
-
+	const newObj = changeMemberProperty(state, deepCopy({}, updated));
 	return deepCopy({}, newObj);
 };
 

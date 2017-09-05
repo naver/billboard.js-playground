@@ -1,79 +1,14 @@
-import {
-	each as ldEach,
-	keys as ldKeys,
-	filter as ldFilter,
-} from "lodash";
 import * as _ from "lodash";
 import * as extractedDocument from "./document.json";
-import { namespaceToObject, deepCopy } from "../util";
+import * as presetDocument from "./preset.json";
+import { deepCopy } from "../util";
 
-const defaultAttributes = ["type", "name", "defaultvalue", "description"];
 const keysFromDocument = [];
-
-/*
-
-from
-{
-	a : {
-		b : "value1",
-		c : "value2"
-	}
-}
-to
-{
-	a : {
-		name : "a",
-		type : ["Object"],
-		defaultValue : undefined,
-		properties : [{
-			name : "b",
-			defaultValue : "value1",
-			type : {
-				names : ["String"]
-			}
-		}, {
-			 name : "c",
-			 defaultValue : "value2",
-			 type : {
-				 names : ["String"]
-		 	 }
-	 	}]
-	}
-}
-*/
-export const objectToPropertyStructure = (obj, prefix) => {
-	const properties = [];
-
-	ldEach(obj, (data, key) => {
-		const keys = ldKeys(data);
-		const unmergedKeys = ldFilter(keys, structure => defaultAttributes.indexOf(structure) < 0);
-
-		if (unmergedKeys.length > 0) {
-			const unmergedProperties = {};
-			const fullName = `${prefix}.${key}`;
-			ldEach(unmergedKeys, propertyKey => (unmergedProperties[propertyKey] = data[propertyKey]));
-
-			const property = objectToPropertyStructure(unmergedProperties, fullName);
-			properties.push(property);
-		} else {
-			properties.push(data);
-		}
-	});
-
-	return {
-		properties,
-		defaultValue: "undefined",
-		type: {
-			names: ["Object"]
-		},
-		name: prefix
-	};
-};
 
 const memberFlatten = (member) => {
 	let newArray = [member];
-	if(member.properties){
-		ldEach(member.properties, (item) => {
+	if (member.properties) {
+		_.each(member.properties, (item) => {
 			if(item.properties){
 				newArray = newArray.concat(memberFlatten(item));
 			} else {
@@ -82,32 +17,26 @@ const memberFlatten = (member) => {
 		});
 	}
 
-
 	return newArray;
 };
 
-/*
- billboard.js API 문서에서 추출한 json 파일을 내부 구조에 맞춰 변경한다
- name => AAA.bbb
- description => hello world
- optional => true / false
- type { names : ["Number"] }
- */
-export const documentToObject = (defaultDocumentOption) => {
+const documentToObject = (defaultDocumentOption) => {
 	let fullProperties = [];
 
-	ldEach(defaultDocumentOption, ({ name, type, kind, defaultvalue, description, properties }) => {
+	_.each(defaultDocumentOption, ({ name, type, kind, defaultvalue, description, properties }) => {
 		if (kind === "member") {
 			if (name.indexOf(":") > -1) {
 				const target = {
-					defaultvalue,
+					value: defaultvalue,
 					name: name.replace(/\:/g, "."),
+					defaultvalue,
 					type,
 					description
 				};
 				fullProperties = fullProperties.concat([target]);
 			} else {
 				const ps = memberFlatten({
+					value: defaultvalue,
 					defaultvalue,
 					properties,
 					type,
@@ -122,12 +51,12 @@ export const documentToObject = (defaultDocumentOption) => {
 
 	let member = {};
 
-	ldEach(fullProperties, (p) => {
+	_.each(fullProperties, (p) => {
 		const keys = p.name.split(".");
 		let copy = {
 			attributes: p
 		};
-		ldEach(keys.reverse(), (key) => {
+		_.each(keys.reverse(), (key) => {
 			const newCopy = {
 				properties: {}
 			};
@@ -140,11 +69,11 @@ export const documentToObject = (defaultDocumentOption) => {
 	});
 
 	const newObj = {};
-	ldEach(Object.keys(member.properties), (memberKey) => {
+	_.each(Object.keys(member.properties), (memberKey) => {
 		let target = member.properties[memberKey];
 		target.kind = "member";
 		target = fillDefaultAttributes(target, memberKey);
-		newObj[memberKey] = target;
+		newObj[memberKey] = deepCopy({}, target, presetDocument[memberKey]);
 	});
 
 	return newObj;
@@ -153,7 +82,7 @@ export const documentToObject = (defaultDocumentOption) => {
 const fillDefaultAttributes = (target, root) => {
 	target.attributes = target.attributes || getDefaultAttributes(root);
 	if(target.properties){
-		ldEach(target.properties, (obj, key) => {
+		_.each(target.properties, (obj, key) => {
 			target.properties[key] = fillDefaultAttributes(obj, `${root}.${key}`);
 		});
 	}
@@ -163,6 +92,7 @@ const fillDefaultAttributes = (target, root) => {
 const getDefaultAttributes = (name) => {
 	return {
 		name,
+		value: undefined,
 		defaultvalue: undefined,
 		type: {
 			names: ["Object"]
@@ -171,10 +101,9 @@ const getDefaultAttributes = (name) => {
 };
 
 export const changeMemberProperty = (original, object) => {
-	object.data && (delete object.data);
 	const fkeys = objectToKeys(object);
 
-	ldEach(fkeys, (keyPath) => {
+	_.each(fkeys, (keyPath) => {
 		const targetPath = keyPath.replace(/\./g, ".properties.") + ".attributes";
 		const type = _.get(original, targetPath + ".type");
 		let value = _.get(object, keyPath);
@@ -183,21 +112,12 @@ export const changeMemberProperty = (original, object) => {
 			value = value * 1;
 		}
 
-		_.update(original, targetPath + ".defaultvalue", () => {
+		_.update(original, targetPath + ".value", () => {
 			return value;
 		});
 	});
 
 	return original;
-};
-export const initCommandConfigure = {
-	data: {
-		columns: [
-			["data1", 30, 200, 100, 400, 150, 250],
-			["data2", 50, 20, 10, 40, 15, 25],
-			["data3", 50, 20, 10, 40, 15, 25]
-		]
-	},
 };
 
 
@@ -206,7 +126,7 @@ const hasProperty = (name) => {
 	let configure = initDocumentConfigure;
 	let attr = {};
 
-	ldEach(keys, (key) => {
+	_.each(keys, (key) => {
 		if(configure !== undefined){
 			const cof = configure[key] || {};
 
@@ -225,7 +145,7 @@ const objectToKeys = (obj, root = "") => {
 	const arr = [];
 
 	if(keys.length > 0){
-		ldEach(keys, key => {
+		_.each(keys, key => {
 			const parent = root == "" ? key : root + "." + key;
 			if(hasProperty(parent)){
 				arr.push(objectToKeys(obj[key], parent));
@@ -239,6 +159,17 @@ const objectToKeys = (obj, root = "") => {
 
 
 	return _.flatten(arr);
+};
+
+
+export const initCommandConfigure = {
+	data: {
+		columns: [
+			["data1", 30, 200, 100, 400, 150, 250],
+			["data2", 50, 20, 10, 40, 15, 25],
+			["data3", 50, 20, 10, 40, 15, 25]
+		]
+	}
 };
 
 export const initDocumentConfigure = documentToObject(extractedDocument);

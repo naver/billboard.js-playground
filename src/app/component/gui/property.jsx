@@ -18,7 +18,7 @@ class Property extends React.Component {
 	render() {
 		const option = this.state;
 		const type = option.type ? option.type.names.join(", ") : "";
-		const input = Property.getInputType(type, option.defaultvalue, option);
+		const input = Property.getInputType(type, option);
 
 		return (<li data-id={option.name} className={option.className}>
 			<span className="name"> {option.name} </span>
@@ -27,7 +27,7 @@ class Property extends React.Component {
 		</li>);
 	}
 
-	static getInputType(type, defaultvalue = "", option) {
+	static getInputType(type, option) {
 		switch (type.toLocaleLowerCase()) {
 			case "boolean" :
 				return <Checkbox {...option} />;

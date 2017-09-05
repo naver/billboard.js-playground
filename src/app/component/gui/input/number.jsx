@@ -6,13 +6,13 @@ import {
 
 class InputNumber extends React.Component {
 	render() {
-		const { defaultvalue, onChange } = this.props;
+		const { value, onChange } = this.props;
 		let returnValue;
 
-		if (isNaN(defaultvalue)) {
+		if (isNaN(value)) {
 			returnValue = (<input type="number" placeholder="undefined" onChange={onChange} />);
 		} else {
-			returnValue = (<input type="number" defaultValue={defaultvalue} onChange={onChange} />);
+			returnValue = (<input type="number" defaultValue={value} onChange={onChange} />);
 		}
 		return returnValue;
 	}

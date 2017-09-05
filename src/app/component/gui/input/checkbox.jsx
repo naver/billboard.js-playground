@@ -6,10 +6,10 @@ import {
 
 class InputCheckbox extends React.Component {
 	render() {
-		const { defaultvalue, onChange } = this.props;
+		const { value, onChange } = this.props;
 		let returnValue;
 
-		if (defaultvalue) {
+		if (value) {
 			returnValue = (<input type="checkbox" checked onChange={onChange} />);
 		} else {
 			returnValue = (<input type="checkbox" onChange={onChange} />);
