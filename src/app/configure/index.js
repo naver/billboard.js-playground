@@ -12,13 +12,14 @@ const memberFlatten = (member) => {
 			if(item.properties){
 				newArray = newArray.concat(memberFlatten(item));
 			} else {
-				if(item.defaultvalue == undefined){
-					item.defaultvalue = undefined;
-				}
-				if(item.value == undefined){
-					item.value = item.defaultvalue;
-				}
-				newArray.push(item);
+				newArray.push({
+					type: item.type,
+					defaultvalue: item.defaultvalue,
+					value: item.defaultvalue,
+					name: item.name,
+					description: item.description,
+					optional: item.optional
+				});
 			}
 		});
 	}
@@ -123,7 +124,7 @@ export const changeMemberProperty = (original, object) => {
 		const type = _.get(original, targetPath + ".type");
 		let value = _.get(object, keyPath);
 
-		if(type.names[0].toLowerCase() === "number"){
+		if(type.names[0].toLowerCase() === "number" && value !== undefined){
 			value = value * 1;
 		}
 
