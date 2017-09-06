@@ -18,7 +18,8 @@ const memberFlatten = (member) => {
 					value: item.defaultvalue,
 					name: item.name,
 					description: item.description,
-					optional: item.optional
+					optional: item.optional,
+					activated: true,
 				});
 			}
 		});
@@ -30,21 +31,24 @@ const memberFlatten = (member) => {
 const documentToObject = (defaultDocumentOption) => {
 	let fullProperties = [];
 
-	_.each(defaultDocumentOption, ({ name, type, kind, defaultvalue, description, properties }) => {
+	_.each(defaultDocumentOption, ({ name, type, kind, defaultvalue, description, properties, optional }) => {
 		if (kind === "member") {
 			if (name.indexOf(":") > -1) {
 				const target = {
+					type: type,
+					defaultvalue: defaultvalue,
 					value: defaultvalue,
 					name: name.replace(/\:/g, "."),
-					defaultvalue,
-					type,
-					description
+					description: description,
+					optional: optional,
+					activated: true,
 				};
 				fullProperties = fullProperties.concat([target]);
 
 			} else {
 				const ps = memberFlatten({
 					value: defaultvalue,
+					activated: true,
 					defaultvalue,
 					properties,
 					type,
@@ -87,6 +91,13 @@ const documentToObject = (defaultDocumentOption) => {
 	return newObj;
 };
 
+export const getValueFromDocument = (doc, namespace, targetAttribute) => {
+	const path = namespace.replace(/\./g, ".properties.");
+	const attirbutes = _.get(doc, path).attributes;
+
+	return attirbutes[targetAttribute];
+};
+
 export const getDefaultValue = (namespace) => {
 	const path = namespace.replace(/\./g, ".properties.");
 	const doc = initDocumentConfigure;
@@ -107,14 +118,34 @@ const fillDefaultAttributes = (target, root) => {
 
 const getDefaultAttributes = (name) => {
 	return {
+		description: "",
+		optional: true,
+		activated: true,
 		name,
 		value: undefined,
 		defaultvalue: undefined,
 		type: {
 			names: ["Object"]
-		}
+		},
 	};
 };
+
+
+export const changeMemberActivate = (original, name, value) => {
+	const fkeys = [name];
+
+	_.each(fkeys, (keyPath) => {
+		const targetPath = keyPath.replace(/\./g, ".properties.") + ".attributes";
+		const type = _.get(original, targetPath + ".type");
+
+		_.update(original, targetPath + ".activated", () => {
+			return value;
+		});
+	});
+
+	return original;
+};
+
 
 export const changeMemberProperty = (original, object) => {
 	const fkeys = objectToKeys(object);

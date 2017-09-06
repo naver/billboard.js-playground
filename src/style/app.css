@@ -36,3 +36,7 @@ textarea {
 .property.updated {
     color : red;
 }
+
+.property.deactivated {
+    opacity: 0.5;
+}

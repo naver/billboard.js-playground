@@ -1,8 +1,8 @@
 import * as _ from "lodash";
 import { combineReducers } from "redux";
 import { namespaceToObject, deepCopy } from "../util";
-import { UPDATE_COMMAND, UPDATE_GUI, RESET_GUI } from "../actions";
-import { initCommandConfigure, initDocumentConfigure, deleteTargetKey, changeMemberProperty, getDefaultValue } from "../configure";
+import { CHANGE_GUI_ACTIVATE, UPDATE_COMMAND, UPDATE_GUI, RESET_GUI } from "../actions";
+import { initCommandConfigure, initDocumentConfigure, changeMemberActivate, deleteTargetKey, changeMemberProperty, getDefaultValue, getValueFromDocument } from "../configure";
 
 // 커맨드창
 let commandState = {
@@ -12,14 +12,19 @@ let commandState = {
 // GUI 옵션
 let guiState = initDocumentConfigure;
 
-const updateResetedCommandState = (state, namespace) => {
-	const original = deepCopy({}, state.original);
-	const deleteTarget = deleteTargetKey(original, namespace);
-
-	return {
-		original: deepCopy({}, deleteTarget),
-		text: JSON.stringify(deleteTarget)
-	};
+const updateActivatedCommandState = (state, name, value) => {
+	if(value === true){
+		const defaultValue = getValueFromDocument(guiState, name, "defaultvalue");
+		const guiValue = getValueFromDocument(guiState, name, "value");
+		if (defaultValue == guiValue) {
+			return deepCopy({}, state);
+		} else {
+			const conf = namespaceToObject(name.split("."), guiValue);
+			return  updateCommandState(state, conf);
+		}
+	} else {
+		return updateResetCommandState(state, name);
+	}
 };
 
 const updateCommandState = (state, updated) => {
@@ -31,6 +36,23 @@ const updateCommandState = (state, updated) => {
 	};
 };
 
+
+const updateResetCommandState = (state, namespace) => {
+	const original = deepCopy({}, state.original);
+	const deleteTarget = deleteTargetKey(original, namespace);
+
+	return {
+		original: deepCopy({}, deleteTarget),
+		text: JSON.stringify(deleteTarget)
+	};
+};
+
+const updateGuiActivate = (state, name, value) => {
+	const newObj = changeMemberActivate(state, name, value);
+	return deepCopy({}, newObj);
+};
+
+
 const updateGuiState = (state, updated) => {
 	const newObj = changeMemberProperty(state, deepCopy({}, updated));
 	return deepCopy({}, newObj);
@@ -40,8 +62,12 @@ const command = (state = commandState, action) => {
 	let returnState;
 
 	switch (action.type) {
+		case CHANGE_GUI_ACTIVATE : {
+			returnState = updateActivatedCommandState(state, action.name, action.value);
+			break;
+		}
 		case RESET_GUI : {
-			returnState = updateResetedCommandState(state, action.name);
+			returnState = updateResetCommandState(state, action.name);
 			break;
 		}
 		case UPDATE_GUI : {
@@ -67,6 +93,10 @@ const gui = (state = guiState, action) => {
 	let returnState = {};
 
 	switch (action.type) {
+		case CHANGE_GUI_ACTIVATE : {
+			returnState = updateGuiActivate(state, action.name, action.value);
+			break;
+		}
 		case RESET_GUI : {
 			const value = getDefaultValue(action.name);
 			const updated = namespaceToObject(action.name.split("."), value);

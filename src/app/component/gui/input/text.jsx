@@ -2,7 +2,7 @@ import React, { PropTypes } from "react";
 import * as _ from "lodash";
 import { connect } from "react-redux";
 import {
-	updateGui
+	updateGui, resetGui
 } from "../../../actions";
 
 class InputText extends React.Component {
@@ -44,7 +44,13 @@ class InputText extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-	onChange: e => (dispatch(updateGui(ownProps.name.replace(/\:/g, "."), e.target.value)))
+	onChange: e => {
+		if(e.target.value === ""){
+			dispatch(resetGui(ownProps.name.replace(/\:/g, ".")));
+		} else {
+			(dispatch(updateGui(ownProps.name.replace(/\:/g, "."), e.target.value)))
+		}
+	}
 });
 
 const Text = connect(
