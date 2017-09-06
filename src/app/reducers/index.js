@@ -2,7 +2,7 @@ import * as _ from "lodash";
 import { combineReducers } from "redux";
 import { namespaceToObject, deepCopy } from "../util";
 import { UPDATE_COMMAND, UPDATE_GUI, RESET_GUI } from "../actions";
-import { initCommandConfigure, initDocumentConfigure, changeMemberProperty, getDefaultValue } from "../configure";
+import { initCommandConfigure, initDocumentConfigure, deleteTargetKey, changeMemberProperty, getDefaultValue } from "../configure";
 
 // 커맨드창
 let commandState = {
@@ -12,6 +12,15 @@ let commandState = {
 // GUI 옵션
 let guiState = initDocumentConfigure;
 
+const updateResetedCommandState = (state, namespace) => {
+	const original = deepCopy({}, state.original);
+	const deleteTarget = deleteTargetKey(original, namespace);
+
+	return {
+		original: deepCopy({}, deleteTarget),
+		text: JSON.stringify(deleteTarget)
+	};
+};
 
 const updateCommandState = (state, updated) => {
 	const original = deepCopy({}, state.original, deepCopy({}, updated));
@@ -32,10 +41,7 @@ const command = (state = commandState, action) => {
 
 	switch (action.type) {
 		case RESET_GUI : {
-			const value = getDefaultValue(action.name);
-			const updated = namespaceToObject(action.name.split("."), value);
-
-			returnState = updateCommandState(state, updated);
+			returnState = updateResetedCommandState(state, action.name);
 			break;
 		}
 		case UPDATE_GUI : {

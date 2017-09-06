@@ -136,6 +136,24 @@ export const changeMemberProperty = (original, object) => {
 	return original;
 };
 
+export const deleteTargetKey = (original, targetkey) => {
+	const keys = targetkey.split(".").reverse();
+	let path = targetkey.replace("." + keys[0], "");
+	let prevPath = path;
+
+	_.unset(original, targetkey);
+
+	_.each(keys.slice(1), (key) => {
+		const target = _.get(original, path);
+		if(target && Object.keys(target).length < 1){
+			_.unset(original, path);
+		}
+		prevPath = path;
+		path = path.replace("." + key, "");
+	});
+
+	return original;
+};
 
 const hasProperty = (name) => {
 	const keys = name.split(".");

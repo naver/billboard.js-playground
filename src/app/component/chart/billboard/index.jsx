@@ -7,7 +7,6 @@ import { deepCopy } from "./util";
 class Billboard extends React.Component {
 	componentWillMount() {
 		this.instance = null;
-		this.updatedKey = 0;
 		this.updated = false;
 		this.setState(this.props);
 	}
@@ -19,7 +18,6 @@ class Billboard extends React.Component {
 
 	componentDidUpdate() {
 		this.updated = false;
-		this.updatedKey = 0;
 		this.generateChart();
 	}
 
@@ -43,26 +41,26 @@ class Billboard extends React.Component {
 	watchConfig() {
 		const { watch } = this.state;
 
-		watch("axis.y.labels", data => this.instance.axis.label({ y: data }));
-		watch("axis.x.categories", data => this.instance.categories(data));
-		watch("legend.show", data => this.instance.legend.show(data));
-		watch("legend.hide", data => this.instance.legend.hide(data));
-		watch("regions", data => this.instance.regions(data));
-		watch("size.width", data => this.instance.resize({ width: data }));
-		watch("size.height", data => this.instance.resize({ height: data }));
-		watch("grid.x.lines", data => this.instance.xgrids(data));
-		watch("grid.y.lines", data => this.instance.ygrids(data));
-		watch("zoom.enable", data => this.instance.zoom.enable(data));
-		watch("zoom.domain", (data) => {
-			if (data === null) {
-				this.instance.unzoom();
-			} else {
-				this.instance.zoom();
-			}
-		});
-		watch("data.columns", (data) => {
-			this.instance.load({ columns: data });
-		});
+		//watch("axis.y.labels", data => this.instance.axis.label({ y: data }));
+		//watch("axis.x.categories", data => this.instance.categories(data));
+		//watch("legend.show", data => this.instance.legend.show(data));
+		//watch("legend.hide", data => this.instance.legend.hide(data));
+		//watch("regions", data => this.instance.regions(data));
+		//watch("size.width", data => this.instance.resize({ width: data }));
+		//watch("size.height", data => this.instance.resize({ height: data }));
+		//watch("grid.x.lines", data => this.instance.xgrids(data));
+		//watch("grid.y.lines", data => this.instance.ygrids(data));
+		//watch("zoom.enable", data => this.instance.zoom.enable(data));
+		//watch("zoom.domain", (data) => {
+		//	if (data === null) {
+		//		this.instance.unzoom();
+		//	} else {
+		//		this.instance.zoom();
+		//	}
+		//});
+		//watch("data.columns", (data) => {
+		//	this.instance.load({ columns: data });
+		//});
 
 		//Object.keys(CONFIGURE_PROPTYPES).forEach((key) => {
 		//	watch(key, (data) => {
@@ -89,8 +87,9 @@ class Billboard extends React.Component {
 		this.instance.destroy();
 	}
 
-	generateChart(mountNode = this.wrapper, config = this.state) {
+	generateChart(mountNode = this.wrapper, config = this.props) {
 		// using react node
+
 		const newConfig = deepCopy({}, config);
 		newConfig.bindto = mountNode;
 
