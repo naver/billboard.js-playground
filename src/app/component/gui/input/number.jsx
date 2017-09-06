@@ -14,21 +14,11 @@ class InputNumber extends React.Component {
 		} else {
 			returnValue = (<input type="number" value={value} onChange={onChange} />);
 		}
-		return <span>
-			{returnValue}
-			<button className="delete" onClick={(e) => this.onClickDelete(e)}>x</button>
-		</span>;
-	}
-
-	onClickDelete(e) {
-		this.props.onClickDelete(e);
+		return returnValue;
 	}
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-	onClickDelete: (e) => {
-		dispatch(resetGui(ownProps.name.replace(/\:/g, ".")));
-	},
 	onChange: (e) => {
 		if(e.target.value === ""){
 			dispatch(resetGui(ownProps.name.replace(/\:/g, ".")));

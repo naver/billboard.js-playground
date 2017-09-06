@@ -33,3 +33,6 @@ textarea {
     overflow-y: scroll;
 }
 
+.property.updated {
+    color : red;
+}

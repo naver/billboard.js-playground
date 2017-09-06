@@ -15,6 +15,9 @@ const memberFlatten = (member) => {
 				if(item.defaultvalue == undefined){
 					item.defaultvalue = undefined;
 				}
+				if(item.value == undefined){
+					item.value = item.defaultvalue;
+				}
 				newArray.push(item);
 			}
 		});

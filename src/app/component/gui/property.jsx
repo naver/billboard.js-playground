@@ -5,8 +5,12 @@ import {
 	Text,
 	Number,
 } from "./input/index";
+import {
+	resetGui
+} from "../../actions";
 
-class Property extends React.Component {
+
+class InputProperty extends React.Component {
 	componentWillMount() {
 		this.setState(this.props);
 	}
@@ -18,13 +22,19 @@ class Property extends React.Component {
 	render() {
 		const option = this.state;
 		const type = option.type ? option.type.names.join(", ") : "";
-		const input = Property.getInputType(type, option);
+		const input = InputProperty.getInputType(type, option);
+		const className = "property" + (this.state.value !== this.state.defaultvalue ? " updated" : "");
 
-		return (<li data-id={option.name} className={option.className}>
+		return (<li data-id={option.name} className={className}>
 			<span className="name"> {option.name} </span>
 			<span className="type"> {type} </span>
 			<span> {input} </span>
+			{input ? <button className="delete" onClick={(e) => this.onClickDelete(e)}>x</button> : ""}
 		</li>);
+	}
+
+	onClickDelete(e) {
+		this.props.onClickDelete(e);
 	}
 
 	static getInputType(type, option) {
@@ -40,5 +50,13 @@ class Property extends React.Component {
 		}
 	}
 }
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+	onClickDelete: () => dispatch(resetGui(ownProps.name.replace(/\:/g, ".")))
+});
+
+const Property = connect(
+	null, mapDispatchToProps
+)(InputProperty);
 
 export default Property;
