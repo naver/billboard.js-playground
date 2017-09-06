@@ -12,6 +12,9 @@ const memberFlatten = (member) => {
 			if(item.properties){
 				newArray = newArray.concat(memberFlatten(item));
 			} else {
+				if(item.defaultvalue == undefined){
+					item.defaultvalue = undefined;
+				}
 				newArray.push(item);
 			}
 		});
@@ -34,6 +37,7 @@ const documentToObject = (defaultDocumentOption) => {
 					description
 				};
 				fullProperties = fullProperties.concat([target]);
+
 			} else {
 				const ps = memberFlatten({
 					value: defaultvalue,
@@ -77,6 +81,14 @@ const documentToObject = (defaultDocumentOption) => {
 	});
 
 	return newObj;
+};
+
+export const getDefaultValue = (namespace) => {
+	const path = namespace.replace(/\./g, ".properties.");
+	const doc = initDocumentConfigure;
+	const attirbutes = _.get(doc, path).attributes;
+
+	return attirbutes.defaultvalue;
 };
 
 const fillDefaultAttributes = (target, root) => {

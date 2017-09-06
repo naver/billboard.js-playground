@@ -1,7 +1,7 @@
 import React, { PropTypes } from "react";
 import { connect } from "react-redux";
 import {
-	updateGui
+	updateGui, resetGui
 } from "../../../actions";
 
 class InputNumber extends React.Component {
@@ -12,14 +12,30 @@ class InputNumber extends React.Component {
 		if (isNaN(value)) {
 			returnValue = (<input type="number" placeholder="undefined" onChange={onChange} />);
 		} else {
-			returnValue = (<input type="number" defaultValue={value} onChange={onChange} />);
+			returnValue = (<input type="number" value={value} onChange={onChange} />);
 		}
-		return returnValue;
+		return <span>
+			{returnValue}
+			<button className="delete" onClick={(e) => this.onClickDelete(e)}>x</button>
+		</span>;
+	}
+
+	onClickDelete(e) {
+		this.props.onClickDelete(e);
 	}
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-	onChange: e => (dispatch(updateGui(ownProps.name.replace(/\:/g, "."), e.target.value*1)))
+	onClickDelete: (e) => {
+		dispatch(resetGui(ownProps.name.replace(/\:/g, ".")));
+	},
+	onChange: (e) => {
+		if(e.target.value === ""){
+			dispatch(resetGui(ownProps.name.replace(/\:/g, ".")));
+		} else {
+			dispatch(updateGui(ownProps.name.replace(/\:/g, "."), e.target.value*1));
+		}
+	}
 });
 
 const Number = connect(

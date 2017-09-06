@@ -10,7 +10,6 @@ import {
 import { Chart } from "./component/chart";
 import { GUI } from "./component/gui";
 import { Command } from "./component/command";
-
 import playgroundApp from "./reducers";
 
 const store = createStore(playgroundApp);

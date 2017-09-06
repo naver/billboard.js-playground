@@ -1,40 +1,41 @@
 import React, { PropTypes } from "react";
+import * as _ from "lodash";
 import { connect } from "react-redux";
 import {
 	updateGui
 } from "../../../actions";
 
 class InputText extends React.Component {
-	getRadioInput(valueoptions, name, onChange, defaultvalue) {
-		return <form>
+	getRadioInput(valueoptions, name, onChange, value) {
+		return (<form>
 			{_.map(valueoptions, (v, i) => {
-				if(v == defaultvalue){
-					return <p key={i}>
+				if(v === value){
+					return (<span key={i}>
 						<input type="radio" checked name={name}  value={v} onChange={onChange} />
 						<span>{v}</span>
-					</p>;
+					</span>);
 				} else {
-					return <p key={i}>
-						<input type="radio" name={name}  value={v} onChange={onChange} />
+					return (<span key={i}>
+						<input type="radio" name={name} value={v} onChange={onChange} />
 						<span>{v}</span>
-					</p>;
+					</span>);
 				}
 
 			})}
-		</form>;
+		</form>);
 	}
 
 	render() {
-		const { defaultvalue, onChange, valueoptions , name } = this.props;
+		const { value, onChange, valueoptions , name } = this.props;
 		let returnValue;
 
-		if(valueoptions){
-			returnValue = this.getRadioInput(valueoptions, name, onChange, defaultvalue);
+		if (valueoptions) {
+			returnValue = this.getRadioInput(valueoptions, name, onChange, value);
 		} else {
-			if (isNaN(defaultvalue)) {
+			if (value === undefined || value  === "undefined") {
 				returnValue = (<input type="text" placeholder="undefined" onChange={onChange} />);
 			} else {
-				returnValue = (<input type="text" defaultValue={defaultvalue} onChange={onChange} />);
+				returnValue = (<input type="text" value={value} onChange={onChange} />);
 			}
 		}
 

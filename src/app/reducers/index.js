@@ -1,8 +1,8 @@
 import * as _ from "lodash";
 import { combineReducers } from "redux";
 import { namespaceToObject, deepCopy } from "../util";
-import { UPDATE_COMMAND, UPDATE_GUI } from "../actions";
-import { initCommandConfigure, initDocumentConfigure, changeMemberProperty } from "../configure";
+import { UPDATE_COMMAND, UPDATE_GUI, RESET_GUI } from "../actions";
+import { initCommandConfigure, initDocumentConfigure, changeMemberProperty, getDefaultValue } from "../configure";
 
 // 커맨드창
 let commandState = {
@@ -31,6 +31,13 @@ const command = (state = commandState, action) => {
 	let returnState;
 
 	switch (action.type) {
+		case RESET_GUI : {
+			const value = getDefaultValue(action.name);
+			const updated = namespaceToObject(action.name.split("."), value);
+
+			returnState = updateCommandState(state, updated);
+			break;
+		}
 		case UPDATE_GUI : {
 			const conf = namespaceToObject(action.name.split("."), action.value);
 			returnState = updateCommandState(state, conf);
@@ -54,6 +61,13 @@ const gui = (state = guiState, action) => {
 	let returnState = {};
 
 	switch (action.type) {
+		case RESET_GUI : {
+			const value = getDefaultValue(action.name);
+			const updated = namespaceToObject(action.name.split("."), value);
+
+			returnState = updateGuiState(state, updated);
+			break;
+		}
 		case UPDATE_GUI : {
 			const value = namespaceToObject(action.name.split("."), action.value);
 			returnState = updateGuiState(state, value);
