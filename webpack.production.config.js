@@ -1,6 +1,5 @@
 var webpack = require('webpack');
 var path = require('path');
-var loaders = require('./webpack.loaders');
 var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -13,11 +12,25 @@ module.exports = {
 		path: path.join(__dirname, 'dist'),
 		filename: '[chunkhash].js'
 	},
+	module: {
+
+		rules : [
+			{
+				test: /\.css$/,
+				use: [ 'style-loader', 'css-loader' ]
+			}
+			,{
+			test: [/(\.js)$/, /(\.jsx)$/],
+			exclude: /(node_modules)/,
+			include: path.join(__dirname, 'src'),
+			loader: "babel-loader",
+			query : {
+				presets: ['es2015', 'react']
+			}
+		}]
+	},
 	resolve: {
 		extensions: ['.js', '.jsx']
-	},
-	module: {
-		loaders
 	},
 	plugins: [
 		new WebpackCleanupPlugin(),
