@@ -4,22 +4,21 @@ var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-	entry: [
-		'./src/index.js'
-	],
+	context: __dirname + "/",
+	entry: {
+		"app" : path.resolve(__dirname, "./src/index.js")
+	},
 	output: {
-		publicPath: './',
-		path: path.join(__dirname, 'dist'),
-		filename: '[chunkhash].js'
+		path: path.join(__dirname, "/dist"), // 파일이 저장될 경로
+		filename: "[name].bundle.js",
+		publicPath : "/dist/", // 서버상의 경로 (ex. express.static)
+		libraryTarget: "umd"
 	},
 	module: {
-
-		rules : [
-			{
-				test: /\.css$/,
-				use: [ 'style-loader', 'css-loader' ]
-			}
-			,{
+		rules : [{
+			test: /\.css$/,
+			use: [ 'style-loader', 'css-loader' ]
+		},{
 			test: [/(\.js)$/, /(\.jsx)$/],
 			exclude: /(node_modules)/,
 			include: path.join(__dirname, 'src'),
@@ -27,37 +26,28 @@ module.exports = {
 			query : {
 				presets: ['es2015', 'react']
 			}
+		},{
+			test: /\.css$/,
+			loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' })
 		}]
 	},
 	resolve: {
+		modules: ['node_modules'],
 		extensions: ['.js', '.jsx']
 	},
+	devtool: "cheap-module-source-map",
+	devServer: {
+		contentBase: __dirname + '/',
+		hot: true,
+		inline: true
+	},
 	plugins: [
-		new WebpackCleanupPlugin(),
-		new webpack.DefinePlugin({
-			'process.env': {
-				NODE_ENV: '"production"'
-			}
+		new webpack.ProvidePlugin({
+			$: "jquery",
+			jQuery: "jquery"
 		}),
-		new webpack.optimize.UglifyJsPlugin({
-			compress: {
-				warnings: false,
-				screw_ie8: true,
-				drop_console: true,
-				drop_debugger: true
-			}
-		}),
-		new webpack.optimize.OccurrenceOrderPlugin(),
-		new ExtractTextPlugin({
-			filename: 'style.css',
-			allChunks: true
-		}),
-		//new HtmlWebpackPlugin({
-		//  template: './src/template.html',
-		//  files: {
-		//    css: ['style.css'],
-		//    js: ['bundle.js'],
-		//  }
-		//})
+		new ExtractTextPlugin("app.bundle.css"),
+		new webpack.HotModuleReplacementPlugin()
 	]
+
 };
