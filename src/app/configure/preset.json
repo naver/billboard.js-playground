@@ -1,4 +1,12 @@
 {
+  "size" : {
+    "properties" : {
+      "width" : {
+
+      },
+      "height" : {}
+    }
+  },
   "data" : {
     "properties" : {
       "type" : {

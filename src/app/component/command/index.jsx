@@ -1,6 +1,8 @@
 import React, { PropTypes } from "react";
+import CodeMirror from "./codemirror";
 import { connect } from "react-redux";
 import { updateCommand } from "../../actions";
+var beautify_js = require('js-beautify').js_beautify;
 
 class Controller extends React.Component {
 	constructor() {
@@ -28,14 +30,21 @@ class Controller extends React.Component {
 
 	render() {
 		const value = `${this.state.text}`;
+		const options = {
+			lineNumbers: true,
+			mode: "javascript"
+		};
 
-		return (<div className="textConfigure">
-			<textarea value={value} onChange={this.onChangeText} className={this.state.error ? "err" : ""} />
+		const newLine = beautify_js(value);
+		const className = "textConfigure" + " " + (this.state.error ? "err" : "");
+
+		return (<div className={className}>
+			<CodeMirror value={newLine} onChange={this.onChangeText} options={options} />
 		</div>);
 	}
 
-	onChangeText(e) {
-		const value = e.target.value;
+	onChangeText(value) {
+	//onChangeText(editor, metadata, value) {
 		let parsed;
 
 		try {
@@ -54,6 +63,7 @@ class Controller extends React.Component {
 				error: false,
 				text: value
 			});
+
 			this.props.onChange(parsed);
 		}
 	}
