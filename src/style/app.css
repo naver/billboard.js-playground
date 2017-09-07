@@ -3,6 +3,8 @@ html, body {
     width : 100%;
     height : 100%;
 }
+
+
 .ReactCodeMirror {
     width: 100%;
     height: 200px;
@@ -23,7 +25,6 @@ html, body {
     width : 50%;
     margin : 0;
 }
-
 .scroll {
     width : 100%;
     height : 100%;
@@ -39,6 +40,18 @@ html, body {
 
 .property.deactivated {
     opacity: 0.5;
+}
+
+.activate_check {
+    opacity:0;
+}
+
+.property.deactivated .activate_check{
+    opacity: 1;
+}
+
+.property:hover .activate_check{
+    opacity:1;
 }
 
 
@@ -162,4 +175,8 @@ li.L1, li.L3, li.L5, li.L7, li.L9 {
     {
         color: #060;
     }
+}
+
+.react-toolbox_checkbox {
+    display: inline;
 }

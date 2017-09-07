@@ -29,11 +29,32 @@ const config = {
 			test: /\.css$/,
 			loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' })
 		}]
+
+		//},{
+		//	test: /\.css$/,
+		//	use: ExtractTextPlugin.extract({
+		//		fallback: 'style-loader',
+		//		use: [
+		//			{
+		//				loader: 'css-loader',
+		//				options: {
+		//					modules: true, // default is false
+		//					sourceMap: true,
+		//					importLoaders: 1,
+		//					localIdentName: "[name]--[local]--[hash:base64:8]"
+		//				}
+		//			},
+		//			'postcss-loader'
+		//		]
+		//	})
+		//}]
 	},
 	resolve: {
 		modules: ['node_modules'],
 		extensions: ['.js', '.jsx']
 	},
+
+
 	devtool: "cheap-module-source-map",
 	devServer: {
 		contentBase: __dirname + '/',
@@ -45,7 +66,7 @@ const config = {
 			$: "jquery",
 			jQuery: "jquery"
 		}),
-		new ExtractTextPlugin("app.bundle.css"),
+		new ExtractTextPlugin('app.bundle.css'),
 		new webpack.HotModuleReplacementPlugin()
 	]
 };

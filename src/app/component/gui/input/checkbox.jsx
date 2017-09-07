@@ -1,26 +1,29 @@
 import React, { PropTypes } from "react";
 import { connect } from "react-redux";
+import theme from "../../../../style/app.css";
+import { Checkbox as MDCheckbox } from "react-toolbox/lib/checkbox";
 import {
 	updateGui
 } from "../../../actions";
 
+
 class InputCheckbox extends React.Component {
 	render() {
-		const { value, onChange } = this.props;
-		let returnValue;
+		const checked = this.props.value ? true : false;
 
-		if (value) {
-			returnValue = (<input type="checkbox" checked onChange={onChange} />);
-		} else {
-			returnValue = (<input type="checkbox" onChange={onChange} />);
-		}
-
-		return returnValue;
+		return (<MDCheckbox
+			className="react-toolbox_checkbox"
+			theme={theme}
+			checked={checked}
+			onChange={this.props.onChange}
+		/>);
 	}
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-	onChange: e => (dispatch(updateGui(ownProps.name.replace(/\:/g, "."), e.target.checked)))
+	onChange: (checked) => {
+		dispatch(updateGui(ownProps.name.replace(/\:/g, "."), checked));
+	}
 });
 
 const Checkbox = connect(

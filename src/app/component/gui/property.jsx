@@ -30,8 +30,8 @@ class InputProperty extends React.Component {
 		return (<li data-id={option.name} className={className}>
 			<span className="">{
 				option.activated ?
-					<input type="checkbox" checked onChange={(e) => this.onChangeActive(e)} />
-					: <input type="checkbox" onChange={(e) => this.onChangeActive(e)} />
+					<input className="activate_check" type="checkbox" checked onChange={(e) => this.onChangeActive(e)} />
+					: <input className="activate_check" type="checkbox" onChange={(e) => this.onChangeActive(e)} />
 			}</span>
 			<span className="name"> {option.name} </span>
 			<span className="type"> {type} </span>
@@ -63,9 +63,7 @@ class InputProperty extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-	onChangeActive: e => {
-		dispatch(changeGuiActivate(ownProps.name.replace(/\:/g, "."), e.target.checked))
-	},
+	onChangeActive: e => dispatch(changeGuiActivate(ownProps.name.replace(/\:/g, "."), e.target.checked)),
 	onClickDelete: () => dispatch(resetGui(ownProps.name.replace(/\:/g, ".")))
 });
 
