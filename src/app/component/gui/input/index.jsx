@@ -1,11 +1,11 @@
 import React from "react";
 
-import Checkbox from "./checkbox";
+import FilteredCheckbox from "./checkbox";
 import Number from "./number";
 import Text from "./text";
 
 export {
-	Checkbox,
+	FilteredCheckbox,
 	Number,
 	Text,
 };

@@ -1,7 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
+import FontIcon from 'material-ui/FontIcon';
+import ContentClear from 'material-ui/svg-icons/content/clear';
+import {yellow200, deepOrange500, deepOrange50, yellow500, red600, greenA200} from 'material-ui/styles/colors';
+import {List, ListItem} from 'material-ui/List';
+import Clear from "./icon/clear";
+import ActionInfo from 'material-ui/svg-icons/action/info';
+import Toggle from 'material-ui/Toggle';
+import Checkbox from 'material-ui/Checkbox';
+import Slider from 'material-ui/Slider';
+
+
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {
-	Checkbox,
+	FilteredCheckbox,
 	Text,
 	Number,
 } from "./input/index";
@@ -22,24 +35,49 @@ class InputProperty extends React.Component {
 	render() {
 		const option = this.state;
 		const type = option.type ? option.type.names.join(", ") : "";
-		const input = InputProperty.getInputType(type, option);
-		const className = "property" +
-			(this.state.value !== this.state.defaultvalue ? " updated" : "") +
-			(this.state.activated ? "" : " deactivated");
 
-		return (<li data-id={option.name} className={className}>
-			<span className="">{
-				option.activated ?
-					<input className="activate_check" type="checkbox" checked onChange={(e) => this.onChangeActive(e)} />
-					: <input className="activate_check" type="checkbox" onChange={(e) => this.onChangeActive(e)} />
-			}</span>
-			<span className="name"> {option.name} </span>
-			<span className="type"> {type} </span>
-			<span> {input} </span>
-			{input ? <button className="delete" onClick={(e) => this.onClickDelete(e)}>x</button> : ""}
-		</li>);
+
+		const title = <div style={{
+						display : "inline-block",
+						"vertical-align" : "middle",
+						width  : "45%"
+					}}>
+			<div style={{display : "inline-block", "width" : "100%"}}>
+				<span className="property_name">{option.name}</span>
+			</div>
+		</div>;
+		const input = <div style={{
+						display : "inline-block",
+						"vertical-align" : "middle",
+						width  : "45%"
+					}}>
+				<div style={{display : "inline-block", "width" : "100%"}}>
+					{InputProperty.getInputType(type, option)}
+				</div>
+			</div>;
+		const clear =
+			<div style={{
+					display : "inline-block",
+					"vertical-align" : "middle",
+					width  : "10%"
+				}}>
+				<div style={{display : "inline-block", "width" : "100%", "text-align" : "right"}}>
+					<Clear />
+				</div>
+			</div>
+			;
+
+		return  (<MuiThemeProvider muiTheme={getMuiTheme()}>
+			<ListItem
+				hoverColor={deepOrange50}
+				style={{
+					width: "100%",
+					}}
+				nestedLevel={this.state.level}
+				children={[title, input, clear]}
+			/>
+		</MuiThemeProvider>);
 	}
-
 	onChangeActive(e) {
 		this.props.onChangeActive(e);
 	}
@@ -51,7 +89,7 @@ class InputProperty extends React.Component {
 	static getInputType(type, option) {
 		switch (type.toLocaleLowerCase()) {
 			case "boolean" :
-				return <Checkbox {...option} />;
+				return <FilteredCheckbox {...option} />;
 			case "string" :
 				return <Text {...option} />;
 			case "number" :

@@ -1,7 +1,9 @@
 import React, { PropTypes } from "react";
 import { connect } from "react-redux";
-import theme from "../../../../style/app.css";
-import { Checkbox as MDCheckbox } from "react-toolbox/lib/checkbox";
+import Toggle from 'material-ui/Toggle';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 import {
 	updateGui
 } from "../../../actions";
@@ -11,23 +13,25 @@ class InputCheckbox extends React.Component {
 	render() {
 		const checked = this.props.value ? true : false;
 
-		return (<MDCheckbox
-			className="react-toolbox_checkbox"
-			theme={theme}
-			checked={checked}
-			onChange={this.props.onChange}
-		/>);
+		return (<MuiThemeProvider muiTheme={getMuiTheme()}>
+			<div>
+				<Toggle
+					toggled={checked}
+					onToggle={this.props.onChange}
+				/>
+			</div>
+		</MuiThemeProvider>);
 	}
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-	onChange: (checked) => {
+	onChange: (e,  checked) => {
 		dispatch(updateGui(ownProps.name.replace(/\:/g, "."), checked));
 	}
 });
 
-const Checkbox = connect(
+const FilteredCheckbox = connect(
 	null, mapDispatchToProps
 )(InputCheckbox);
 
-export default Checkbox;
+export default FilteredCheckbox;

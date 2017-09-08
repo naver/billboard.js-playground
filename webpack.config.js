@@ -25,29 +25,43 @@ const config = {
 			query : {
 				presets: ['es2015', 'react']
 			}
-		},{
-			test: /\.css$/,
-			loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' })
-		}]
-
-		//},{
-		//	test: /\.css$/,
-		//	use: ExtractTextPlugin.extract({
-		//		fallback: 'style-loader',
-		//		use: [
-		//			{
-		//				loader: 'css-loader',
-		//				options: {
-		//					modules: true, // default is false
-		//					sourceMap: true,
-		//					importLoaders: 1,
-		//					localIdentName: "[name]--[local]--[hash:base64:8]"
-		//				}
-		//			},
-		//			'postcss-loader'
-		//		]
-		//	})
-		//}]
+		},
+			{ test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?name=[name].[ext]&limit=10000&minetype=application/font-woff" },
+			{
+				test: /\.scss$/,
+				use: ExtractTextPlugin.extract({
+					use: [{
+						loader: "css-loader"
+					}, {
+						loader: "sass-loader"
+					}],
+					// use style-loader in development
+					fallback: "style-loader"
+				})
+			},
+			{
+				test: /\.css$/,
+				loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' })
+			},
+			//{
+			//	test: /\.css$/,
+			//	use: ExtractTextPlugin.extract({
+			//		fallbackLoader: 'style-loader',
+			//		use: [
+			//			{
+			//				loader: 'css-loader',
+			//				options: {
+			//					modules: true, // default is false
+			//					sourceMap: true,
+			//					importLoaders: 1,
+			//					localIdentName: "[name]"
+			//				}
+			//			},
+			//			'postcss-loader'
+			//		]
+			//	})
+			//}
+		]
 	},
 	resolve: {
 		modules: ['node_modules'],

@@ -20,10 +20,11 @@ ReactDOM.render(
 		<div id="wrapper">
 			<Chart />
 			<Command />
-			<div className="scroll">
-				<GUI />
-			</div>
+			<GUI />
 		</div>
 	</Provider>,
 	root
 );
+
+
+

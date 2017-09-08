@@ -2889,7 +2889,7 @@
         "optional": true,
         "defaultvalue": false,
         "description": "Show grids along x axis.",
-        "name": "x.show"
+        "name": "grid.x.show"
       },
       {
         "type": {
@@ -2900,7 +2900,7 @@
         "optional": true,
         "defaultvalue": "[]",
         "description": "Show additional grid lines along x axis.<br>\r This option accepts array including object that has value, text, position and class. text, position and class are optional. For position, start, middle and end (default) are available.\r If x axis is category axis, value can be category name. If x axis is timeseries axis, value can be date string, Date object and unixtime integer.",
-        "name": "x.lines"
+        "name": "grid.x.lines"
       },
       {
         "type": {
@@ -2911,7 +2911,7 @@
         "optional": true,
         "defaultvalue": false,
         "description": "Show grids along x axis.",
-        "name": "y.show"
+        "name": "grid.y.show"
       },
       {
         "type": {
@@ -2922,7 +2922,7 @@
         "optional": true,
         "defaultvalue": "[]",
         "description": "Show additional grid lines along y axis.<br>\r This option accepts array including object that has value, text, position and class.",
-        "name": "y.lines"
+        "name": "grid.y.lines"
       },
       {
         "type": {
@@ -2932,7 +2932,7 @@
         },
         "optional": true,
         "defaultvalue": 10,
-        "name": "y.ticks"
+        "name": "grid.y.ticks"
       },
       {
         "type": {
@@ -2943,7 +2943,7 @@
         "optional": true,
         "defaultvalue": true,
         "description": "Show grids when focus.",
-        "name": "focus.show"
+        "name": "grid.focus.show"
       },
       {
         "type": {
@@ -2953,7 +2953,7 @@
         },
         "optional": true,
         "defaultvalue": true,
-        "name": "lines.front"
+        "name": "grid.lines.front"
       }
     ],
     "meta": {
