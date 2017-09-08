@@ -69,7 +69,6 @@ class InputProperty extends React.Component {
 
 		return  (<MuiThemeProvider muiTheme={getMuiTheme()}>
 			<ListItem
-				hoverColor={deepOrange50}
 				style={{
 					width: "100%",
 					}}

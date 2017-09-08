@@ -9,7 +9,26 @@ import {
 	updateGui, resetGui
 } from "../../../actions";
 import FontIcon from 'material-ui/FontIcon';
-import {blue500, red600, greenA200} from 'material-ui/styles/colors';
+import {red600, green200, blue300, blue500, grey100, grey400, lightBlue100, lightBlue300} from 'material-ui/styles/colors';
+
+
+const iconSelect = {
+	fill: lightBlue300,
+};
+
+const icon = {
+	fill: grey400
+};
+
+const labelSelect = {
+	"font-size" : "14px"
+	//color: lightBlue300,
+}
+
+const label = {
+	"font-size" : "14px",
+	color : grey400
+}
 
 class InputText extends React.Component {
 	getRadioInput(valueoptions, name, onChange, value) {
@@ -17,6 +36,12 @@ class InputText extends React.Component {
 					<RadioButtonGroup name={name} defaultSelected={value} onChange={onChange}>
 						{_.map(valueoptions, (v, i) => {
 							return (<RadioButton
+								iconStyle={
+								    value === v ? iconSelect : icon
+								}
+								labelStyle={
+									value === v ? labelSelect : label
+								}
 								key={i}
 								value={v}
 								label={v}
@@ -37,6 +62,10 @@ class InputText extends React.Component {
 				// <input type="text" placeholder="undefined" onChange={onChange} />
 				returnValue = (<MuiThemeProvider muiTheme={getMuiTheme()}>
 					<TextField
+						underlineFocusStyle={{
+							//borderBottomWidth: "1px",
+							borderColor : lightBlue300
+						}}
 						style={{width:"100%", display:"inline-block"}}
 						fullWidth={true}
 						hintText="undefined" />
@@ -44,6 +73,10 @@ class InputText extends React.Component {
 			} else {
 				returnValue = (<MuiThemeProvider muiTheme={getMuiTheme()}>
 					<TextField
+						underlineFocusStyle={{
+							//borderBottomWidth: "1px",
+							borderColor : lightBlue300
+						}}
 						style={{width:"100%", display:"inline-block"}}
 						fullWidth={true}
 						hintText={value} />

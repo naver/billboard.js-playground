@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import Slider from 'material-ui/Slider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import TextField from 'material-ui/TextField';
-import Badge from 'material-ui/Badge';
+import  * as color from 'material-ui/styles/colors';
+import mui from 'material-ui';
 
 import {
 	updateGui, resetGui
@@ -13,48 +13,51 @@ import {
 	deepCopy
 } from "../../../util";
 
+
 class InputNumber extends React.Component {
 	render() {
 		const props = deepCopy({}, this.props);
-		const value = props.value;
-		let returnValue;
+		let value = props.value;
+		let sliderStyle = {padding : 0, margin:0};
+		let style = {
+			width:"60%", display:"inline-block"
+		};
+		let valueStyle = {width:"40%", display:"inline-block"};
 
 		if (isNaN(value)) {
-			returnValue = (
-				<MuiThemeProvider muiTheme={getMuiTheme()}>
-					<div>
-						<Slider
-							sliderStyle={{padding : 0, margin:0}}
-							style={{width:"60%", display:"inline-block"}}
-							{...props}
-						/>
-												<span className="number_guide"
-													  style={{width:"40%", display:"inline-block"}}
-												>{props.defaultvalue}</span>
+			value = props.defaultvalue || "none";
+			valueStyle = deepCopy(valueStyle, {
+				color : color.grey400
+			});
 
-					</div>
-				</MuiThemeProvider>
-			)
 		} else {
 			//<input type="number" value={value} onChange={onChange} />
-			props.value = props.value*1;
-			returnValue = (
-				<MuiThemeProvider muiTheme={getMuiTheme()}>
-					<div>
-						<Slider
-							sliderStyle={{padding : 0, margin:0}}
-							style={{width:"60%", display:"inline-block"}}
-							{...props}
-						/>
-												<span className="number_guide"
-													  style={{width:"40%", display:"inline-block"}}
-												>{props.value}</span>
-
-					</div>
-				</MuiThemeProvider>
-			);
+			value = value*1;
+			valueStyle = deepCopy(valueStyle, {
+				color : color.grey900
+			});
 		}
-		return returnValue;
+		return (<MuiThemeProvider muiTheme={getMuiTheme({
+			slider: {
+					  trackColor: color.grey400,
+					  trackColorSelected: color.grey400,
+					  selectionColor: color.lightBlue300,
+					  handleColorZero: color.grey400,
+					  handleFillColor: color.grey100,
+					  rippleColor: color.lightBlue100
+				}
+			})}>
+			<div>
+				<Slider
+					sliderStyle={sliderStyle}
+					style={style}
+					{...props}
+				/>
+				<span className="number_guide"
+					  style={valueStyle}
+				>{value}</span>
+			</div>
+		</MuiThemeProvider>);
 	}
 }
 

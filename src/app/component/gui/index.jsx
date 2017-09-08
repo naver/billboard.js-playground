@@ -7,7 +7,7 @@ import Divider from 'material-ui/Divider';
 import {List, ListItem} from 'material-ui/List';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {yellow200, deepOrange500, grey900, grey50, grey200, yellow500, red600, greenA200} from 'material-ui/styles/colors';
+import {yellow200, deepOrange400,deepOrange500, deepOrange700, grey900, grey50, grey200, yellow500, red600, deepOrange600, greenA200} from 'material-ui/styles/colors';
 
 class Control extends React.Component {
 	componentWillMount() {
@@ -48,14 +48,12 @@ class Control extends React.Component {
 					hasProperty.push(<MuiThemeProvider muiTheme={getMuiTheme()} key={key}>
 						<ListItem
 							innerDivStyle={{
-								"font-family": 'Bungee',
-								"background" : deepOrange500,
-								"color" : grey50,
-								"font-size": "25px"
-							}}
-							style={{
-
-							}}
+									"font-family": 'Bungee',
+									"background" : deepOrange400,
+									"color" : grey50,
+									"font-size": "25px",
+									"border-bottom": `2px solid ${deepOrange700}`
+								}}
 							className="member"
 							primaryText={member.name}
 							initiallyOpen={true}
