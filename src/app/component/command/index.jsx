@@ -2,6 +2,7 @@ import React, { PropTypes } from "react";
 import CodeMirror from "./codemirror";
 import { connect } from "react-redux";
 import { updateCommand } from "../../actions";
+import ExportCode from "./exportcode";
 var beautify_js = require('js-beautify').js_beautify;
 
 class Controller extends React.Component {
@@ -39,6 +40,7 @@ class Controller extends React.Component {
 		const className = "textConfigure" + " " + (this.state.error ? "err" : "");
 
 		return (<div className={className}>
+			<ExportCode />
 			<CodeMirror value={newLine} onChange={this.onChangeText} options={options} />
 		</div>);
 	}

@@ -27,6 +27,7 @@ const config = {
 			}
 		},
 			{ test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?name=[name].[ext]&limit=10000&minetype=application/font-woff" },
+			{ test: /\.svg(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?name=[name].[ext]&limit=10000&minetype=application/svg" },
 			{
 				test: /\.scss$/,
 				use: ExtractTextPlugin.extract({
