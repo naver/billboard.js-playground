@@ -94,4 +94,18 @@ html {
     text-align : center;
 
 }
+
+.codepen-export input[type="submit"] {
+    border : none;
+    width: 60px;
+    height : 40px;
+    background: none;
+}
+.codepen-export .button {
+    background-size: contain !important;
+    border : none ;
+    width: 60px  !important;
+    height : 40px  !important;
+    background-image : url(codepen-export.svg) !important;
+}
 /**  app.css **/

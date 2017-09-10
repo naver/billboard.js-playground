@@ -4,7 +4,6 @@ import Toggle from 'material-ui/Toggle';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import  * as color from 'material-ui/styles/colors';
-
 import {
 	updateGui
 } from "../../../actions";

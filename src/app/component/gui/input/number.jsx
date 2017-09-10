@@ -1,10 +1,9 @@
 import React, { PropTypes } from "react";
 import { connect } from "react-redux";
-import Slider from 'material-ui/Slider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import  * as color from 'material-ui/styles/colors';
-import mui from 'material-ui';
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import getMuiTheme from "material-ui/styles/getMuiTheme";
+import Slider from "material-ui/Slider";
+import  * as color from "material-ui/styles/colors";
 
 import {
 	updateGui, resetGui
@@ -14,48 +13,51 @@ import {
 } from "../../../util";
 
 
+const SliderStyleTheme = {
+	trackColor: color.grey400,
+	trackColorSelected: color.grey400,
+	selectionColor: color.lightBlue300,
+	handleColorZero: color.grey400,
+	handleFillColor: color.grey100,
+	rippleColor: color.lightBlue100
+};
+
+const SliderStyle = {
+	padding: 0,
+	margin: 0
+};
+const Style = {
+	width: "60%",
+	display: "inline-block"
+};
+const ValueTextStyle = {
+	width: "40%",
+	display: "inline-block"
+};
+
 class InputNumber extends React.Component {
 	render() {
 		const props = deepCopy({}, this.props);
-		let value = props.value;
-		let sliderStyle = {padding : 0, margin:0};
-		let style = {
-			width:"60%", display:"inline-block"
-		};
-		let valueStyle = {width:"40%", display:"inline-block"};
 
-		if (isNaN(value)) {
+		if (isNaN(props.value)) {
 			props.value = props.defaultvalue || undefined;
-			valueStyle = deepCopy(valueStyle, {
-				color: color.grey400
-			});
+			ValueTextStyle.color = color.grey400;
 		} else {
-			//<input type="number" value={value} onChange={onChange} />
-			props.value = value*1;
-			valueStyle = deepCopy(valueStyle, {
-				color: color.grey900
-			});
+			props.value *= 1;
+			ValueTextStyle.color = color.grey900;
 		}
 
-		return (<MuiThemeProvider muiTheme={getMuiTheme({
-			slider: {
-				  trackColor: color.grey400,
-				  trackColorSelected: color.grey400,
-				  selectionColor: color.lightBlue300,
-				  handleColorZero: color.grey400,
-				  handleFillColor: color.grey100,
-				  rippleColor: color.lightBlue100
-				}
-			})}>
+		return (<MuiThemeProvider muiTheme={getMuiTheme({ slider: SliderStyleTheme })}>
 			<div>
 				<Slider
-					sliderStyle={sliderStyle}
-					style={style}
+					sliderStyle={SliderStyle}
+					style={Style}
 					{...props}
 				/>
-				<span className="number_guide"
-					  style={valueStyle}
-				>{value}</span>
+				<span
+					className="number_guide"
+					style={ValueTextStyle}
+				>{props.value}</span>
 			</div>
 		</MuiThemeProvider>);
 	}
@@ -63,12 +65,13 @@ class InputNumber extends React.Component {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
 	onChange: (e, value) => {
-		if(value === ""){
-			dispatch(resetGui(ownProps.name.replace(/\:/g, "."), {
+		const name = ownProps.name.replace(/\:/g, ".");
+		if (value === "") {
+			dispatch(resetGui(name, {
 				root: ownProps.rootMemberName
 			}));
 		} else {
-			dispatch(updateGui(ownProps.name.replace(/\:/g, "."), {
+			dispatch(updateGui(name, {
 				root: ownProps.rootMemberName,
 				value: value * 1
 			}));

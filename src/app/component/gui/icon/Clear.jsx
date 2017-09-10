@@ -6,6 +6,9 @@ import {blue500,deepOrange500, grey500, red500, greenA200} from 'material-ui/sty
 import {List, ListItem} from 'material-ui/List';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import {
+	updateGui, resetGui
+} from "../../../actions";
 
 
 class DeleteIcon extends React.Component {
@@ -23,13 +26,16 @@ class DeleteIcon extends React.Component {
 	onClickDelete(e) {
 		this.props.onClickDelete(e);
 	}
-
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-	onChangeActive: e => dispatch(changeGuiActivate(ownProps.name.replace(/\:/g, "."), e.target.checked)),
-	onClickDelete: () => dispatch(resetGui(ownProps.name.replace(/\:/g, ".")))
-});
+const mapDispatchToProps = (dispatch, ownProps) => {
+	return {
+		onChangeActive: e => dispatch(changeGuiActivate(ownProps.name.replace(/\:/g, "."), e.target.checked)),
+		onClickDelete: () => dispatch(resetGui(ownProps.name.replace(/\:/g, "."), {
+			root: ownProps.rootMemberName
+		}))
+	};
+};
 
 const Clear = connect(
 	null, mapDispatchToProps

@@ -67,7 +67,7 @@ class InputProperty extends React.Component {
 						width: "100%",
 						textAlign: "right"
 					}}>
-					<Clear />
+					<Clear {...this.state}/>
 				</div>
 			</div>);
 	}
