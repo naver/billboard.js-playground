@@ -2,8 +2,28 @@ import * as _ from "lodash";
 import * as extractedDocument from "./document.json";
 import * as presetDocument from "./preset.json";
 import { deepCopy } from "../util";
+import { convertColumnsToData, convertRowsToData, convertJsonToData } from "./convert"
 
 const keysFromDocument = [];
+
+
+export const convertData = (data) => {
+	let converted;
+	if (data.columns) {
+		converted = convertColumnsToData(data.columns);
+	} else if (data.rows) {
+		converted = convertRowsToData(data.rows);
+	} else if (data.json){
+		converted = convertJsonToData(data.json, {
+			value: _.keys(data.json[0])
+		});
+	}
+	return {
+		header: _.keys(converted[0]),
+		body: converted
+	};
+};
+
 
 const memberFlatten = (member) => {
 	let newArray = [member];
@@ -19,7 +39,7 @@ const memberFlatten = (member) => {
 					name: item.name,
 					description: item.description,
 					optional: item.optional,
-					activated: true,
+					activated: false,
 				});
 			}
 		});
@@ -41,14 +61,14 @@ const documentToObject = (defaultDocumentOption) => {
 					name: name.replace(/\:/g, "."),
 					description: description,
 					optional: optional,
-					activated: true,
+					activated: false,
 				};
 				fullProperties = fullProperties.concat([target]);
 
 			} else {
 				const ps = memberFlatten({
 					value: defaultvalue,
-					activated: true,
+					activated: false,
 					defaultvalue,
 					properties,
 					type,
@@ -120,7 +140,7 @@ const getDefaultAttributes = (name) => {
 	return {
 		description: "",
 		optional: true,
-		activated: true,
+		activated: false,
 		name,
 		value: undefined,
 		defaultvalue: undefined,
@@ -154,6 +174,11 @@ export const changeMemberProperty = (original, object) => {
 		const targetPath = keyPath.replace(/\./g, ".properties.") + ".attributes";
 		const type = _.get(original, targetPath + ".type");
 		let value = _.get(object, keyPath);
+		let changed = _.get(original, targetPath + ".defaultvalue") !== value;
+
+		_.update(original, targetPath + ".activated", () => {
+			return changed;
+		});
 
 		if(type.names[0].toLowerCase() === "number" && value !== undefined){
 			value = value * 1;
@@ -222,7 +247,6 @@ const objectToKeys = (obj, root = "") => {
 		arr.push(root);
 	}
 
-
 	return _.flatten(arr);
 };
 
@@ -236,5 +260,36 @@ export const initCommandConfigure = {
 		]
 	}
 };
+
+
+//export const initCommandConfigure = {
+//	data : {
+//		rows: [
+//			["A", "B", "C"],
+//			[90, 120, 300],
+//			[40, 160, 240],
+//			[50, 200, 290],
+//			[120, 160, 230],
+//			[80, 130, 300],
+//			[90, 220, 320]
+//		]
+//	}
+//};
+//
+
+//export const initCommandConfigure = {
+//	data : {
+//		json: [
+//			{name: "www.site1.com", upload: 200, download: 200, total: 400},
+//			{name: "www.site2.com", upload: 100, download: 300, total: 400},
+//			{name: "www.site3.com", upload: 300, download: 200, total: 500},
+//			{name: "www.site4.com", upload: 400, download: 100, total: 500}
+//		],
+//		keys: {
+//			// x: "name", // it's possible to specify 'x' when category axis
+//			value: ["upload", "download"]
+//		}
+//	}
+//}
 
 export const initDocumentConfigure = documentToObject(extractedDocument);

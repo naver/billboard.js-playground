@@ -11,35 +11,32 @@ import {
 } from "../../../actions";
 
 
-class DeleteIcon extends React.Component {
+class EditIcon extends React.Component {
 	render (){
-		const color = this.props.activated ? deepOrange500 : grey500;
 		return <MuiThemeProvider muiTheme={getMuiTheme()}>
-			<div>
-				<FontIcon
-					onClick={(e) => this.onClickDelete(e)}
-					className="material-icons"
-					color={color}>clear</FontIcon>
-			</div>
+			<FontIcon
+				style={{
+					fontSize: "20px",
+					left: "-86px"
+				}}
+				className="material-icons"
+				color={grey500}>mode edit</FontIcon>
 		</MuiThemeProvider>;
 	}
 
 	onClickDelete(e) {
-		this.props.onClickDelete(e);
+		//this.props.onClickDelete(e);
 	}
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
 	return {
-		onChangeActive: e => dispatch(changeGuiActivate(ownProps.name.replace(/\:/g, "."), e.target.checked)),
-		onClickDelete: () => dispatch(resetGui(ownProps.name.replace(/\:/g, "."), {
-			root: ownProps.rootMemberName
-		}))
+		//onChangeActive: e => dispatch(changeGuiActivate(ownProps.name.replace(/\:/g, "."), e.target.checked)),
 	};
 };
 
-const Clear = connect(
+const Modify = connect(
 	null, mapDispatchToProps
-)(DeleteIcon);
+)(EditIcon);
 
-export default Clear;
+export default Modify;

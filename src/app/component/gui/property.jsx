@@ -5,6 +5,7 @@ import ContentClear from 'material-ui/svg-icons/content/clear';
 import {yellow200, deepOrange500, deepOrange50, yellow500, red600, greenA200} from 'material-ui/styles/colors';
 import {List, ListItem} from 'material-ui/List';
 import Clear from "./icon/clear";
+import Modify from "./icon/modify";
 import ActionInfo from 'material-ui/svg-icons/action/info';
 import Toggle from 'material-ui/Toggle';
 import Checkbox from 'material-ui/Checkbox';
@@ -32,14 +33,35 @@ class InputProperty extends React.Component {
 		this.setState(nextProps);
 	}
 
+	getModify() {
+		return "";
+		return (<div
+			style={{
+					display: "inline-block",
+					verticalAlign: "middle",
+					width: "5%"
+				}}>
+			<div style={{
+						display: "inline-block",
+						width: "100%",
+						textAlign: "left"
+					}}>
+				<Modify {...this.state}/>
+			</div>
+		</div>);
+	}
+
 	getName() {
 		return (<div style={{
 						display : "inline-block",
 						verticalAlign : "middle",
 						width  : "45%"
 					}}>
-			<div style={{display : "inline-block", "width" : "100%"}}>
-				<span className="property_name">{this.state.name}</span>
+			<div style={{display : "inline-block", "width" : "100%"}}
+				 onClick={(e) => this.onClickTitle(e)}
+			>
+				<div className="property_name">{this.state.name}</div>
+				<div className="property_type">{this.state.type.names.join(", ")}</div>
 			</div>
 		</div>);
 	}
@@ -53,11 +75,17 @@ class InputProperty extends React.Component {
 			<div style={{ display: "inline-block", "width": "100%" }}>
 				{InputProperty.getInputType(type, this.state)}
 			</div>
-		</div>)
+		</div>);
+	}
+
+	onClickTitle() {
+		console.log(this.state.description);
 	}
 
 	getClear() {
-		return (<div style={{
+		return (<div
+				className="property_clear"
+				style={{
 					display: "inline-block",
 					verticalAlign: "middle",
 					width: "10%"
@@ -79,15 +107,19 @@ class InputProperty extends React.Component {
 		const title = this.getName();
 		const input = this.getInput(type);
 		const clear = this.getClear();
+		const modify = this.getModify();
+		const className = "property" + (option.activated ? " activated" : "")
 
 		return  (<MuiThemeProvider muiTheme={getMuiTheme()}>
 			<ListItem
+				className={className}
 				style={{ width: "100%" }}
 				nestedLevel={this.state.level}
-				children={[title, input, clear]}
+				children={[modify, title, input, clear]}
 			/>
 		</MuiThemeProvider>);
 	}
+
 	onChangeActive(e) {
 		this.props.onChangeActive(e);
 	}

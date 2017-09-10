@@ -10,6 +10,7 @@ import {
 import { Chart } from "./component/chart";
 import { GUI } from "./component/gui";
 import { Command } from "./component/command";
+import { Data } from "./component/data";
 import playgroundApp from "./reducers";
 
 const store = createStore(playgroundApp);
@@ -20,11 +21,11 @@ ReactDOM.render(
 		<div id="wrapper">
 			<Chart />
 			<Command />
+			<Data />
 			<GUI />
 		</div>
 	</Provider>,
 	root
 );
-
 
 

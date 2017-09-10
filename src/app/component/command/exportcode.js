@@ -30,13 +30,7 @@ class CodePenExportCode extends React.Component {
 
 		return (<form action="https://codepen.io/pen/define" method="POST" target="_blank" className="codepen-export"
 					  ref={(input) => { this.form = input; }}
-					  style={{
-					  		display: "inline-block",
-							position: "relative",
-							border: "none",
-							width: "60px",
-							height: "40px",
-		}}>
+					  >
 			<input type="hidden" name="data" value={JSON.stringify(value)} />
 			<input type="submit" alt="export to codepen" value="" style={{position: "absolute"}} />
 			<MuiThemeProvider muiTheme={getMuiTheme()}>

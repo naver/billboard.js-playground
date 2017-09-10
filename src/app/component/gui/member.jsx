@@ -51,8 +51,6 @@ class Member extends React.Component {
 		const member = this.props.attributes;
 		const properties = this.props.properties;
 
-		console.log("rendered => " + member.name);
-
 		return <MuiThemeProvider muiTheme={getMuiTheme()}>
 			<ListItem
 				innerDivStyle={{
