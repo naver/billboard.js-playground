@@ -21,13 +21,13 @@ const icon = {
 };
 
 const labelSelect = {
-	"font-size" : "14px"
+	fontSize : "14px"
 	//color: lightBlue300,
 }
 
 const label = {
-	"font-size" : "14px",
-	color : grey400
+	fontSize : "14px",
+	color: grey400
 }
 
 class InputText extends React.Component {
@@ -91,9 +91,14 @@ class InputText extends React.Component {
 const mapDispatchToProps = (dispatch, ownProps) => ({
 	onChange: (e, value) => {
 		if(value === ""){
-			dispatch(resetGui(ownProps.name.replace(/\:/g, ".")));
+			dispatch(resetGui(ownProps.name.replace(/\:/g, "."), {
+				root: ownProps.rootMemberName
+			}));
 		} else {
-			(dispatch(updateGui(ownProps.name.replace(/\:/g, "."), value)));
+			(dispatch(updateGui(ownProps.name.replace(/\:/g, "."), {
+				value: value,
+				root: ownProps.rootMemberName
+			})));
 		}
 	}
 });

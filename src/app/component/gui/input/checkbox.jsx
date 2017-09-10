@@ -38,10 +38,10 @@ class InputCheckbox extends React.Component {
 		const checked = this.props.value ? true : false;
 		const labelStyle = this.props.value === this.props.defaultvalue ? {
 			//color : color.grey400,
-			"font-size" : "14px"
+			fontSize : "14px"
 		} : {
 			//color : color.grey900,
-			"font-size" : "14px"
+			fontSize : "14px"
 		}
 
 		return (<MuiThemeProvider muiTheme={getMuiTheme()}>
@@ -63,8 +63,11 @@ class InputCheckbox extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-	onChange: (e,  checked) => {
-		dispatch(updateGui(ownProps.name.replace(/\:/g, "."), checked));
+	onChange: (e, checked) => {
+		dispatch(updateGui(ownProps.name.replace(/\:/g, "."), {
+			value: checked,
+			root: ownProps.rootMemberName
+		}));
 	}
 });
 

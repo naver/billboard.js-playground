@@ -6,7 +6,8 @@ export const CHANGE_GUI_ACTIVATE = "CHANGE_GUI_ACTIVATE";
 export const changeGuiActivate = (name, value) => ({
 	type: CHANGE_GUI_ACTIVATE,
 	name,
-	value
+	value: value.value,
+	root: value.root,
 });
 
 

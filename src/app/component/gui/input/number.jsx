@@ -25,26 +25,26 @@ class InputNumber extends React.Component {
 		let valueStyle = {width:"40%", display:"inline-block"};
 
 		if (isNaN(value)) {
-			value = props.defaultvalue || "none";
+			props.value = props.defaultvalue || undefined;
 			valueStyle = deepCopy(valueStyle, {
-				color : color.grey400
+				color: color.grey400
 			});
-
 		} else {
 			//<input type="number" value={value} onChange={onChange} />
-			value = value*1;
+			props.value = value*1;
 			valueStyle = deepCopy(valueStyle, {
-				color : color.grey900
+				color: color.grey900
 			});
 		}
+
 		return (<MuiThemeProvider muiTheme={getMuiTheme({
 			slider: {
-					  trackColor: color.grey400,
-					  trackColorSelected: color.grey400,
-					  selectionColor: color.lightBlue300,
-					  handleColorZero: color.grey400,
-					  handleFillColor: color.grey100,
-					  rippleColor: color.lightBlue100
+				  trackColor: color.grey400,
+				  trackColorSelected: color.grey400,
+				  selectionColor: color.lightBlue300,
+				  handleColorZero: color.grey400,
+				  handleFillColor: color.grey100,
+				  rippleColor: color.lightBlue100
 				}
 			})}>
 			<div>
@@ -64,9 +64,14 @@ class InputNumber extends React.Component {
 const mapDispatchToProps = (dispatch, ownProps) => ({
 	onChange: (e, value) => {
 		if(value === ""){
-			dispatch(resetGui(ownProps.name.replace(/\:/g, ".")));
+			dispatch(resetGui(ownProps.name.replace(/\:/g, "."), {
+				root: ownProps.rootMemberName
+			}));
 		} else {
-			dispatch(updateGui(ownProps.name.replace(/\:/g, "."), value*1));
+			dispatch(updateGui(ownProps.name.replace(/\:/g, "."), {
+				root: ownProps.rootMemberName,
+				value: value * 1
+			}));
 		}
 	}
 });

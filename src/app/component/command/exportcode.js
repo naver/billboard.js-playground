@@ -1,4 +1,5 @@
 import React, { PropTypes } from "react";
+import { connect } from "react-redux";
 
 const URL = {
 	d3v4 : "https://cdnjs.cloudflare.com/ajax/libs/d3/4.10.2/d3.js",
@@ -8,20 +9,12 @@ const URL = {
 
 const html = `<div id="chart"></div>`;
 
-const js = `bb.generate({
-	data: {
-			columns: [
-				["data1", 30, 200, 100, 400, 150, 250],
-				["data2", 50, 20, 10, 40, 15, 25],
-				["data3", 50, 20, 10, 40, 15, 25]
-			]
-		}
-})`;
 const css_external = `${URL.bbcss}`;
 const js_external = `${URL.d3v4};${URL.bbjs}`
 
-class ExportCode extends React.Component {
+class CodePenExportCode extends React.Component {
 	render() {
+		const js = `bb.generate(${this.props.text})`;
 		const value = {
 			title: "bb playground",
 			css_external,
@@ -35,11 +28,17 @@ class ExportCode extends React.Component {
 			<input type="submit" value="Create New Pen with Prefilled Data" />
 		</form>);
 	}
+}
+
+
+CodePenExportCode.propTypes = {
+	text: PropTypes.string.isRequired
 };
 
+const mapStateToProps = state => ({
+	text: state.command.text
+});
+
+const ExportCode = connect(mapStateToProps, null)(CodePenExportCode);
 
 export default ExportCode;
-
-
-
-

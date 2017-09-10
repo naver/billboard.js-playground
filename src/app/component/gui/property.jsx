@@ -32,46 +32,57 @@ class InputProperty extends React.Component {
 		this.setState(nextProps);
 	}
 
+	getName() {
+		return (<div style={{
+						display : "inline-block",
+						verticalAlign : "middle",
+						width  : "45%"
+					}}>
+			<div style={{display : "inline-block", "width" : "100%"}}>
+				<span className="property_name">{this.state.name}</span>
+			</div>
+		</div>);
+	}
+
+	getInput(type) {
+		return (<div style={{
+						display: "inline-block",
+						verticalAlign: "middle",
+						width: "45%"
+					}}>
+			<div style={{ display: "inline-block", "width": "100%" }}>
+				{InputProperty.getInputType(type, this.state)}
+			</div>
+		</div>)
+	}
+
+	getClear() {
+		return (<div style={{
+					display: "inline-block",
+					verticalAlign: "middle",
+					width: "10%"
+				}}>
+					<div style={{
+						display: "inline-block",
+						width: "100%",
+						textAlign: "right"
+					}}>
+					<Clear />
+				</div>
+			</div>);
+	}
+
 	render() {
 		const option = this.state;
 		const type = option.type ? option.type.names.join(", ") : "";
 
-
-		const title = <div style={{
-						display : "inline-block",
-						"vertical-align" : "middle",
-						width  : "45%"
-					}}>
-			<div style={{display : "inline-block", "width" : "100%"}}>
-				<span className="property_name">{option.name}</span>
-			</div>
-		</div>;
-		const input = <div style={{
-						display : "inline-block",
-						"vertical-align" : "middle",
-						width  : "45%"
-					}}>
-				<div style={{display : "inline-block", "width" : "100%"}}>
-					{InputProperty.getInputType(type, option)}
-				</div>
-			</div>;
-		const clear =
-			<div style={{
-					display : "inline-block",
-					"vertical-align" : "middle",
-					width  : "10%"
-				}}>
-				<div style={{display : "inline-block", "width" : "100%", "text-align" : "right"}}>
-					<Clear />
-				</div>
-			</div>
-			;
+		const title = this.getName();
+		const input = this.getInput(type);
+		const clear = this.getClear();
 
 		return  (<MuiThemeProvider muiTheme={getMuiTheme()}>
 			<ListItem
-				style={{
-					width: "100%",
-					}}
+				style={{ width: "100%" }}
 				nestedLevel={this.state.level}
 				children={[title, input, clear]}
 			/>
@@ -86,6 +97,7 @@ class InputProperty extends React.Component {
 	}
 
 	static getInputType(type, option) {
+
 		switch (type.toLocaleLowerCase()) {
 			case "boolean" :
 				return <FilteredCheckbox {...option} />;

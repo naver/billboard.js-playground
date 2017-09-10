@@ -71,7 +71,7 @@ const command = (state = commandState, action) => {
 			break;
 		}
 		case UPDATE_GUI : {
-			const conf = namespaceToObject(action.name.split("."), action.value);
+			const conf = namespaceToObject(action.name.split("."), action.value.value);
 			returnState = updateCommandState(state, conf);
 			break;
 		}
@@ -94,7 +94,7 @@ const gui = (state = guiState, action) => {
 
 	switch (action.type) {
 		case CHANGE_GUI_ACTIVATE : {
-			returnState = updateGuiActivate(state, action.name, action.value);
+			returnState = updateGuiActivate(state, action.name, action.value.value);
 			break;
 		}
 		case RESET_GUI : {
@@ -105,18 +105,23 @@ const gui = (state = guiState, action) => {
 			break;
 		}
 		case UPDATE_GUI : {
-			const value = namespaceToObject(action.name.split("."), action.value);
+			const value = namespaceToObject(action.name.split("."), action.value.value);
 			returnState = updateGuiState(state, value);
 			break;
 		}
 		case UPDATE_COMMAND :
-			returnState = updateGuiState(state, action.value);
+			returnState = updateGuiState(state, action.value.value);
 			break;
 		default :
 			returnState = state;
 	}
 
 	guiState = returnState;
+
+	if (action.value && action.value.root) {
+		returnState.lastUpdateRoot = action.value.root;
+	}
+
 
 	// react connect check shallow key
 	returnState.lastUpdate = (new Date()).getTime();
