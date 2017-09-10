@@ -16,7 +16,7 @@ html {
 
 .ReactCodeMirror {
     width: 100%;
-    height: 100%;
+    height: auto;
     position : absolute;
 }
 .CodeMirror {
@@ -31,22 +31,21 @@ html {
     background: #ffd9d9;
 }
 
-.chart, .textConfigure, .dataTable {
+.chart, .tabviews {
     width : 60%;
+    height : 50%;
     margin : 0;
     left : 0;
 }
 
-.chart {
-    height : 30%;
+.textConfigure, .dataTable {
+    width : 100%;
 }
-.dataTable {
-    height : 40%;
+
+.layer_wrapper {
+    padding : 10px;
 }
-.textConfigure {
-    height : 30%;
-    position : relative;
-}
+
 
 .inputConfigure {
     width : 40%;
@@ -78,6 +77,16 @@ html {
 .property_content {
     display : inline-block;
 }
+
+.edit_function {
+    //opacity: 0;
+}
+
+
+.property:hover .edit_function {
+    opacity: 1;
+}
+
 
 .property.updated {
     color : red;
@@ -121,7 +130,7 @@ html {
 }
 
 .member svg {
-    color : #FAFAFA !important;
+    color : #ff8a65 !important;
 }
 
 .number_guide {
@@ -151,4 +160,12 @@ html {
     height : 40px  !important;
     background-image : url(codepen-export.svg) !important;
 }
+
+.table-row:hover .table-row-column{
+    opacity:1;
+}
+.table-row-column {
+    opacity:0;
+}
+
 /**  app.css **/

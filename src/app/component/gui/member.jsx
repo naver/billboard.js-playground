@@ -7,7 +7,7 @@ import Divider from 'material-ui/Divider';
 import {List, ListItem} from 'material-ui/List';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {yellow200, deepOrange400,deepOrange500, deepOrange700, grey900, grey50, grey200, yellow500, red600, deepOrange600, greenA200} from 'material-ui/styles/colors';
+import {yellow200, deepOrange200, deepOrange300, deepOrange400,deepOrange500, deepOrange700, grey900, grey50, grey200, yellow500, red600, deepOrange600, greenA200} from 'material-ui/styles/colors';
 
 class Member extends React.Component {
 	componentWillMount() {
@@ -53,13 +53,14 @@ class Member extends React.Component {
 
 		return <MuiThemeProvider muiTheme={getMuiTheme()}>
 			<ListItem
+				style={{
+				}}
 				innerDivStyle={{
 					fontFamily: "Bungee",
-					background: deepOrange400,
-					color: grey50,
+					color: deepOrange300,
 					fontSize: "25px",
 					borderBottomWidth: "2px",
-					borderBottomColor: `${deepOrange700}`
+					borderBottomColor: `${deepOrange300}`
 				}}
 				className="member"
 				primaryText={member.name}

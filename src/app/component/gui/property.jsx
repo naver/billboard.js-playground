@@ -18,6 +18,7 @@ import {
 	FilteredCheckbox,
 	Text,
 	Number,
+	Code,
 	CustomArray
 } from "./input/index";
 import {
@@ -140,6 +141,8 @@ class InputProperty extends React.Component {
 				return <Number {...option} />;
 			case "array" :
 				return <CustomArray {...option} />;
+			case "function" :
+				return <Code {...option} />;
 			default :
 				return "";
 		}
