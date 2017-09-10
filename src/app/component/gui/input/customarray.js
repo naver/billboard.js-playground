@@ -4,12 +4,15 @@ import TextField from 'material-ui/TextField';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
+import IconButton from 'material-ui/IconButton';
+
 import { connect } from "react-redux";
 import {
 	updateGui, resetGui
 } from "../../../actions";
 import FontIcon from 'material-ui/FontIcon';
 import {red600, green200, blue300, blue500, grey100, grey400, lightBlue100, lightBlue300} from 'material-ui/styles/colors';
+
 
 const iconSelect = {
 	fill: lightBlue300,
@@ -29,75 +32,51 @@ const label = {
 	color: grey400
 }
 
-class InputText extends React.Component {
-	getRadioInput(valueoptions, name, onChange, value) {
-		return (<MuiThemeProvider>
-			<RadioButtonGroup name={name} defaultSelected={value} onChange={onChange}>
-				{_.map(valueoptions, (v, i) => {
-					return (<RadioButton
-						iconStyle={
-								    value === v ? iconSelect : icon
-								}
-						labelStyle={
-									value === v ? labelSelect : label
-								}
-						key={i}
-						value={v}
-						label={v}
-					/>);
-				})}
-			</RadioButtonGroup>
-		</MuiThemeProvider>);
-	}
-
-	makeKeyObject() {
-		const keys = this.props.customkeys;
-
-		return _.map(keys, (item, idx) => {
-			return <span key={idx}>
-				<span>{item.name}</span>
-				<TextField></TextField>
-			</span>;
-		});
-	}
-
+class ArrayInput extends React.Component {
 	render() {
-		const {customkeys} = this.props;
 		const { value, onChange, valueoptions , name } = this.props;
 		let returnValue;
+		const edit = <span className="">add</span>
 
-		if (customkeys) {
+		if(Array.isArray(value)){
 			returnValue = (<MuiThemeProvider muiTheme={getMuiTheme()}>
-				<FontIcon
-					style={{display: "inline-block"}}
-					color={grey400}
-					className="material-icons">add_circle</FontIcon>
-			</MuiThemeProvider>);
-		}
+				<div style={{width:"100%", display:"inline-block"}}>
 
-
-		if (value === undefined || value  === "undefined") {
-			// <input type="text" placeholder="undefined" onChange={onChange} />
-			returnValue = (<MuiThemeProvider muiTheme={getMuiTheme()}>
-				<TextField
-					underlineFocusStyle={{
-							//borderBottomWidth: "1px",
-							borderColor : lightBlue300
-						}}
-					style={{width:"100%", display:"inline-block"}}
-					fullWidth={true}
-					hintText="undefined" />
+					{_.map(value, (v, i) => {
+						return <div>
+							<span>{i}</span>
+							<TextField
+								style={{width:"80%", display:"inline-block"}}
+								fullWidth={true}
+								hintText={v} />
+						</div>
+					})}
+					<IconButton iconClassName="edit_function material-icons"
+								tooltipPosition="top-center"
+								style={{width:"20%", display:"inline-block", textAlign:"right"}}
+								children={edit}
+					/>
+				</div>
 			</MuiThemeProvider>);
 		} else {
 			returnValue = (<MuiThemeProvider muiTheme={getMuiTheme()}>
-				<TextField
-					underlineFocusStyle={{
-							//borderBottomWidth: "1px",
-							borderColor : lightBlue300
-						}}
-					style={{width:"100%", display:"inline-block"}}
-					fullWidth={true}
-					hintText={value} />
+				<div style={{width:"100%", display:"inline-block"}}>
+					<TextField
+						underlineStyle={{
+						borderColor: "transparent",
+					}}
+						underlineFocusStyle={{
+						borderColor: "transparent",
+					}}
+						style={{width:"80%", display:"inline-block"}}
+						fullWidth={true}
+						hintText={value} />
+					<IconButton iconClassName="edit_function material-icons"
+								tooltipPosition="top-center"
+								style={{width:"20%", display:"inline-block", textAlign:"right"}}
+								children={edit}
+					/>
+				</div>
 			</MuiThemeProvider>);
 		}
 
@@ -122,6 +101,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
 const CustomArray = connect(
 	null, mapDispatchToProps
-)(InputText);
+)(ArrayInput);
 
 export default CustomArray;
