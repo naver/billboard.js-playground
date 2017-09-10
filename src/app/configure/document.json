@@ -1532,7 +1532,7 @@
       {
         "type": {
           "names": [
-            "Array"
+            "Number"
           ]
         },
         "optional": true,
@@ -1780,7 +1780,7 @@
     ],
     "type": {
       "names": [
-        "Array"
+        "Boolean"
       ]
     },
     "defaultvalue": "false",
@@ -2562,7 +2562,7 @@
     ],
     "type": {
       "names": [
-        "Array"
+        "Boolean"
       ]
     },
     "defaultvalue": "false",
