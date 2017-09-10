@@ -6,7 +6,6 @@ import { convertColumnsToData, convertRowsToData, convertJsonToData } from "./co
 
 const keysFromDocument = [];
 
-
 export const convertData = (data) => {
 	let converted;
 	if (data.columns) {
@@ -24,6 +23,44 @@ export const convertData = (data) => {
 	};
 };
 
+const typeValid = (types, value) => {
+	if(value === undefined || value === "undefined"){
+		return undefined;
+	}
+
+	if(types.indexOf("number") > -1) {
+		if(isNaN(value)){
+			//console.log("TODO => " + value);
+			return value;
+		} else {
+			return value*1;
+		}
+	}
+
+	if(types.indexOf("array") > -1){
+		const array = JSON.parse(value+="");
+		return array;
+	}
+
+	if(types.indexOf("function") > -1){
+		return value;
+	}
+
+	if(types.indexOf("boolean") > -1){
+		return value;
+	}
+
+	if(types.indexOf("string") > -1){
+		return value;
+	}
+
+	if(types.indexOf("object") > -1){
+		return value;
+	}
+
+	return value;
+
+};
 
 const memberFlatten = (member) => {
 	let newArray = [member];
@@ -32,10 +69,11 @@ const memberFlatten = (member) => {
 			if(item.properties){
 				newArray = newArray.concat(memberFlatten(item));
 			} else {
+				const value = typeValid(item.type.names.map(type => (type.toLowerCase())), item.defaultvalue);
 				newArray.push({
 					type: item.type,
-					defaultvalue: item.defaultvalue,
-					value: item.defaultvalue,
+					defaultvalue: value,
+					value: value,
 					name: item.name,
 					description: item.description,
 					optional: item.optional,
@@ -63,18 +101,18 @@ const documentToObject = (defaultDocumentOption) => {
 					optional: optional,
 					activated: false,
 				};
-				fullProperties = fullProperties.concat([target]);
 
+				fullProperties = fullProperties.concat([target]);
 			} else {
 				const ps = memberFlatten({
 					value: defaultvalue,
-					activated: false,
 					defaultvalue,
 					properties,
 					type,
 					name,
 					description,
-					kind
+					kind,
+					activated: false,
 				});
 				fullProperties = fullProperties.concat(ps);
 			}

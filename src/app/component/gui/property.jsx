@@ -18,6 +18,7 @@ import {
 	FilteredCheckbox,
 	Text,
 	Number,
+	CustomArray
 } from "./input/index";
 import {
 	resetGui, changeGuiActivate
@@ -137,6 +138,8 @@ class InputProperty extends React.Component {
 				return <Text {...option} />;
 			case "number" :
 				return <Number {...option} />;
+			case "array" :
+				return <CustomArray {...option} />;
 			default :
 				return "";
 		}

@@ -2894,7 +2894,7 @@
       {
         "type": {
           "names": [
-            "Boolean"
+            "Array"
           ]
         },
         "optional": true,
@@ -2916,7 +2916,7 @@
       {
         "type": {
           "names": [
-            "Boolean"
+            "Array"
           ]
         },
         "optional": true,
@@ -2927,7 +2927,7 @@
       {
         "type": {
           "names": [
-            "Boolean"
+            "Number"
           ]
         },
         "optional": true,
@@ -3016,7 +3016,7 @@
       {
         "type": {
           "names": [
-            "Boolean"
+            "Number"
           ]
         },
         "optional": true,

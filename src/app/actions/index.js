@@ -15,9 +15,9 @@ export const updateData = (name, value, info) => {
 
 export const changeGuiActivate = (name, value) => ({
 	type: CHANGE_GUI_ACTIVATE,
-	name,
 	value: value.value,
 	root: value.root,
+	name
 });
 
 

@@ -1,4 +1,21 @@
 {
+  "regions" : {
+    "attributes" : {
+      "customkeys" : [{
+        "name" : "axis",
+        "type" : "string"
+      }, {
+        "name" : "start",
+        "type" : "number"
+      }, {
+        "name" : "end",
+        "type" : "number"
+      }, {
+        "name" : "class",
+        "type" : "string"
+      }]
+    }
+  },
   "size" : {
     "properties" : {
       "width" : {
@@ -178,6 +195,28 @@
   },
   "point" : {
     "properties" : {
+      "select" : {
+        "properties" : {
+          "r" : {
+            "attributes" : {
+              "custominput" : true
+            }
+          }
+        }
+      },
+      "focus" : {
+        "properties" : {
+          "expand" : {
+            "properties" : {
+              "r" : {
+                "attributes" : {
+                  "custominput" : true
+                }
+              }
+            }
+          }
+        }
+      },
       "r" : {
         "attributes" : {
           "min" : 0,
@@ -189,6 +228,11 @@
   },
   "gauge" : {
     "properties" : {
+      "startingAngle" : {
+        "attributes" : {
+          "custominput" : true
+        }
+      },
       "max" : {
         "attributes" : {
           "min" : 0,
@@ -211,11 +255,94 @@
   },
   "legend" : {
     "properties" : {
+      "inset" : {
+        "properties" : {
+          "anchor" : {
+            "attributes" : {
+              "name" : "legend.inset.anchor",
+              "valueoptions" : ["top-left", "top-right", "bottom-left", "bottom-right"],
+              "type": {
+                "names" : ["String"]
+              },
+              "optional": true,
+              "value": "top-left",
+              "defaultvalue": "top-left"
+            }
+          },
+          "x" : {
+            "attributes" : {
+              "name" : "legend.inset.x",
+              "type": {
+                "names" : ["Number"]
+              },
+              "optional": true,
+              "value": 10,
+              "defaultvalue": 10,
+              "min" : 0,
+              "max" : 100,
+              "step" : 1
+            }
+          },
+          "y" : {
+            "attributes" : {
+              "name" : "legend.inset.y",
+              "type": {
+                "names" : ["Number"]
+              },
+              "optional": true,
+              "value": 0,
+              "defaultvalue": 0,
+              "min" : 0,
+              "max" : 100,
+              "step" : 1
+            }
+          },
+          "step" : {
+            "attributes" : {
+              "name" : "legend.inset.step",
+              "type": {
+                "names" : ["Number"]
+              },
+              "optional": true,
+              "value" : "undefined",
+              "defaultvalue": "undefined",
+              "min" : 0,
+              "max" : 100,
+              "step" : 0.1
+            }
+          }
+        }
+      },
       "position" : {
         "attributes" : {
           "valueoptions" : ["bottom", "right", "inset"]
         }
       }
+    }
+  },
+
+  "grid" : {
+    "properties" : {
+      "y" : {
+        "properties" : {
+          "ticks" : {
+            "attributes" : {
+              "min" : 0,
+              "max" : 100,
+              "step" : 1
+            }
+          }
+        }
+      }
+    }
+  },
+  "title" : {
+    "properties" : {
+       "position" : {
+         "attributes" : {
+           "valueoptions" : ["top-center", "top-right", "top-left"]
+         }
+       }
     }
   }
 }
