@@ -112,10 +112,6 @@ class InputProperty extends React.Component {
 		</MuiThemeProvider>);
 	}
 
-	onChangeActive(e) {
-		this.props.onChangeActive(e);
-	}
-
 	onClickDelete(e) {
 		this.props.onClickDelete(e);
 	}
@@ -140,7 +136,7 @@ class InputProperty extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-	onChangeActive: e => dispatch(changeGuiActivate(ownProps.name.replace(/\:/g, "."), e.target.checked)),
+
 	onClickDelete: () => dispatch(resetGui(ownProps.name.replace(/\:/g, ".")))
 });
 
