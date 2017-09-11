@@ -38,28 +38,51 @@ const ValueTextStyle = {
 class InputNumber extends React.Component {
 	render() {
 		const props = deepCopy({}, this.props);
+		const textStyle = deepCopy({}, ValueTextStyle);
 
 		if (isNaN(props.value)) {
 			props.value = props.defaultvalue || undefined;
-			ValueTextStyle.color = color.grey400;
+			textStyle.color = color.grey400;
+
+			return (<div>
+				<MuiThemeProvider muiTheme={getMuiTheme({ slider: SliderStyleTheme })}>
+					<Slider
+						axis={"x"}
+						required={false}
+						sliderStyle={SliderStyle}
+						style={Style}
+						value={props.min}
+						min={props.min}
+						max={props.max}
+						step={props.step}
+						onChange={props.onChange}
+					/>
+				</MuiThemeProvider>
+				<span className="number_guide" style={textStyle}>undefined</span>
+			</div>);
 		} else {
 			props.value *= 1;
-			ValueTextStyle.color = color.grey900;
+			textStyle.color = color.grey900;
+
+			return (<div>
+				<MuiThemeProvider muiTheme={getMuiTheme({ slider: SliderStyleTheme })}>
+					<Slider
+						axis={"x"}
+						required={false}
+						sliderStyle={SliderStyle}
+						style={Style}
+						value={props.value}
+						min={props.min}
+						max={props.max}
+						step={props.step}
+						onChange={props.onChange}
+					/>
+				</MuiThemeProvider>
+				<span className="number_guide" style={textStyle}>{props.value}</span>
+			</div>);
 		}
 
-		return (<MuiThemeProvider muiTheme={getMuiTheme({ slider: SliderStyleTheme })}>
-			<div>
-				<Slider
-					sliderStyle={SliderStyle}
-					style={Style}
-					{...props}
-				/>
-				<span
-					className="number_guide"
-					style={ValueTextStyle}
-				>{props.value}</span>
-			</div>
-		</MuiThemeProvider>);
+
 	}
 }
 

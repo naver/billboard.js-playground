@@ -26,18 +26,17 @@ const label = {
 
 class InputRadio extends React.Component {
 	render() {
-		const {valueoptions, name, onChange, value} = this.props;
+		const { valueoptions, name, value, onChangeRadio } = this.props;
 
 		return <MuiThemeProvider>
-			<RadioButtonGroup name={name} defaultSelected={value} onChange={this.props.onChangeRadio}>
+			<RadioButtonGroup name={name} valueSelected={value} onChange={onChangeRadio}>
 				{_.map(valueoptions, (v, i) => {
+					const iconStyle = value === v ? iconSelect : icon;
+					const labelStyle = value === v ? labelSelect : label;
+
 					return (<RadioButton
-						iconStyle={
-								    value === v ? iconSelect : icon
-								}
-						labelStyle={
-									value === v ? labelSelect : label
-								}
+						iconStyle={iconStyle}
+						labelStyle={labelStyle}
 						key={i}
 						value={v}
 						label={v}
