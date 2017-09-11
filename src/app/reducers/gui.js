@@ -1,7 +1,7 @@
 import * as _ from "lodash";
 import { combineReducers } from "redux";
 import { namespaceToObject, deepCopy } from "../util";
-import { CHANGE_GUI_ACTIVATE, UPDATE_COMMAND, UPDATE_DATA, UPDATE_GUI, RESET_GUI } from "../actions";
+import { CHANGE_GUI_ACTIVATE, UPDATE_CODE_INPUT, UPDATE_COMMAND, UPDATE_DATA, UPDATE_GUI, RESET_GUI } from "../actions";
 import { initCommandConfigure, initDocumentConfigure, changeMemberActivate, deleteTargetKey, changeMemberProperty, getDefaultValue, getValueFromDocument, convertData } from "../configure";
 
 // GUI 옵션
@@ -21,6 +21,12 @@ const gui = (state = guiState, action) => {
 	let returnState = {};
 
 	switch (action.type) {
+		case UPDATE_CODE_INPUT : {
+			let code = action.value.value;
+			eval(`code = ${code}`);
+			returnState = updateGuiActivate(state, action.name, code);
+			break;
+		}
 		case CHANGE_GUI_ACTIVATE : {
 			returnState = updateGuiActivate(state, action.name, action.value.value);
 			break;
@@ -38,7 +44,7 @@ const gui = (state = guiState, action) => {
 			break;
 		}
 		case UPDATE_COMMAND :
-			returnState = updateGuiState(state, action.value.value);
+			returnState = updateGuiState(state, action.value);
 			break;
 		default :
 			returnState = state;

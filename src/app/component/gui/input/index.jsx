@@ -1,15 +1,15 @@
 import React from "react";
 
-import FilteredCheckbox from "./checkbox";
-import Number from "./number";
-import Text from "./text";
-import CustomArray from "./customarray";
-import Code from "./code"
+import ConnectedCheckbox from "./checkbox";
+import ConnectedNumber from "./number";
+import ConnectedText from "./text";
+import ConnectedCollection from "./collection";
+import ConnectedCode from "./code"
 
 export {
-	CustomArray,
-	FilteredCheckbox,
-	Number,
-	Text,
-	Code
+	ConnectedCollection,
+	ConnectedCheckbox,
+	ConnectedNumber,
+	ConnectedText,
+	ConnectedCode
 };

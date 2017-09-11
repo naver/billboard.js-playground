@@ -1,12 +1,11 @@
 import React, { PropTypes } from "react";
 import { connect } from "react-redux";
-import Toggle from 'material-ui/Toggle';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import  * as color from 'material-ui/styles/colors';
-import {
-	updateGui
-} from "../../../actions";
+import getMuiTheme from "material-ui/styles/getMuiTheme";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+
+import Toggle from "material-ui/Toggle";
+import  * as color from "material-ui/styles/colors";
+import { updateGui } from "../../../actions";
 
 const styles = {
 	block: {
@@ -14,12 +13,6 @@ const styles = {
 	},
 	toggle: {
 		marginBottom: 16,
-	},
-	thumbOff: {
-		backgroundColor: '#ffcccc',
-	},
-	trackOff: {
-		backgroundColor: '#ff9d9d',
 	},
 	thumbSwitched: {
 		backgroundColor: color.lightBlue100,
@@ -70,8 +63,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 	}
 });
 
-const FilteredCheckbox = connect(
+const ConnectedCheckbox = connect(
 	null, mapDispatchToProps
 )(InputCheckbox);
 
-export default FilteredCheckbox;
+export default ConnectedCheckbox;

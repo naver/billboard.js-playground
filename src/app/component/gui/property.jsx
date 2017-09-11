@@ -1,25 +1,15 @@
-import React from "react";
+import React, { PropTypes } from "react";
 import { connect } from "react-redux";
-import FontIcon from 'material-ui/FontIcon';
-import ContentClear from 'material-ui/svg-icons/content/clear';
-import {yellow200, deepOrange500, deepOrange50, yellow500, red600, greenA200} from 'material-ui/styles/colors';
-import {List, ListItem} from 'material-ui/List';
+import getMuiTheme from "material-ui/styles/getMuiTheme";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import { ListItem } from "material-ui/List";
 import Clear from "./icon/clear";
-import Modify from "./icon/modify";
-import ActionInfo from 'material-ui/svg-icons/action/info';
-import Toggle from 'material-ui/Toggle';
-import Checkbox from 'material-ui/Checkbox';
-import Slider from 'material-ui/Slider';
-
-
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {
-	FilteredCheckbox,
-	Text,
-	Number,
-	Code,
-	CustomArray
+	ConnectedCollection,
+	ConnectedCheckbox,
+	ConnectedNumber,
+	ConnectedText,
+	ConnectedCode
 } from "./input/index";
 import {
 	resetGui, changeGuiActivate
@@ -37,20 +27,20 @@ class InputProperty extends React.Component {
 
 	getModify() {
 		return "";
-		return (<div
-			style={{
-					display: "inline-block",
-					verticalAlign: "middle",
-					width: "5%"
-				}}>
-			<div style={{
-						display: "inline-block",
-						width: "100%",
-						textAlign: "left"
-					}}>
-				<Modify {...this.state}/>
-			</div>
-		</div>);
+		//return (<div
+		//	style={{
+		//			display: "inline-block",
+		//			verticalAlign: "middle",
+		//			width: "5%"
+		//		}}>
+		//	<div style={{
+		//				display: "inline-block",
+		//				width: "100%",
+		//				textAlign: "left"
+		//			}}>
+		//		<Modify {...this.state}/>
+		//	</div>
+		//</div>);
 	}
 
 	getName() {
@@ -134,15 +124,15 @@ class InputProperty extends React.Component {
 
 		switch (type.toLocaleLowerCase()) {
 			case "boolean" :
-				return <FilteredCheckbox {...option} />;
+				return <ConnectedCheckbox {...option} />;
 			case "string" :
-				return <Text {...option} />;
+				return <ConnectedText {...option} />;
 			case "number" :
-				return <Number {...option} />;
+				return <ConnectedNumber {...option} />;
 			case "array" :
-				return <CustomArray {...option} />;
+				return <ConnectedCollection {...option} />;
 			case "function" :
-				return <Code {...option} />;
+				return <ConnectedCode {...option} />;
 			default :
 				return "";
 		}

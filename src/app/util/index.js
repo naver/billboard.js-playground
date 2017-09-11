@@ -31,3 +31,17 @@ export const deepCopy = (target, ...sources) => {
 
 	return deepCopy(target, ...sources);
 };
+
+
+export const strinifyContainsFunction = (obj) => {
+	function replacer(key, value) {
+		if(typeof value == "function"){
+			return `___codestart${value}codeend___`;
+		}
+		return value;
+	}
+	var text = JSON.stringify(obj, replacer);
+	text = text.replace(/\"\_\_\_codestart/g, "").replace(/codeend\_\_\_\"/g, "");
+
+	return text;
+}

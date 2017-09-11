@@ -84,7 +84,8 @@ class Billboard extends React.Component {
 	}
 
 	destroy() {
-		this.instance.destroy();
+		this.instance && this.instance.destroy();
+		this.instance = null;
 	}
 
 	generateChart(mountNode = this.wrapper, config = this.props) {

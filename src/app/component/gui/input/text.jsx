@@ -3,94 +3,66 @@ import * as _ from "lodash";
 import TextField from 'material-ui/TextField';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import { connect } from "react-redux";
-import {
-	updateGui, resetGui
-} from "../../../actions";
-import FontIcon from 'material-ui/FontIcon';
+import { updateGui, resetGui } from "../../../actions";
 import {red600, green200, blue300, blue500, grey100, grey400, lightBlue100, lightBlue300} from 'material-ui/styles/colors';
+import ConnectedRadio from "./radio";
 
-
-const iconSelect = {
-	fill: lightBlue300,
+const underlineFocusStyle = {
+	borderColor: lightBlue300
 };
 
-const icon = {
-	fill: grey400
+const textFieldStyle = {
+	width: "100%",
+	display: "inline-block"
 };
-
-const labelSelect = {
-	fontSize : "14px"
-	//color: lightBlue300,
-}
-
-const label = {
-	fontSize : "14px",
-	color: grey400
-}
 
 class InputText extends React.Component {
-	getRadioInput(valueoptions, name, onChange, value) {
-		return (<MuiThemeProvider>
-					<RadioButtonGroup name={name} defaultSelected={value} onChange={onChange}>
-						{_.map(valueoptions, (v, i) => {
-							return (<RadioButton
-								iconStyle={
-								    value === v ? iconSelect : icon
-								}
-								labelStyle={
-									value === v ? labelSelect : label
-								}
-								key={i}
-								value={v}
-								label={v}
-							/>);
-						})}
-				</RadioButtonGroup>
+	getTextToRadio() {
+		return (<ConnectedRadio {...this.props} />);
+	}
+
+	getDefaultTextArea(options) {
+		return (<MuiThemeProvider muiTheme={getMuiTheme()}>
+			<TextField
+				onChange={(e, v) => this.props.onChangeText(e, v)}
+				underlineFocusStyle={underlineFocusStyle}
+				style={textFieldStyle}
+				fullWidth={true}
+				{...options} />
 		</MuiThemeProvider>);
 	}
 
 	render() {
-		const { value, onChange, valueoptions , name } = this.props;
+		const { value, valueoptions } = this.props;
 		let returnValue;
 
 		if (valueoptions) {
-			returnValue = this.getRadioInput(valueoptions, name, onChange, value);
+			returnValue = this.getTextToRadio();
+		} else if (value === undefined || value === "undefined") {
+			returnValue = this.getDefaultTextArea({
+				hintText: "undefined"
+			});
 		} else {
-			if (value === undefined || value  === "undefined") {
-				// <input type="text" placeholder="undefined" onChange={onChange} />
-				returnValue = (<MuiThemeProvider muiTheme={getMuiTheme()}>
-					<TextField
-						underlineFocusStyle={{
-							//borderBottomWidth: "1px",
-							borderColor : lightBlue300
-						}}
-						style={{width:"100%", display:"inline-block"}}
-						fullWidth={true}
-						hintText="undefined" />
-				</MuiThemeProvider>);
-			} else {
-				returnValue = (<MuiThemeProvider muiTheme={getMuiTheme()}>
-					<TextField
-						underlineFocusStyle={{
-							//borderBottomWidth: "1px",
-							borderColor : lightBlue300
-						}}
-						style={{width:"100%", display:"inline-block"}}
-						fullWidth={true}
-						hintText={value} />
-				</MuiThemeProvider>);
-			}
+			returnValue = this.getDefaultTextArea({
+				value
+			});
 		}
 
 		return returnValue;
 	}
 }
 
+InputText.propTypes = {
+	onChangeText: PropTypes.func,
+	value: PropTypes.string,
+	valueoptions: PropTypes.array
+};
+
+
 const mapDispatchToProps = (dispatch, ownProps) => ({
-	onChange: (e, value) => {
-		if(value === ""){
+	onChangeText: (e, value) => {
+		if (value === "") {
 			dispatch(resetGui(ownProps.name.replace(/\:/g, "."), {
 				root: ownProps.rootMemberName
 			}));
@@ -103,8 +75,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 	}
 });
 
-const Text = connect(
+
+const ConnectedText = connect(
 	null, mapDispatchToProps
 )(InputText);
 
-export default Text;
+export default ConnectedText;

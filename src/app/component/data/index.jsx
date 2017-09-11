@@ -22,7 +22,7 @@ const cellStyle = {
 	padding: "0 5"
 };
 
-class Controller extends React.Component {
+class DataTableController extends React.Component {
 	componentWillMount() {
 		this.setState(this.props);
 	}
@@ -139,7 +139,6 @@ class Controller extends React.Component {
 		const data = this.props.data;
 		const header = this.getHeader(data.header);
 		const body = this.getBody(data.body);
-		const footer = this.getFooter(data.header);
 
 		// todo
 		return <div className="dataTable">
@@ -161,7 +160,7 @@ class Controller extends React.Component {
 	}
 }
 
-Controller.propTypes = {
+DataTableController.propTypes = {
 	onChange: PropTypes.func.isRequired
 };
 
@@ -178,7 +177,7 @@ const mapStateToProps = state => ({
 	data: state.data
 });
 
-const Data = connect(mapStateToProps, mapDispatchToProps)(Controller);
+const Data = connect(mapStateToProps, mapDispatchToProps)(DataTableController);
 
 export {
 	Data

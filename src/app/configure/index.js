@@ -222,6 +222,10 @@ export const changeMemberProperty = (original, object) => {
 			value = value * 1;
 		}
 
+		if(typeof value === "function") {
+			value = value.toString();
+		}
+
 		_.update(original, targetPath + ".value", () => {
 			return value;
 		});

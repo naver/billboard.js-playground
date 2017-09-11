@@ -99,8 +99,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 	}
 });
 
-const CustomArray = connect(
+const ConnectedCollection = connect(
 	null, mapDispatchToProps
 )(ArrayInput);
 
-export default CustomArray;
+export default ConnectedCollection;

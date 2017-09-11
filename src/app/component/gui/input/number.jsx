@@ -79,8 +79,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 	}
 });
 
-const Number = connect(
+const ConnectedNumber = connect(
 	null, mapDispatchToProps
 )(InputNumber);
 
-export default Number;
+export default ConnectedNumber;

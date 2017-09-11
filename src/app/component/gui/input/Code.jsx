@@ -8,7 +8,7 @@ import IconButton from 'material-ui/IconButton';
 
 import { connect } from "react-redux";
 import {
-	updateGui, resetGui
+	updateGui, resetGui, updateCodeInput
 } from "../../../actions";
 import FontIcon from 'material-ui/FontIcon';
 import {red600, green200, blue300, blue500, grey100, grey400, lightBlue100, lightBlue300} from 'material-ui/styles/colors';
@@ -33,32 +33,10 @@ const label = {
 }
 
 class CodeInput extends React.Component {
-	getRadioInput(valueoptions, name, onChange, value) {
-		return (<MuiThemeProvider>
-			<RadioButtonGroup name={name} defaultSelected={value} onChange={onChange}>
-				{_.map(valueoptions, (v, i) => {
-					return (<RadioButton
-						iconStyle={
-								    value === v ? iconSelect : icon
-								}
-						labelStyle={
-									value === v ? labelSelect : label
-								}
-						key={i}
-						value={v}
-						label={v}
-					/>);
-				})}
-			</RadioButtonGroup>
-		</MuiThemeProvider>);
-	}
-
 	render() {
-		const { value, onChange, valueoptions , name } = this.props;
-		let returnValue;
-		const edit = <span className="">edit</span>
+		const { value } = this.props;
 
-		returnValue = (<MuiThemeProvider muiTheme={getMuiTheme()}>
+		return <MuiThemeProvider muiTheme={getMuiTheme()}>
 			<div style={{width:"100%", display:"inline-block"}}>
 				<TextField
 					underlineFocusStyle={{
@@ -68,37 +46,31 @@ class CodeInput extends React.Component {
 					disabled={true}
 					fullWidth={true}
 					hintText={value} />
-				<IconButton iconClassName="edit_function material-icons"
-							tooltipPosition="top-center"
-							tooltip="edit in text editor"
-							style={{width:"20%", display:"inline-block", textAlign:"right"}}
-							children={edit}
+				<IconButton
+					onClick={this.props.onClickCodeEdit}
+					iconClassName="edit_function material-icons"
+					tooltipPosition="top-center"
+					tooltip="edit in text editor"
+					style={{width:"20%", display:"inline-block", textAlign:"right"}}
+					children={<span className="">edit</span>}
 				/>
 			</div>
 
-		</MuiThemeProvider>);
-
-		return returnValue;
+		</MuiThemeProvider>;
 	}
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-	onChange: (e, value) => {
-		if(value === ""){
-			dispatch(resetGui(ownProps.name.replace(/\:/g, "."), {
-				root: ownProps.rootMemberName
-			}));
-		} else {
-			(dispatch(updateGui(ownProps.name.replace(/\:/g, "."), {
-				value: value,
-				root: ownProps.rootMemberName
-			})));
-		}
+	onClickCodeEdit: (e, value) => {
+		dispatch(updateCodeInput(ownProps.name.replace(/\:/g, "."), {
+			value: ownProps.defaultvalue,
+			root: ownProps.rootMemberName || ownProps.name
+		}));
 	}
 });
 
-const Code = connect(
+const ConnectedCode = connect(
 	null, mapDispatchToProps
 )(CodeInput);
 
-export default Code;
+export default ConnectedCode;

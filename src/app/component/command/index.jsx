@@ -19,12 +19,14 @@ class Controller extends React.Component {
 
 	componentWillMount() {
 		this.setState({
-			text: this.props.text
+			text: this.props.text,
+			focus: this.props.focus
 		});
 	}
 
 	componentWillReceiveProps(nextProps) {
 		this.setState({
+			focus: nextProps.focus,
 			text: nextProps.text
 		});
 	}
@@ -46,11 +48,10 @@ class Controller extends React.Component {
 	}
 
 	onChangeText(value) {
-	//onChangeText(editor, metadata, value) {
 		let parsed;
 
 		try {
-			parsed = JSON.parse(value);
+			eval(`parsed = ${value}`);
 		} catch (e) {
 			parsed = null;
 		}
@@ -81,7 +82,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-	text: state.command.text
+	text: state.command.text,
+	focus: state.command.focus
 });
 
 const Command = connect(mapStateToProps, mapDispatchToProps)(Controller);

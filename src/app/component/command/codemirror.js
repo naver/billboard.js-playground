@@ -51,6 +51,7 @@ var CodeMirror = createReactClass({
 	componentDidMount: function componentDidMount() {
 		var codeMirrorInstance = this.getCodeMirrorInstance();
 		this.codeMirror = codeMirrorInstance.fromTextArea(this.textareaNode, this.props.options);
+
 		this.codeMirror.on('change', this.codemirrorValueChanged);
 		this.codeMirror.on('cursorActivity', this.cursorActivity);
 		this.codeMirror.on('focus', this.focusChanged.bind(this, true));
@@ -74,7 +75,7 @@ var CodeMirror = createReactClass({
 				this.codeMirror.setValue(nextProps.value);
 			}
 		} else {
-			if(this.state.origin === "setValue"){
+			if(this.state.origin === "setValue" || this.state.isFocused === false){
 				this.codeMirror.setValue(nextProps.value);
 			}
 		}
@@ -114,7 +115,7 @@ var CodeMirror = createReactClass({
 	},
 	codemirrorValueChanged: function codemirrorValueChanged(doc, change) {
 		this.setState({
-			origin : change.origin
+			origin: change.origin
 		});
 		if (this.props.onChange && change.origin !== 'setValue') {
 			this.props.onChange(doc.getValue(), change);
