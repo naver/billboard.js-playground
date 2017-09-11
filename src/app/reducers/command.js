@@ -1,8 +1,9 @@
 import * as _ from "lodash";
 import { combineReducers } from "redux";
 import { namespaceToObject, deepCopy, strinifyContainsFunction } from "../util";
-import { UPDATE_CODE_INPUT, UPDATE_COMMAND, UPDATE_DATA, UPDATE_GUI, RESET_GUI } from "../actions";
-import { initCommandConfigure, initDocumentConfigure, changeMemberActivate, deleteTargetKey, changeMemberProperty, getDefaultValue, getValueFromDocument, convertData } from "../configure";
+import { initCommandConfigure, initDocumentConfigure, changeMemberActivate, deleteTargetKey, changeMemberProperty, getDefaultValue, getValueFromDocument, convertData,getRemovedAttributes } from "../configure";
+import { CHANGE_GUI_ACTIVATE, RECENT_CONFIGURE, UPDATE_CODE_INPUT, UPDATE_COMMAND, UPDATE_DATA, UPDATE_GUI, RESET_GUI } from "../actions";
+
 
 // 커맨드창
 let commandState = {
@@ -10,14 +11,13 @@ let commandState = {
 	text: JSON.stringify(initCommandConfigure)
 };
 
-
 const updateCommandCode = (state, updated, targetKey, originalCode) => {
 	const original = deepCopy({}, state.original, updated);
 	const text = strinifyContainsFunction(original);
 
 	return {
 		original, text
-	}
+	};
 };
 
 const updateCommandState = (state, updated) => {
@@ -38,21 +38,6 @@ const updateResetCommandState = (state, namespace) => {
 		original: deepCopy({}, deleteTarget),
 		text: text
 	};
-};
-
-const updateActivatedCommandState = (state, name, value) => {
-	if(value === true){
-		const defaultValue = getValueFromDocument(guiState, name, "defaultvalue");
-		const guiValue = getValueFromDocument(guiState, name, "value");
-		if (defaultValue == guiValue) {
-			return deepCopy({}, state);
-		} else {
-			const conf = namespaceToObject(name.split("."), guiValue);
-			return  updateCommandState(state, conf);
-		}
-	} else {
-		return updateResetCommandState(state, name);
-	}
 };
 
 const command = (state = commandState, action) => {
@@ -98,4 +83,89 @@ const command = (state = commandState, action) => {
 	return returnState;
 };
 
-export default command;
+
+
+// GUI 옵션
+let guiState = initDocumentConfigure;
+let lastCommandConfigure = {};
+
+const setDefaultGuiState = (state, keys) => {
+	let newObj = {};
+	_.each(keys, (name) => {
+		const newValue = getDefaultValue(name);
+		const obj = namespaceToObject(name.split("."), newValue);
+		newObj = deepCopy(newObj, obj);
+	});
+
+	const newState = updateGuiState(state, newObj);
+	return deepCopy({}, newState);
+};
+
+const updateGuiState = (state, updated) => {
+	const newObj = changeMemberProperty(state, deepCopy({}, updated));
+	return deepCopy({}, newObj);
+};
+
+const updateGuiActivate = (state, name, value) => {
+	const newObj = changeMemberActivate(state, name, value);
+	return deepCopy({}, newObj);
+};
+
+const gui = (state = guiState, action) => {
+	let returnState = {};
+
+	switch (action.type) {
+		case RECENT_CONFIGURE : {
+			lastCommandConfigure = action.configure;
+			returnState = state;
+			break;
+		}
+		case UPDATE_CODE_INPUT : {
+			let code = action.value.value;
+			eval(`code = ${code}`);
+			returnState = updateGuiActivate(state, action.name, code);
+			break;
+		}
+		case CHANGE_GUI_ACTIVATE : {
+			returnState = updateGuiActivate(state, action.name, action.value.value);
+			break;
+		}
+		case RESET_GUI : {
+			const value = getDefaultValue(action.name);
+			const updated = namespaceToObject(action.name.split("."), value);
+
+			returnState = updateGuiState(state, updated);
+			break;
+		}
+		case UPDATE_GUI : {
+			const value = namespaceToObject(action.name.split("."), action.value.value);
+			returnState = updateGuiState(state, value);
+			break;
+		}
+		case UPDATE_COMMAND :
+			const prevState = deepCopy({}, commandState.original);
+			const removedCommandKeys = getRemovedAttributes(prevState, action.value);
+
+			returnState = updateGuiState(state, action.value);
+			returnState = setDefaultGuiState(returnState, removedCommandKeys)
+			break;
+		default :
+			returnState = state;
+	}
+
+	guiState = returnState;
+
+	if (action.value && action.value.root) {
+		returnState.lastUpdateRoot = action.value.root;
+	}
+
+	// react connect check shallow key
+	returnState.lastUpdate = (new Date()).getTime();
+	return returnState;
+};
+
+export {
+	command, gui
+};
+
+

@@ -1,7 +1,7 @@
 import * as _ from "lodash";
 import * as extractedDocument from "./document.json";
 import * as presetDocument from "./preset.json";
-import { deepCopy } from "../util";
+import { deepCopy, objectFlatten } from "../util";
 import { convertColumnsToData, convertRowsToData, convertJsonToData } from "./convert"
 
 const keysFromDocument = [];
@@ -292,6 +292,23 @@ const objectToKeys = (obj, root = "") => {
 	return _.flatten(arr);
 };
 
+export const getRemovedAttributes = (prevState, newState) => {
+
+	const prev = objectFlatten(prevState);
+	const cur = objectFlatten(newState);
+	const prevKeys = _.keys(prev);
+
+	const newKeys = _.difference(_.keys(prev), _.keys(cur));
+
+	//const newKeys = _.filter(_.keys(cur), (key) => {
+	//	const idx = prevKeys.indexOf(key);
+	//	if(idx < 0) {
+	//		return key
+	//	}
+	//});
+
+	return newKeys;
+};
 
 export const initCommandConfigure = {
 	data: {

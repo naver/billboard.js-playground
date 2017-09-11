@@ -1,7 +1,7 @@
 import React, { PropTypes } from "react";
 import CodeMirror from "./codemirror";
 import { connect } from "react-redux";
-import { updateCommand } from "../../actions";
+import { updateCommand, recentConfigureUpdate } from "../../actions";
 import ExportCode from "./exportcode";
 var beautify_js = require('js-beautify').js_beautify;
 
@@ -22,6 +22,7 @@ class Controller extends React.Component {
 			text: this.props.text,
 			focus: this.props.focus
 		});
+
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -43,18 +44,29 @@ class Controller extends React.Component {
 
 		return (<div className={className}>
 			<ExportCode />
-			<CodeMirror value={newLine} onChange={this.onChangeText} options={options} />
+			<CodeMirror value={newLine} onChange={(v) => this.onChangeText(v)} options={options} />
 		</div>);
 	}
 
-	onChangeText(value) {
-		let parsed;
+	componentDidUpdate() {
+		const value = this.state.text;
+		const parsed = this.getParsed(value);
+		parsed !== null && this.props.onRenderedCommand(parsed);
+	}
 
+	getParsed(value) {
+		let parsed;
 		try {
 			eval(`parsed = ${value}`);
 		} catch (e) {
 			parsed = null;
 		}
+
+		return parsed;
+	}
+
+	onChangeText(value) {
+		let parsed = this.getParsed(value);
 
 		if(parsed === null){
 			this.setState({
@@ -78,7 +90,13 @@ Controller.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
-	onChange: text => dispatch(updateCommand(text))
+	onChange: text => {
+		dispatch(updateCommand(text))
+	},
+	onRenderedCommand : object => {
+		//console.log("onRenderedCommand");
+		//dispatch(recentConfigureUpdate(object))
+	}
 });
 
 const mapStateToProps = state => ({

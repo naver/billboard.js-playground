@@ -4,6 +4,7 @@ export const RESET_GUI = "RESET_GUI";
 export const CHANGE_GUI_ACTIVATE = "CHANGE_GUI_ACTIVATE";
 export const UPDATE_DATA = "UPDATE_DATA";
 export const UPDATE_CODE_INPUT = "UPDATE_CODE_INPUT";
+export const RECENT_CONFIGURE = "RECENT_CONFIGURE";
 
 export const updateCodeInput = (name, value) => {
 	return {
@@ -21,6 +22,10 @@ export const updateData = (name, value, info) => {
 		info
 	};
 };
+export const recentConfigureUpdate = (configure) => ({
+	type: RECENT_CONFIGURE,
+	configure
+})
 
 export const changeGuiActivate = (name, value) => ({
 	type: CHANGE_GUI_ACTIVATE,

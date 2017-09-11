@@ -32,6 +32,30 @@ export const deepCopy = (target, ...sources) => {
 	return deepCopy(target, ...sources);
 };
 
+export const objectFlatten = (obj) => {
+	var flattenObject = function(ob) {
+		var toReturn = {};
+
+		for (var i in ob) {
+			if (!ob.hasOwnProperty(i)) continue;
+
+			if ((typeof ob[i]) == 'object' && !Array.isArray(ob[i])) {
+				var flatObject = flattenObject(ob[i]);
+				for (var x in flatObject) {
+					if (!flatObject.hasOwnProperty(x)) continue;
+
+					toReturn[i + '.' + x] = flatObject[x];
+				}
+			} else {
+				toReturn[i] = ob[i];
+			}
+		}
+		return toReturn;
+	};
+
+
+	return flattenObject(obj);
+};
 
 export const strinifyContainsFunction = (obj) => {
 	function replacer(key, value) {
