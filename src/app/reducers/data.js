@@ -1,14 +1,12 @@
 import * as _ from "lodash";
-import { combineReducers } from "redux";
-import { namespaceToObject, deepCopy } from "../util";
-import { REFLECT_CODE_TO_DATATABLE, UPDATE_HEADER, UPDATE_CELL, REFLECTED_DATA, REMOVE_VALUE_TO_DATA, REMOVE_KEY_TO_DATA, ADD_VALUE_TO_DATA, ADD_KEY_TO_DATA, CHANGE_GUI_ACTIVATE, UPDATE_COMMAND, UPDATE_DATA, UPDATE_GUI, RESET_GUI } from "../actions";
-import { initCommandConfigure, initDocumentConfigure, changeMemberActivate, deleteTargetKey, changeMemberProperty, getDefaultValue, getValueFromDocument, convertData } from "../configure";
+import { deepCopy } from "../util";
+import { UPDATE_COMMAND, REFLECT_CODE_TO_DATATABLE, UPDATE_HEADER, UPDATE_CELL, REMOVE_VALUE_TO_DATA, REMOVE_KEY_TO_DATA, ADD_VALUE_TO_DATA, ADD_KEY_TO_DATA } from "../actions";
+import { initCommandConfigure, convertData } from "../configure";
 
 // header, body
 let dataState = convertData(initCommandConfigure.data);
 
-const redrawAllData = (state, newCodeText) => {
-	const configure = JSON.parse(newCodeText);
+const redrawAllData = (state, configure) => {
 	const newState = convertData(configure.data);
 
 	return newState;
@@ -51,7 +49,7 @@ const addKeyToDataTable = (state, newData) => {
 	return newState;
 };
 
-const updateTableHeader = (state, {value, column}) => {
+const updateTableHeader = (state, { value, column }) => {
 	const newState = deepCopy({}, state);
 	const prevHeader = state.header[column];
 	const newBody = newState.body.map((data) => {
@@ -79,8 +77,14 @@ const data = (state = dataState, action) => {
 
 
 	switch (action.type) {
+		case UPDATE_COMMAND : {
+			returnState = redrawAllData(state, action.value);
+			returnState.lastUpdate = new Date();
+
+			break;
+		}
 		case REFLECT_CODE_TO_DATATABLE : {
-			returnState = redrawAllData(state, action.data);
+			returnState = redrawAllData(state, action.configures);
 			returnState.lastUpdate = new Date();
 
 			break;
@@ -126,7 +130,6 @@ const data = (state = dataState, action) => {
 	}
 
 	dataState = returnState;
-	//returnState.lastUpdate = new Date();
 
 	return returnState;
 };

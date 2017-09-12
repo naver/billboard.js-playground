@@ -17,7 +17,7 @@ export const REFLECT_CODE_TO_DATATABLE = "REFLECT_CODE_TO_DATATABLE";
 export const reflectCommandToDatatable = (code) => {
 	return {
 		type: REFLECT_CODE_TO_DATATABLE,
-		data: code
+		configures: code
 	};
 };
 

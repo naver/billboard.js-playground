@@ -50,8 +50,14 @@ const textFieldProps = {
 };
 
 class DataTableController extends React.Component {
+	componentWillReceiveProps(nextProps) {
+		this.setState({
+			fromCode: nextProps.data.fromCode
+		});
+	}
+
 	componentDidUpdate() {
-		this.props.reflectedData(deepCopy({}, this.props.data));
+		this.props.reflectedData(this.props.data);
 	}
 
 	getHeaderTextField(headerKey, columnIndex) {

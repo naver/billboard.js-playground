@@ -10,6 +10,7 @@ class Controller extends React.Component {
 		super();
 
 		this.state = {
+			original: {},
 			error: false,
 			text: ""
 		};
@@ -19,6 +20,8 @@ class Controller extends React.Component {
 
 	componentWillMount() {
 		this.setState({
+			fromData: this.props.fromData,
+			original: this.props.original,
 			text: this.props.text,
 			focus: this.props.focus
 		});
@@ -26,6 +29,8 @@ class Controller extends React.Component {
 
 	componentWillReceiveProps(nextProps) {
 		this.setState({
+			fromData: nextProps.fromData,
+			original: nextProps.original,
 			focus: nextProps.focus,
 			text: nextProps.text
 		});
@@ -48,9 +53,9 @@ class Controller extends React.Component {
 	}
 
 	componentDidUpdate() {
-		if(!this.state.error){
-			this.props.reflectCode(this.state.text);
-		}
+		//if(!this.state.error){
+		//	this.props.reflectCode(this.state.original);
+		//}
 	}
 
 	getParsed(value) {
@@ -77,7 +82,7 @@ class Controller extends React.Component {
 				error: false,
 				text: value
 			});
-
+			this.props.reflectCode(parsed);
 			this.props.onChange(parsed);
 		}
 	}
@@ -98,6 +103,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
+	original: state.command.original,
 	text: state.command.text,
 	focus: state.command.focus
 });

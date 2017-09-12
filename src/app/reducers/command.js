@@ -106,6 +106,10 @@ const command = (state = commandState, action) => {
 		case REFLECTED_DATA : {
 			const lastedData = deepCopy({}, action.data);
 			returnState = updateCommandData(state, lastedData);
+			returnState.fromData = true;
+			// react connect check shallow key
+			returnState.lastUpdate = new Date()
+
 			break;
 		}
 		// GUI의 코드 수정 버튼을 클릭했때 옵션의 default 값으로 command 창에 입력된다
@@ -114,6 +118,9 @@ const command = (state = commandState, action) => {
 			const updated = namespaceToObject(action.name.split("."), func);
 
 			returnState = updateCommandCode(state, updated);
+
+			// react connect check shallow key
+			returnState.lastUpdate = new Date()
 			focus = action.name;
 			break;
 		}
@@ -121,6 +128,8 @@ const command = (state = commandState, action) => {
 		// GUI의 삭제 버튼을 클릭했을때 default 값으로 변경한다
 		case RESET_GUI : {
 			returnState = updateResetCommandState(state, action.name);
+			// react connect check shallow key
+			returnState.lastUpdate = new Date()
 			break;
 		}
 
@@ -138,12 +147,16 @@ const command = (state = commandState, action) => {
 				const conf = namespaceToObject(action.name.split("."), action.value.value);
 				returnState = updateCommandState(state, conf);
 			}
+			// react connect check shallow key
+			returnState.lastUpdate = new Date()
 			break;
 		}
 
 		// command 텍스트가 입력된 후에 최신 상태로 반영한다
 		case UPDATE_COMMAND :
 			returnState = resetCommandState(action.value);
+			// react connect check shallow key
+			returnState.lastUpdate = new Date()
 			break;
 		default :
 			returnState = state;
@@ -151,9 +164,6 @@ const command = (state = commandState, action) => {
 
 	commandState = returnState;
 
-	// react connect check shallow key
-	returnState.lastUpdate = new Date();
-	returnState.focus = focus;
 	return returnState;
 };
 
