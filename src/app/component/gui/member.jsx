@@ -19,7 +19,9 @@ class Member extends React.Component {
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
-		if(this.props.attributes.name === nextProps.lastUpdateRoot){
+		const roots = nextProps.lastUpdateRoot || [];
+
+		if(roots.indexOf(this.props.attributes.name) > -1){
 			return true;
 		} else {
 			return false;

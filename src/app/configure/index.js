@@ -23,6 +23,26 @@ export const convertData = (data) => {
 	};
 };
 
+export const dataToFormatedData = (format, data) => {
+	if(format === "columns"){
+		const mapper = {};
+		const columns = [];
+
+		data.header.forEach(function(key, index){
+			mapper[key] = index;
+			columns.push([key]);
+		});
+
+		data.body.forEach(function(data, index){
+			_.each(data, (value, key) => {
+				columns[mapper[key]][index+1] = value;
+			});
+		});
+
+		return columns;
+	}
+};
+
 const typeValid = (types, value) => {
 	if(value === undefined || value === "undefined"){
 		return undefined;
@@ -218,7 +238,7 @@ export const changeMemberProperty = (original, object) => {
 			return changed;
 		});
 
-		if(type.names[0].toLowerCase() === "number" && value !== undefined){
+		if(type && type.names && type.names[0] && type.names[0].toLowerCase() === "number" && value !== undefined){
 			value = value * 1;
 		}
 

@@ -336,6 +336,21 @@
       }
     }
   },
+  "color" : {
+    "properties" : {
+      "threshold" : {
+        "properties" : {
+          "max" : {
+            "attributes" : {
+              "min" : 0,
+              "max" : 300,
+              "step" : 1
+            }
+          }
+        }
+      }
+    }
+  },
   "title" : {
     "properties" : {
        "position" : {

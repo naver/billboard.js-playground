@@ -40,6 +40,9 @@ class InputNumber extends React.Component {
 		const props = deepCopy({}, this.props);
 		const textStyle = deepCopy({}, ValueTextStyle);
 
+		props.min = props.min || 0;
+		props.max = props.max || 1;
+
 		if (isNaN(props.value)) {
 			props.value = props.defaultvalue || undefined;
 			textStyle.color = color.grey400;

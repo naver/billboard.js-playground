@@ -25,6 +25,7 @@ class InputText extends React.Component {
 	getDefaultTextArea(options) {
 		return (<MuiThemeProvider muiTheme={getMuiTheme()}>
 			<TextField
+				name={this.props.name}
 				onChange={(e, v) => this.props.onChangeText(e, v)}
 				underlineFocusStyle={underlineFocusStyle}
 				style={textFieldStyle}

@@ -32,6 +32,12 @@ export const deepCopy = (target, ...sources) => {
 	return deepCopy(target, ...sources);
 };
 
+export const stringToFunction = (str) =>{
+	let code = str;
+	eval(`code = ${code}`);
+	return code;
+}
+
 export const objectFlatten = (obj) => {
 	var flattenObject = function(ob) {
 		var toReturn = {};

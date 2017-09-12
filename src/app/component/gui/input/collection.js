@@ -43,9 +43,10 @@ class ArrayInput extends React.Component {
 				<div style={{width:"100%", display:"inline-block"}}>
 
 					{_.map(value, (v, i) => {
-						return <div>
+						return <div key={i}>
 							<span>{i}</span>
 							<TextField
+								name={this.props.name}
 								style={{width:"80%", display:"inline-block"}}
 								fullWidth={true}
 								hintText={v} />
@@ -62,6 +63,7 @@ class ArrayInput extends React.Component {
 			returnValue = (<MuiThemeProvider muiTheme={getMuiTheme()}>
 				<div style={{width:"100%", display:"inline-block"}}>
 					<TextField
+						name={this.props.name}
 						underlineStyle={{
 						borderColor: "transparent",
 					}}

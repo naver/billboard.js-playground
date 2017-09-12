@@ -137,7 +137,9 @@ class InputProperty extends React.Component {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
 
-	onClickDelete: () => dispatch(resetGui(ownProps.name.replace(/\:/g, ".")))
+	onClickDelete: () => dispatch(resetGui(ownProps.name.replace(/\:/g, "."), {
+		root: ownProps.rootMemberName
+	}))
 });
 
 const Property = connect(

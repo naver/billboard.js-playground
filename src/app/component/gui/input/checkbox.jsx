@@ -34,7 +34,7 @@ class InputCheckbox extends React.Component {
 		} : {
 			//color : color.grey900,
 			fontSize : "14px"
-		}
+		};
 
 		return (<MuiThemeProvider muiTheme={getMuiTheme()}>
 			<div>

@@ -39,6 +39,7 @@ class CodeInput extends React.Component {
 		return <MuiThemeProvider muiTheme={getMuiTheme()}>
 			<div style={{width:"100%", display:"inline-block"}}>
 				<TextField
+					name={this.props.name}
 					underlineFocusStyle={{
 						borderColor : lightBlue300
 					}}

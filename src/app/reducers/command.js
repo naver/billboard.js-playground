@@ -1,18 +1,46 @@
 import * as _ from "lodash";
 import { combineReducers } from "redux";
-import { namespaceToObject, deepCopy, strinifyContainsFunction } from "../util";
-import { initCommandConfigure, initDocumentConfigure, changeMemberActivate, deleteTargetKey, changeMemberProperty, getDefaultValue, getValueFromDocument, convertData,getRemovedAttributes } from "../configure";
-import { CHANGE_GUI_ACTIVATE, RECENT_CONFIGURE, UPDATE_CODE_INPUT, UPDATE_COMMAND, UPDATE_DATA, UPDATE_GUI, RESET_GUI } from "../actions";
+import { namespaceToObject, deepCopy, strinifyContainsFunction, stringToFunction } from "../util";
+import { initCommandConfigure, initDocumentConfigure, changeMemberActivate, deleteTargetKey, changeMemberProperty, getDefaultValue, getValueFromDocument, dataToFormatedData, convertData,getRemovedAttributes } from "../configure";
+import { CHANGE_GUI_ACTIVATE, REFLECTED_DATA, RECENT_CONFIGURE, UPDATE_CODE_INPUT, UPDATE_COMMAND, UPDATE_DATA, UPDATE_GUI, RESET_GUI } from "../actions";
 
-
-// 커맨드창
+// 커멘드 상태
 let commandState = {
 	original: initCommandConfigure,
 	text: JSON.stringify(initCommandConfigure)
 };
 
-const updateCommandCode = (state, updated, targetKey, originalCode) => {
+let oldCommand = deepCopy({}, commandState);
+
+const updateCommandData = (state, lastest) => {
+	// columns, json, rows
+	const formatList = ["columns", "json", "rows"];
+	const newState = deepCopy({}, state);
+	const format = Object.keys(newState.original.data).filter((key) => {
+		return formatList.indexOf(key) > -1;
+	})[0];
+
+	newState.original.data[format] = dataToFormatedData(format, lastest);
+
+	const text = strinifyContainsFunction(newState.original);
+
+
+	return {
+		original: newState.original,
+		text
+	};
+};
+
+const updateCommandCode = (state, updated) => {
 	const original = deepCopy({}, state.original, updated);
+	const text = strinifyContainsFunction(original);
+
+	return {
+		original, text
+	};
+};
+const resetCommandState = (updated) => {
+	const original = deepCopy({}, updated);
 	const text = strinifyContainsFunction(original);
 
 	return {
@@ -39,50 +67,6 @@ const updateResetCommandState = (state, namespace) => {
 		text: text
 	};
 };
-
-const command = (state = commandState, action) => {
-	let returnState;
-	let focus = null;
-
-	switch (action.type) {
-		case UPDATE_CODE_INPUT : {
-			let code = action.value.value;
-			eval(`code = ${code}`);
-			const conf = namespaceToObject(action.name.split("."), code);
-			returnState = updateCommandCode(state, conf, action.name, code);
-			focus = action.name;
-			break;
-		}
-		case RESET_GUI : {
-			returnState = updateResetCommandState(state, action.name);
-			break;
-		}
-		case UPDATE_GUI : {
-			const value = action.value.value;
-			const defaultvalue = getDefaultValue(action.name);
-			if(value === defaultvalue){
-				returnState = updateResetCommandState(state, action.name);
-			} else {
-				const conf = namespaceToObject(action.name.split("."), action.value.value);
-				returnState = updateCommandState(state, conf);
-			}
-			break;
-		}
-		case UPDATE_COMMAND :
-			returnState = updateCommandState(state, action.value);
-			break;
-		default :
-			returnState = state;
-	}
-
-	commandState = returnState;
-
-	// react connect check shallow key
-	returnState.lastUpdate = new Date();
-	returnState.focus = focus;
-	return returnState;
-};
-
 
 
 // GUI 옵션
@@ -111,8 +95,71 @@ const updateGuiActivate = (state, name, value) => {
 	return deepCopy({}, newObj);
 };
 
+const command = (state = commandState, action) => {
+	oldCommand = commandState;
+
+	let returnState;
+	let focus = null;
+
+	switch (action.type) {
+		// data table ui 가 갱신되었을때
+		case REFLECTED_DATA : {
+			const lastedData = deepCopy({}, action.data);
+			returnState = updateCommandData(state, lastedData);
+			break;
+		}
+		// GUI의 코드 수정 버튼을 클릭했때 옵션의 default 값으로 command 창에 입력된다
+		case UPDATE_CODE_INPUT : {
+			const func = stringToFunction(action.state.value);
+			const updated = namespaceToObject(action.name.split("."), func);
+
+			returnState = updateCommandCode(state, updated);
+			focus = action.name;
+			break;
+		}
+
+		// GUI의 삭제 버튼을 클릭했을때 default 값으로 변경한다
+		case RESET_GUI : {
+			returnState = updateResetCommandState(state, action.name);
+			break;
+		}
+
+		// GUI 조작후
+		case UPDATE_GUI : {
+			const value = action.value.value;
+			const defaultvalue = getDefaultValue(action.name);
+
+			// 변경한 값이 기존과 같으면 default 값으로 지정
+			if (value === defaultvalue) {
+				returnState = updateResetCommandState(state, action.name);
+			}
+			// 새로운 값으로 셋팅
+			else {
+				const conf = namespaceToObject(action.name.split("."), action.value.value);
+				returnState = updateCommandState(state, conf);
+			}
+			break;
+		}
+
+		// command 텍스트가 입력된 후에 최신 상태로 반영한다
+		case UPDATE_COMMAND :
+			returnState = resetCommandState(action.value);
+			break;
+		default :
+			returnState = state;
+	}
+
+	commandState = returnState;
+
+	// react connect check shallow key
+	returnState.lastUpdate = new Date();
+	returnState.focus = focus;
+	return returnState;
+};
+
 const gui = (state = guiState, action) => {
 	let returnState = {};
+	let root = action.value && action.value.root ? [action.value.root] : [];
 
 	switch (action.type) {
 		case RECENT_CONFIGURE : {
@@ -121,7 +168,7 @@ const gui = (state = guiState, action) => {
 			break;
 		}
 		case UPDATE_CODE_INPUT : {
-			let code = action.value.value;
+			let code = action.state.value;
 			eval(`code = ${code}`);
 			returnState = updateGuiActivate(state, action.name, code);
 			break;
@@ -133,7 +180,6 @@ const gui = (state = guiState, action) => {
 		case RESET_GUI : {
 			const value = getDefaultValue(action.name);
 			const updated = namespaceToObject(action.name.split("."), value);
-
 			returnState = updateGuiState(state, updated);
 			break;
 		}
@@ -143,20 +189,22 @@ const gui = (state = guiState, action) => {
 			break;
 		}
 		case UPDATE_COMMAND :
-			const prevState = deepCopy({}, commandState.original);
+			const prevState = deepCopy({}, oldCommand.original);
 			const removedCommandKeys = getRemovedAttributes(prevState, action.value);
 
 			returnState = updateGuiState(state, action.value);
-			returnState = setDefaultGuiState(returnState, removedCommandKeys)
+			returnState = setDefaultGuiState(returnState, removedCommandKeys);
+
+			root = root.concat(_.keys(prevState));
+			root = root.concat(_.keys(action.value));
 			break;
 		default :
 			returnState = state;
 	}
-
 	guiState = returnState;
 
-	if (action.value && action.value.root) {
-		returnState.lastUpdateRoot = action.value.root;
+	if (root) {
+		returnState.lastUpdateRoot = root;
 	}
 
 	// react connect check shallow key
@@ -167,5 +215,3 @@ const gui = (state = guiState, action) => {
 export {
 	command, gui
 };
-
-

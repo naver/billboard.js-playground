@@ -22,7 +22,7 @@ class Control extends React.Component {
 				const properties = option.properties;
 
 				if (properties) {
-					hasProperty.push(<Member {...option} properties={option.properties} lastUpdateRoot={lastUpdateRoot} />);
+					hasProperty.push(<Member key={option.attributes.name} {...option} properties={option.properties} lastUpdateRoot={lastUpdateRoot} />);
 				} else {
 					noneProperty.push(<Property key={option.attributes.name} {...option.attributes} level={0} />);
 				}

@@ -1,7 +1,7 @@
 import React, { PropTypes } from "react";
 import CodeMirror from "./codemirror";
 import { connect } from "react-redux";
-import { updateCommand, recentConfigureUpdate } from "../../actions";
+import { updateCommand, recentConfigureUpdate, reflectCommandToDatatable } from "../../actions";
 import ExportCode from "./exportcode";
 var beautify_js = require('js-beautify').js_beautify;
 
@@ -22,7 +22,6 @@ class Controller extends React.Component {
 			text: this.props.text,
 			focus: this.props.focus
 		});
-
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -49,9 +48,9 @@ class Controller extends React.Component {
 	}
 
 	componentDidUpdate() {
-		const value = this.state.text;
-		const parsed = this.getParsed(value);
-		parsed !== null && this.props.onRenderedCommand(parsed);
+		if(!this.state.error){
+			this.props.reflectCode(this.state.text);
+		}
 	}
 
 	getParsed(value) {
@@ -90,13 +89,12 @@ Controller.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
+	reflectCode: (text) => {
+		dispatch(reflectCommandToDatatable(text));
+	},
 	onChange: text => {
 		dispatch(updateCommand(text))
 	},
-	onRenderedCommand : object => {
-		//console.log("onRenderedCommand");
-		//dispatch(recentConfigureUpdate(object))
-	}
 });
 
 const mapStateToProps = state => ({
