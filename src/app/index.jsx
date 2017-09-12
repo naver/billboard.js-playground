@@ -12,6 +12,7 @@ import { GUI } from "./component/gui";
 import { Command } from "./component/command";
 import { Data } from "./component/data";
 import { TabViews } from "./component/tabviews";
+import { Guide } from "./component/guide";
 import playgroundApp from "./reducers";
 
 const store = createStore(playgroundApp);
@@ -23,6 +24,7 @@ ReactDOM.render(
 			<Chart />
 			<TabViews />
 			<GUI />
+			<Guide />
 		</div>
 	</Provider>,
 	root

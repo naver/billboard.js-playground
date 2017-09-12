@@ -6,11 +6,11 @@ import { initCommandConfigure, initDocumentConfigure, changeMemberActivate, dele
 
 //import gui from "./gui";
 //import command from "./command";
-import {command, gui} from "./command";
+import {command, gui, guide} from "./command";
 import data from "./data";
 
 const playgroundApp = combineReducers({
-	command, gui, data
+	command, gui, data, guide
 });
 
 export default playgroundApp;

@@ -13,6 +13,22 @@ export const REFLECTED_DATA = "REFLECTED_DATA";
 export const UPDATE_HEADER = "UPDATE_HEADER";
 export const UPDATE_CELL = "UPDATE_CELL";
 export const REFLECT_CODE_TO_DATATABLE = "REFLECT_CODE_TO_DATATABLE";
+export const UPDATE_CONFIGURE_INFO = "UPDATE_CONFIGURE_INFO";
+export const SHOW_GUIDE_CARD = "SHOW_GUIDE_CARD";
+
+export const showGuideCard = (style) => {
+	return {
+		type: SHOW_GUIDE_CARD,
+		style,
+	}
+}
+
+export const updateConfigureInfo = (name) => {
+	return {
+		type: UPDATE_CONFIGURE_INFO,
+		name
+	}
+}
 
 export const reflectCommandToDatatable = (code) => {
 	return {

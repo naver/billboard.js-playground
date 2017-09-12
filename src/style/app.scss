@@ -117,6 +117,15 @@ html {
     font-weight : 500;
 }
 
+.property .material-icons {
+    opacity:0;
+    font-size:20px;
+    padding-left:10px;
+}
+.property:hover .material-icons.info {
+    opacity:1;
+}
+
 .property_type {
     font-size: 14px;
     line-height: 16px;
@@ -159,6 +168,13 @@ html {
     width: 60px  !important;
     height : 40px  !important;
     background-image : url(codepen-export.svg) !important;
+}
+.drawer_close {
+    transform : translate(-10px, 200px) !important;
+
+}
+.drawer_open {
+    transform : translate(-10px, -10px) !important;
 }
 
 .table-row:hover .table-row-column{

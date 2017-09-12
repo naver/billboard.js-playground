@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import getMuiTheme from "material-ui/styles/getMuiTheme";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import { ListItem } from "material-ui/List";
+import FontIcon from 'material-ui/FontIcon';
 import Clear from "./icon/clear";
 import {
 	ConnectedCollection,
@@ -12,7 +13,7 @@ import {
 	ConnectedCode
 } from "./input/index";
 import {
-	resetGui, changeGuiActivate
+	resetGui, changeGuiActivate, updateConfigureInfo
 } from "../../actions";
 
 
@@ -25,24 +26,6 @@ class InputProperty extends React.Component {
 		this.setState(nextProps);
 	}
 
-	getModify() {
-		return "";
-		//return (<div
-		//	style={{
-		//			display: "inline-block",
-		//			verticalAlign: "middle",
-		//			width: "5%"
-		//		}}>
-		//	<div style={{
-		//				display: "inline-block",
-		//				width: "100%",
-		//				textAlign: "left"
-		//			}}>
-		//		<Modify {...this.state}/>
-		//	</div>
-		//</div>);
-	}
-
 	getName() {
 		return (<div style={{
 						display : "inline-block",
@@ -52,7 +35,10 @@ class InputProperty extends React.Component {
 			<div style={{display : "inline-block", "width" : "100%"}}
 				 onClick={(e) => this.onClickTitle(e)}
 			>
-				<div className="property_name">{this.state.name}</div>
+				<div className="property_name">{this.state.name}
+					<FontIcon
+						onClick={(e) => this.onClickTitle()} className="material-icons info">info_outline</FontIcon>
+				</div>
 				<div className="property_type">{this.state.type.names.join(", ")}</div>
 			</div>
 		</div>);
@@ -71,7 +57,7 @@ class InputProperty extends React.Component {
 	}
 
 	onClickTitle() {
-		console.log(this.state.description);
+		this.props.onClickTitle(this.state.name);
 	}
 
 	getClear() {
@@ -99,7 +85,6 @@ class InputProperty extends React.Component {
 		const title = this.getName();
 		const input = this.getInput(type);
 		const clear = this.getClear();
-		const modify = this.getModify();
 		const className = "property" + (option.activated ? " activated" : "")
 
 		return  (<MuiThemeProvider muiTheme={getMuiTheme()}>
@@ -107,7 +92,7 @@ class InputProperty extends React.Component {
 				className={className}
 				style={{ width: "100%" }}
 				nestedLevel={this.state.level}
-				children={[modify, title, input, clear]}
+				children={[title, input, clear]}
 			/>
 		</MuiThemeProvider>);
 	}
@@ -136,7 +121,9 @@ class InputProperty extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-
+	onClickTitle : (name) => {
+		dispatch(updateConfigureInfo(name));
+	},
 	onClickDelete: () => dispatch(resetGui(ownProps.name.replace(/\:/g, "."), {
 		root: ownProps.rootMemberName
 	}))

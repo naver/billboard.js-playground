@@ -98,6 +98,8 @@ const memberFlatten = (member) => {
 					description: item.description,
 					optional: item.optional,
 					activated: false,
+					examples: item.examples,
+					docid: item.name,
 				});
 			}
 		});
@@ -109,17 +111,19 @@ const memberFlatten = (member) => {
 const documentToObject = (defaultDocumentOption) => {
 	let fullProperties = [];
 
-	_.each(defaultDocumentOption, ({ name, type, kind, defaultvalue, description, properties, optional }) => {
+	_.each(defaultDocumentOption, ({ id, examples, name, type, kind, defaultvalue, description, properties, optional }) => {
 		if (kind === "member") {
 			if (name.indexOf(":") > -1) {
 				const target = {
 					type: type,
 					defaultvalue: defaultvalue,
 					value: defaultvalue,
+					docid: name,
 					name: name.replace(/\:/g, "."),
 					description: description,
 					optional: optional,
 					activated: false,
+					examples,
 				};
 
 				fullProperties = fullProperties.concat([target]);
@@ -133,6 +137,8 @@ const documentToObject = (defaultDocumentOption) => {
 					description,
 					kind,
 					activated: false,
+					examples,
+					docid: name,
 				});
 				fullProperties = fullProperties.concat(ps);
 			}
@@ -328,6 +334,11 @@ export const getRemovedAttributes = (prevState, newState) => {
 	//});
 
 	return newKeys;
+};
+
+export const getAttributesFromDocument = (name) => {
+	const path = name.replace(/\./g, ".properties.") + ".attributes";
+	return _.get(initDocumentConfigure, path);
 };
 
 export const initCommandConfigure = {

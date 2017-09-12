@@ -1,13 +1,14 @@
 import * as _ from "lodash";
 import { combineReducers } from "redux";
-import { namespaceToObject, deepCopy, strinifyContainsFunction, stringToFunction } from "../util";
-import { initCommandConfigure, initDocumentConfigure, changeMemberActivate, deleteTargetKey, changeMemberProperty, getDefaultValue, getValueFromDocument, dataToFormatedData, convertData,getRemovedAttributes } from "../configure";
-import { CHANGE_GUI_ACTIVATE, REFLECTED_DATA, RECENT_CONFIGURE, UPDATE_CODE_INPUT, UPDATE_COMMAND, UPDATE_DATA, UPDATE_GUI, RESET_GUI } from "../actions";
+import { namespaceToObject, deepCopy, strinifyContainsFunction, stringToFunction, objectFlatten } from "../util";
+import { initCommandConfigure, initDocumentConfigure, changeMemberActivate, deleteTargetKey, changeMemberProperty, getDefaultValue, getValueFromDocument, dataToFormatedData, convertData,getRemovedAttributes, getAttributesFromDocument } from "../configure";
+import { SHOW_GUIDE_CARD, CHANGE_GUI_ACTIVATE, REFLECTED_DATA, RECENT_CONFIGURE, UPDATE_CODE_INPUT, UPDATE_COMMAND, UPDATE_CONFIGURE_INFO, UPDATE_DATA, UPDATE_GUI, RESET_GUI } from "../actions";
 
 // 커멘드 상태
 let commandState = {
 	original: initCommandConfigure,
-	text: JSON.stringify(initCommandConfigure)
+	text: JSON.stringify(initCommandConfigure),
+	chip: objectFlatten(initCommandConfigure)
 };
 
 let oldCommand = deepCopy({}, commandState);
@@ -129,7 +130,7 @@ const command = (state = commandState, action) => {
 		case RESET_GUI : {
 			returnState = updateResetCommandState(state, action.name);
 			// react connect check shallow key
-			returnState.lastUpdate = new Date()
+			returnState.lastUpdate = new Date();
 			break;
 		}
 
@@ -163,6 +164,8 @@ const command = (state = commandState, action) => {
 	}
 
 	commandState = returnState;
+
+	returnState.chip = Object.keys(objectFlatten(returnState.original));
 
 	return returnState;
 };
@@ -222,6 +225,44 @@ const gui = (state = guiState, action) => {
 	return returnState;
 };
 
+
+let drawerState = {
+	open : false,
+	style:"400px",
+	name: "none",
+	attributes: getAttributesFromDocument("bindto"),
+};
+const guide = (state = drawerState, action) => {
+	let returnState = {};
+
+	switch (action.type) {
+		case UPDATE_CONFIGURE_INFO : {
+			const name = action.name;
+			const attributes = getAttributesFromDocument(name);
+			returnState = {
+				name,
+				attributes
+			};
+			returnState.lastUpdate = (new Date()).getTime();
+			break;
+		}
+		case SHOW_GUIDE_CARD : {
+			returnState.open = true;
+			returnState.style = action.style;
+			returnState.lastUpdate = (new Date()).getTime();
+			break;
+		}
+		default :
+			returnState = state;
+	}
+
+	returnState = deepCopy({}, drawerState, returnState);
+	drawerState = returnState;
+
+	return returnState;
+};
+
+
 export {
-	command, gui
+	command, gui, guide
 };
