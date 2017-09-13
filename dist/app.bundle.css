@@ -1,4 +1,4 @@
-/*
+@import url(https://fonts.googleapis.com/css?family=Bungee);/*
 html5doctor.com Reset Stylesheet
 v1.6.1
 Last Updated: 2010-09-17
@@ -102,70 +102,6 @@ input, select {
 }
 
 
-/**  app.css **/
-html, body {
-    background-color: rgb(238, 238, 238);
-    width : 100%;
-    height : 100%;
-    padding : 10px;
-    overflow : hidden;
-}
-.ReactCodeMirror {
-    width: 100%;
-    height: 200px;
-}
-.type {
-    color: #009688;
-}
-.err {
-    background: #ffd9d9;
-}
-
-#app, #wrapper{
-    position : absolute;
-    width : 100%;
-    height : 100%;
-}
-
-.chart, .textConfigure, .inputConfigure {
-    width : 50%;
-    margin : 0;
-}
-
-.inputConfigure {
-    width : 45%;
-    left : 55%;
-    position : absolute;
-    height : 100%;
-    top : 0;
-}
-.scroll {
-    width : 100%;
-    height : 100%;
-    overflow-y: scroll;
-}
-
-.property.updated {
-    color : red;
-}
-
-.property.deactivated {
-    opacity: 0.5;
-}
-
-.activate_check {
-    opacity:0;
-}
-
-.property.deactivated .activate_check{
-    opacity: 0;
-}
-
-.property:hover .activate_check{
-    opacity:1;
-}
-
-
 /* fallback */
 @font-face {
     font-family: 'Material Icons';
@@ -189,7 +125,9 @@ html, body {
     direction: ltr;
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
-}/* BASICS */
+}
+
+/* BASICS */
 
 .CodeMirror {
   /* Set height, width, borders, and global font properties here */
@@ -699,13 +637,26 @@ span.CodeMirror-selectedtext { background: none; }
 
 .bb-chart-arc .bb-gauge-value {
   fill: #000; }/**  app.scss **/
-#app, #wrapper {
-  border: 1px solid red;
-  position: relative; }
+html {
+  padding: 10px; }
+
+#app {
+  border: 1px solid #d7d7d7;
+  position: relative;
+  height: 100%;
+  box-sizing: border-box; }
+
+#wrapper {
+  height: 100%; }
 
 .ReactCodeMirror {
   width: 100%;
-  height: 200px; }
+  height: auto;
+  position: absolute; }
+
+.CodeMirror {
+  width: 100%;
+  height: 100%; }
 
 .type {
   color: #009688; }
@@ -713,30 +664,49 @@ span.CodeMirror-selectedtext { background: none; }
 .err {
   background: #ffd9d9; }
 
-.chart, .textConfigure, .inputConfigure {
-  width: 50%;
-  margin: 0; }
+.chart, .tabviews {
+  width: 60%;
+  height: 50%;
+  margin: 0;
+  left: 0; }
+
+.textConfigure, .dataTable {
+  width: 100%; }
+
+.layer_wrapper {
+  padding: 10px; }
 
 .inputConfigure {
-  width: 45%;
-  left: 55%;
+  width: 40%;
+  left: 60%;
   position: absolute;
   height: 100%;
-  top: 0; }
+  top: 0;
+  border-left: 1px solid #d7d7d7;
+  box-sizing: border-box; }
 
 .scroll {
   width: 100%;
   height: 100%;
   overflow-y: scroll; }
 
+.property_clear {
+  opacity: 0; }
+
+.property.activated .property_clear {
+  opacity: 1; }
+
+.property_content {
+  display: inline-block; }
+
+.property:hover .edit_function {
+  opacity: 1; }
+
 .property.updated {
   color: red; }
 
 .property.deactivated {
   opacity: 0.5; }
-
-.activate_check {
-  opacity: 0; }
 
 .property.deactivated .activate_check {
   opacity: 0; }
@@ -746,6 +716,69 @@ span.CodeMirror-selectedtext { background: none; }
 
 .react-toolbox_checkbox {
   display: inline-block; }
+
+.property_name {
+  color: #424242;
+  font-weight: 500; }
+
+.property .material-icons {
+  opacity: 0;
+  font-size: 20px;
+  padding-left: 10px; }
+
+.property:hover .material-icons.info {
+  opacity: 1; }
+
+.property_type {
+  font-size: 14px;
+  line-height: 16px;
+  height: 16px;
+  margin: 0;
+  margin-top: 4px;
+  color: rgba(0, 0, 0, 0.54);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
+
+.member svg {
+  color: #ff8a65 !important; }
+
+.number_guide {
+  font-size: 14px;
+  line-height: 24px;
+  font-family: Roboto, sans-serif;
+  text-align: center; }
+
+.codepen-export {
+  position: absolute;
+  right: 60px;
+  z-index: 1000; }
+
+.codepen-export input[type="submit"] {
+  border: none;
+  width: 60px;
+  height: 40px;
+  background: none;
+  display: inline-block; }
+
+.codepen-export .button {
+  background-size: contain !important;
+  border: none;
+  width: 60px  !important;
+  height: 40px  !important;
+  background-image: url("data:image/svg+xml,%3C?xml version='1.0' encoding='utf-8'?%3E %3C!-- Generator: Adobe Illustrator 16.0.4, SVG Export Plug-In . SVG Version: 6.00 Build 0) --%3E %3C!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'%3E %3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='179.851px' height='120.095px' viewBox='0 0 179.851 120.095' enable-background='new 0 0 179.851 120.095' xml:space='preserve'%3E %3Cg%3E %3Cg%3E %3Crect x='104.055' y='54.547' fill='%23EFEFEF' width='48.38' height='11'/%3E %3C/g%3E %3Cg%3E %3Cg%3E %3Cpath fill='%23EFEFEF' d='M149.336,60.047c-8.046-8.046-11.881-23.957-12.196-34.996c11.031,14.821,25.367,27.747,42.711,34.996 c-17.344,6.941-31.048,20.649-42.711,34.996C138.087,83.223,140.975,68.875,149.336,60.047z'/%3E %3C/g%3E %3C/g%3E %3C/g%3E %3Cg%3E %3Cpolygon fill='%23EFEFEF' points='29.301,54.708 29.301,65.388 37.284,60.048 '/%3E %3Cpolygon fill='%23EFEFEF' points='56.856,46.956 56.856,32.073 31.855,48.739 43.023,56.21 '/%3E %3Cpolygon fill='%23EFEFEF' points='88.239,48.739 63.238,32.073 63.238,46.956 77.072,56.21 '/%3E %3Cpolygon fill='%23EFEFEF' points='31.855,71.356 56.856,88.022 56.856,73.14 43.023,63.888 '/%3E %3Cpolygon fill='%23EFEFEF' points='63.238,73.14 63.238,88.022 88.239,71.356 77.072,63.888 '/%3E %3Cpolygon fill='%23EFEFEF' points='60.047,52.499 48.762,60.048 60.047,67.597 71.333,60.048 '/%3E %3Cpath fill='%23EFEFEF' d='M60.047,0C26.885,0,0,26.884,0,60.048s26.885,60.047,60.047,60.047c33.164,0,60.048-26.883,60.048-60.047 S93.211,0,60.047,0z M97.175,71.36c0,0.141-0.01,0.279-0.028,0.418c-0.007,0.045-0.018,0.092-0.025,0.137 c-0.017,0.09-0.032,0.18-0.056,0.268c-0.014,0.053-0.033,0.104-0.05,0.154c-0.025,0.078-0.051,0.156-0.082,0.234 c-0.021,0.053-0.048,0.104-0.071,0.154c-0.034,0.072-0.069,0.143-0.108,0.213c-0.028,0.049-0.061,0.098-0.091,0.146 c-0.043,0.066-0.087,0.131-0.135,0.193c-0.035,0.049-0.071,0.094-0.11,0.139c-0.05,0.059-0.103,0.117-0.158,0.172 c-0.042,0.043-0.083,0.086-0.127,0.125c-0.058,0.053-0.119,0.104-0.182,0.152c-0.047,0.037-0.094,0.074-0.144,0.109 c-0.019,0.012-0.035,0.027-0.054,0.039L61.817,96.64c-0.536,0.357-1.152,0.537-1.771,0.537c-0.616,0-1.233-0.18-1.77-0.537 L24.34,74.015c-0.018-0.012-0.034-0.027-0.052-0.039c-0.05-0.035-0.098-0.072-0.145-0.109c-0.062-0.049-0.123-0.1-0.181-0.152 c-0.044-0.039-0.086-0.082-0.128-0.125c-0.056-0.055-0.107-0.113-0.159-0.172c-0.037-0.045-0.074-0.09-0.109-0.139 c-0.047-0.062-0.092-0.127-0.134-0.193c-0.032-0.049-0.062-0.098-0.092-0.146c-0.039-0.07-0.074-0.141-0.108-0.213 c-0.024-0.051-0.049-0.102-0.071-0.154c-0.031-0.078-0.058-0.156-0.082-0.234c-0.018-0.051-0.035-0.102-0.05-0.154 c-0.023-0.088-0.039-0.178-0.056-0.268c-0.008-0.045-0.02-0.092-0.025-0.137c-0.019-0.139-0.029-0.277-0.029-0.418V48.735 c0-0.141,0.011-0.279,0.029-0.416c0.006-0.047,0.018-0.092,0.025-0.139c0.017-0.09,0.032-0.18,0.056-0.268 c0.015-0.053,0.032-0.104,0.05-0.154c0.024-0.078,0.051-0.156,0.082-0.232c0.022-0.053,0.047-0.105,0.071-0.156 c0.034-0.072,0.069-0.143,0.108-0.211c0.029-0.051,0.06-0.1,0.092-0.148c0.042-0.066,0.087-0.131,0.134-0.193 c0.035-0.047,0.072-0.094,0.109-0.139c0.052-0.059,0.104-0.117,0.159-0.172c0.042-0.043,0.084-0.086,0.128-0.125 c0.058-0.053,0.118-0.104,0.181-0.152c0.047-0.037,0.095-0.074,0.145-0.109c0.018-0.012,0.034-0.027,0.052-0.039l33.938-22.625 c1.072-0.715,2.468-0.715,3.54,0l33.937,22.625c0.019,0.012,0.035,0.027,0.054,0.039c0.05,0.035,0.097,0.072,0.144,0.109 c0.062,0.049,0.124,0.1,0.182,0.152c0.044,0.039,0.085,0.082,0.127,0.125c0.056,0.055,0.108,0.113,0.158,0.172 c0.039,0.045,0.075,0.092,0.11,0.139c0.048,0.062,0.092,0.127,0.135,0.193c0.03,0.049,0.062,0.098,0.091,0.148 c0.039,0.068,0.074,0.139,0.108,0.211c0.023,0.051,0.05,0.104,0.071,0.156c0.031,0.076,0.057,0.154,0.082,0.232 c0.017,0.051,0.036,0.102,0.05,0.154c0.023,0.088,0.039,0.178,0.056,0.268c0.008,0.047,0.019,0.092,0.025,0.139 c0.019,0.137,0.028,0.275,0.028,0.416V71.36z'/%3E %3Cpolygon fill='%23EFEFEF' points='90.794,65.388 90.794,54.708 82.812,60.048 '/%3E %3C/g%3E %3C/svg%3E") !important; }
+
+.drawer_close {
+  transform: translate(-10px, 200px) !important; }
+
+.drawer_open {
+  transform: translate(-10px, -10px) !important; }
+
+.table-row:hover .table-row-column {
+  opacity: 1; }
+
+.table-row-column {
+  opacity: 0; }
 
 /**  app.css **/
 
