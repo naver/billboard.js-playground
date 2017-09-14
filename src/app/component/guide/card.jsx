@@ -6,13 +6,14 @@ import Chip from 'material-ui/Chip';
 import FontIcon from 'material-ui/FontIcon';
 import { connect } from "react-redux";
 import {
-	showGuideCard, resetGui, updateConfigureInfo
+	showGuideCard, resetGui, updateConfigureInfo, hideGuideCard
 } from "../../actions";
 
 const styles = {
 	chip: {
 		display:"inline-block",
-		paddingBottom: "8px"
+		paddingBottom: "8px",
+		paddingRight: "8px",
 	},
 	wrapper: {
 		display: 'flex',
@@ -48,13 +49,27 @@ class PropertyCard extends React.Component {
 	}
 
 	getActiveOption() {
+		const closeIcon = (<FontIcon onClick={(e) => this.props.onHideCard()} className="material-icons">close</FontIcon>);
 		const chip = this.props.chip;
 		return (<CardActions>
-			{chip.map((v) => {
-				return <div key={v} style={styles.chip}>
-					<Chip key={v} onClick={() => this.props.onClickChip(v)} onRequestDelete={() => this.props.onClickDelete(v)}>{v}</Chip>
-				</div>;
-			})}
+			<div style={{
+				marginRight: 0,
+				display: "inline-block",
+				width: "95%"
+			}}>
+				{chip.map((v) => {
+					return <div key={v} style={styles.chip}>
+						<Chip key={v} onClick={() => this.props.onClickChip(v)} onRequestDelete={() => this.props.onClickDelete(v)}>{v}</Chip>
+					</div>;
+				})}
+			</div>
+			<div style={{
+				marginRight: 0,
+				display: "inline-block",
+				width: "5%"
+			}}>
+				{closeIcon}
+			</div>
 		</CardActions>);
 	}
 
@@ -78,7 +93,6 @@ class PropertyCard extends React.Component {
 						closeIcon={openDocIcon}>
 						<CardTitle title={name} subtitle="Card subtitle" />
 					</CardHeader>
-
 					<CardText>
 						<div ref={(d) => { this.descriptionWrapper = d; }}></div>
 					</CardText>
@@ -90,14 +104,6 @@ class PropertyCard extends React.Component {
 			</div>
 		);
 	}
-
-	componentDidUpdate() {
-		this.descriptionWrapper.innerHTML = this.props.attributes.description;
-
-		const heightStyle = window.getComputedStyle(this.wrapper).height;
-
-		this.props.onUpdateCard(heightStyle);
-	}
 }
 
 const mapStateToProps = state => ({
@@ -107,6 +113,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
+	onHideCard: () => {
+		dispatch(hideGuideCard());
+	},
 	onClickChip : (name) => {
 		dispatch(updateConfigureInfo(name));
 	},

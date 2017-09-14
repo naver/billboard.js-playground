@@ -2,7 +2,7 @@ import * as _ from "lodash";
 import { combineReducers } from "redux";
 import { namespaceToObject, deepCopy, strinifyContainsFunction, stringToFunction, objectFlatten } from "../util";
 import { initCommandConfigure, initDocumentConfigure, changeMemberActivate, deleteTargetKey, changeMemberProperty, getDefaultValue, getValueFromDocument, dataToFormatedData, convertData,getRemovedAttributes, getAttributesFromDocument } from "../configure";
-import { SHOW_GUIDE_CARD, CHANGE_GUI_ACTIVATE, REFLECTED_DATA, RECENT_CONFIGURE, UPDATE_CODE_INPUT, UPDATE_COMMAND, UPDATE_CONFIGURE_INFO, UPDATE_DATA, UPDATE_GUI, RESET_GUI } from "../actions";
+import { HIDE_GUIDE_CARD, SHOW_GUIDE_CARD, CHANGE_GUI_ACTIVATE, REFLECTED_DATA, RECENT_CONFIGURE, UPDATE_CODE_INPUT, UPDATE_COMMAND, UPDATE_CONFIGURE_INFO, UPDATE_DATA, UPDATE_GUI, RESET_GUI } from "../actions";
 
 // 커멘드 상태
 let commandState = {
@@ -236,6 +236,11 @@ const guide = (state = drawerState, action) => {
 	let returnState = {};
 
 	switch (action.type) {
+		case RESET_GUI : {
+			returnState.open = false;
+			returnState.lastUpdate = (new Date()).getTime();
+			break;
+		}
 		case UPDATE_CONFIGURE_INFO : {
 			const name = action.name;
 			const attributes = getAttributesFromDocument(name);
@@ -243,6 +248,12 @@ const guide = (state = drawerState, action) => {
 				name,
 				attributes
 			};
+			returnState.open = true;
+			returnState.lastUpdate = (new Date()).getTime();
+			break;
+		}
+		case HIDE_GUIDE_CARD : {
+			returnState.open = false;
 			returnState.lastUpdate = (new Date()).getTime();
 			break;
 		}

@@ -3,42 +3,56 @@ import Drawer from "material-ui/Drawer";
 import getMuiTheme from "material-ui/styles/getMuiTheme";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import { connect } from "react-redux";
-import { DocumentCard } from "./card.jsx";
-import Chip from 'material-ui/Chip';
-
-const styles = {
-	chip: {
-		margin: 4,
-	},
-	wrapper: {
-		display: 'flex',
-		flexWrap: 'wrap',
-	},
-};
+import { DocumentCard } from "./card";
 
 class DockedGuide extends React.Component {
+	constructor() {
+		super();
+
+		this.state = {
+			open: false
+		};
+	}
+
+	componentDidMount() {
+		this.setState(this.props);
+	}
+
+	componentWillReceiveProps(nextProps) {
+		this.setState(nextProps);
+	}
+
+	shouldComponentUpdate(nextProps, nextState) {
+		if (this.state.open !== nextState.open) {
+			this.setState({
+				open: nextState.open
+			});
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	render() {
-		const style = this.props.style;
 		return (
 			<MuiThemeProvider>
 				<Drawer
 					containerStyle={{
-						transform : this.props.open ? "translate(-10px, -10px)" : "translate(-10px, "+style+")",
-						height: style,
+						transform: this.state.open ? "translate(-10px, -10px)" : "translate(-10px,100%)",
 						top: "none",
-					 	bottom: "0",
+						height: "auto",
+						bottom: "0",
 					}}
+					onRequestChange={(open) => { this.setState({ open }); }}
 					width={600}
 					openSecondary={true}
-					open={this.props.open}
+					open={this.state.open}
 				>
 					<DocumentCard />
 				</Drawer>
 			</MuiThemeProvider>);
 	}
 }
-
 
 const mapStateToProps = state => ({
 	open: state.guide.open,
@@ -54,3 +68,4 @@ export {
 	Guide
 }
 export default Guide;
+

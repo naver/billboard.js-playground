@@ -15,7 +15,14 @@ export const UPDATE_CELL = "UPDATE_CELL";
 export const REFLECT_CODE_TO_DATATABLE = "REFLECT_CODE_TO_DATATABLE";
 export const UPDATE_CONFIGURE_INFO = "UPDATE_CONFIGURE_INFO";
 export const SHOW_GUIDE_CARD = "SHOW_GUIDE_CARD";
+export const HIDE_GUIDE_CARD = "HIDE_GUIDE_CARD";
 
+export const hideGuideCard = () => {
+	return {
+		type: HIDE_GUIDE_CARD
+	}
+
+};
 export const showGuideCard = (style) => {
 	return {
 		type: SHOW_GUIDE_CARD,
