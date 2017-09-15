@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import getMuiTheme from "material-ui/styles/getMuiTheme";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import { ListItem } from "material-ui/List";
-import FontIcon from 'material-ui/FontIcon';
+import FontIcon from "material-ui/FontIcon";
 import Clear from "./icon/clear";
 import {
 	ConnectedCollection,
@@ -13,8 +13,9 @@ import {
 	ConnectedCode
 } from "./input/index";
 import {
-	resetGui, changeGuiActivate, updateConfigureInfo
+	resetGui, updateConfigureInfo, showGuideCard
 } from "../../actions";
+import  * as color from "material-ui/styles/colors";
 
 
 class InputProperty extends React.Component {
@@ -32,12 +33,9 @@ class InputProperty extends React.Component {
 						verticalAlign : "middle",
 						width  : "45%"
 					}}>
-			<div style={{display : "inline-block", "width" : "100%"}}
-				 onClick={(e) => this.onClickTitle(e)}
-			>
+			<div style={{display : "inline-block", "width" : "100%"}}>
 				<div className="property_name">{this.state.name}
-					<FontIcon
-						onClick={(e) => this.onClickTitle()} className="material-icons info">info_outline</FontIcon>
+					<FontIcon color={color.grey800} onClick={(e) => this.onClickTitle()} className="material-icons property_info">info_outline</FontIcon>
 				</div>
 				<div className="property_type">{this.state.type.names.join(", ")}</div>
 			</div>
@@ -85,9 +83,13 @@ class InputProperty extends React.Component {
 		const title = this.getName();
 		const input = this.getInput(type);
 		const clear = this.getClear();
-		const className = "property" + (option.activated ? " activated" : "")
+		const className = `property ${(option.activated ? " activated" : "")}`;
 
-		return  (<MuiThemeProvider muiTheme={getMuiTheme()}>
+		if(this.state.hidegui){
+			return <span style={{}}></span>;
+		};
+
+		return (<MuiThemeProvider muiTheme={getMuiTheme()}>
 			<ListItem
 				className={className}
 				style={{ width: "100%" }}
@@ -123,10 +125,13 @@ class InputProperty extends React.Component {
 const mapDispatchToProps = (dispatch, ownProps) => ({
 	onClickTitle : (name) => {
 		dispatch(updateConfigureInfo(name));
+		dispatch(showGuideCard(name));
 	},
-	onClickDelete: () => dispatch(resetGui(ownProps.name.replace(/\:/g, "."), {
-		root: ownProps.rootMemberName
-	}))
+	onClickDelete: () => {
+		dispatch(resetGui(ownProps.name.replace(/\:/g, "."), {
+			root: ownProps.rootMemberName
+		}))
+	}
 });
 
 const Property = connect(

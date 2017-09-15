@@ -5,13 +5,13 @@ export const CHANGE_GUI_ACTIVATE = "CHANGE_GUI_ACTIVATE";
 export const UPDATE_DATA = "UPDATE_DATA";
 export const UPDATE_CODE_INPUT = "UPDATE_CODE_INPUT";
 export const RECENT_CONFIGURE = "RECENT_CONFIGURE";
-export const ADD_KEY_TO_DATA = "ADD_KEY_TO_DATA";
-export const ADD_VALUE_TO_DATA = "ADD_VALUE_TO_DATA";
-export const REMOVE_VALUE_TO_DATA = "REMOVE_VALUE_TO_DATA";
-export const REMOVE_KEY_TO_DATA = "REMOVE_KEY_TO_DATA";
+export const ADD_KEY_FROM_TABLE= "ADD_KEY_FROM_TABLE";
+export const ADD_VALUE_FROM_TABLE = "ADD_VALUE_FROM_TABLE";
+export const REMOVE_VALUE_FROM_TABLE = "REMOVE_VALUE_FROM_TABLE";
+export const REMOVE_KEY_FROM_TABLE = "REMOVE_KEY_FROM_DATA";
 export const REFLECTED_DATA = "REFLECTED_DATA";
-export const UPDATE_HEADER = "UPDATE_HEADER";
-export const UPDATE_CELL = "UPDATE_CELL";
+export const UPDATE_TABLE_KEY = "UPDATE_TABLE_KEY";
+export const UPDATE_TABLE_VALUE = "UPDATE_TABLE_VALUE";
 export const REFLECT_CODE_TO_DATATABLE = "REFLECT_CODE_TO_DATATABLE";
 export const UPDATE_CONFIGURE_INFO = "UPDATE_CONFIGURE_INFO";
 export const SHOW_GUIDE_CARD = "SHOW_GUIDE_CARD";
@@ -37,23 +37,17 @@ export const updateConfigureInfo = (name) => {
 	}
 }
 
-export const reflectCommandToDatatable = (code) => {
-	return {
-		type: REFLECT_CODE_TO_DATATABLE,
-		configures: code
-	};
-};
 
 export const updateHeader = (updateData) => {
 	return {
-		type: UPDATE_HEADER,
+		type: UPDATE_TABLE_KEY,
 		data: updateData
 	};
 };
 
 export const updateCell = (updateData) => {
 	return {
-		type: UPDATE_CELL,
+		type: UPDATE_TABLE_VALUE,
 		data: updateData
 	};
 };
@@ -65,29 +59,29 @@ export const reflectedDataToCommand = (latestData) => {
 	}
 }
 
-export const removeValueToData = (index) => {
+export const removeValueFromTable = (index) => {
 	return {
-		type: REMOVE_VALUE_TO_DATA,
+		type: REMOVE_VALUE_FROM_TABLE,
 		data: index
 	};
 };
 
-export const removeKeyToData = (key) => {
+export const removeKeyFromTable = (key) => {
 	return {
-		type: REMOVE_KEY_TO_DATA,
+		type: REMOVE_KEY_FROM_TABLE,
 		data: key
 	};
 };
 
 export const addValueToData = (newData) => {
 	return {
-		type: ADD_VALUE_TO_DATA,
+		type: ADD_VALUE_FROM_TABLE,
 		data: newData
 	};
 }
 export const addKeyToData = (newData) => {
 	return {
-		type: ADD_KEY_TO_DATA,
+		type: ADD_KEY_FROM_TABLE,
 		data: newData
 	};
 };
@@ -96,7 +90,6 @@ export const updateCodeInput = (name, state) => {
 	return {
 		type: UPDATE_CODE_INPUT,
 		name,
-		state
 	};
 };
 
@@ -121,20 +114,27 @@ export const changeGuiActivate = (name, value) => ({
 });
 
 
-export const resetGui = (name, value) => {
+export const resetGui = (name, updated) => {
 	return {
 		type: RESET_GUI,
-		value,
+		updated,
 		name
 	};
 };
-export const updateGui = (name, value) => ({
+export const updateGui = (name, updated) => ({
 	type: UPDATE_GUI,
 	name,
-	value
+	updated
 });
 
-export const updateCommand = value => ({
+export const updateCommand = updated => ({
 	type: UPDATE_COMMAND,
-	value
+	updated
 });
+
+export const reflectCommandToDatatable = (updated) => {
+	return {
+		type: REFLECT_CODE_TO_DATATABLE,
+		updated
+	};
+};

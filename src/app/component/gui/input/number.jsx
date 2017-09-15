@@ -42,10 +42,10 @@ class InputNumber extends React.Component {
 
 		props.min = props.min || 0;
 		props.max = props.max || 1;
+		textStyle.color = props.activated ? color.grey900 : color.grey400;
 
 		if (isNaN(props.value)) {
 			props.value = props.defaultvalue || undefined;
-			textStyle.color = color.grey400;
 
 			return (<div>
 				<MuiThemeProvider muiTheme={getMuiTheme({ slider: SliderStyleTheme })}>
@@ -65,7 +65,6 @@ class InputNumber extends React.Component {
 			</div>);
 		} else {
 			props.value *= 1;
-			textStyle.color = color.grey900;
 
 			return (<div>
 				<MuiThemeProvider muiTheme={getMuiTheme({ slider: SliderStyleTheme })}>

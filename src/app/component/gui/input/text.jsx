@@ -5,7 +5,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { connect } from "react-redux";
 import { updateGui, resetGui } from "../../../actions";
-import {red600, green200, blue300, blue500, grey100, grey400, lightBlue100, lightBlue300} from 'material-ui/styles/colors';
+import {red600, green200, blue300, blue500, grey100, grey900, grey400, lightBlue100, lightBlue300} from 'material-ui/styles/colors';
 import ConnectedRadio from "./radio";
 
 const underlineFocusStyle = {
@@ -42,10 +42,15 @@ class InputText extends React.Component {
 			returnValue = this.getTextToRadio();
 		} else if (value === undefined || value === "undefined") {
 			returnValue = this.getDefaultTextArea({
-				hintText: "undefined"
+				hintText: "undefined",
+				value: ""
 			});
 		} else {
 			returnValue = this.getDefaultTextArea({
+				inputStyle: {
+					color: this.props.activated ? grey900 : grey400
+				},
+				hintText: "undefined",
 				value
 			});
 		}
@@ -69,7 +74,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 			}));
 		} else {
 			(dispatch(updateGui(ownProps.name.replace(/\:/g, "."), {
-				value: value,
+				value,
 				root: ownProps.rootMemberName
 			})));
 		}

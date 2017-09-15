@@ -28,12 +28,12 @@ const styles = {
 class InputCheckbox extends React.Component {
 	render() {
 		const checked = this.props.value ? true : false;
-		const labelStyle = this.props.value === this.props.defaultvalue ? {
-			//color : color.grey400,
-			fontSize : "14px"
+		const labelStyle = this.props.activated ? {
+			color: color.grey900,
+			fontSize: "14px"
 		} : {
-			//color : color.grey900,
-			fontSize : "14px"
+			color: color.grey400,
+			fontSize: "14px"
 		};
 
 		return (<MuiThemeProvider muiTheme={getMuiTheme()}>

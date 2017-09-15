@@ -11,30 +11,12 @@ import {
 	updateGui, resetGui, updateCodeInput
 } from "../../../actions";
 import FontIcon from 'material-ui/FontIcon';
-import {red600, green200, blue300, blue500, grey100, grey400, lightBlue100, lightBlue300} from 'material-ui/styles/colors';
-
-
-const iconSelect = {
-	fill: lightBlue300,
-};
-
-const icon = {
-	fill: grey400
-};
-
-const labelSelect = {
-	fontSize : "14px"
-	//color: lightBlue300,
-}
-
-const label = {
-	fontSize : "14px",
-	color: grey400
-}
+import {grey900, grey400, red600, green200, blue300, blue500, grey100, lightBlue100, lightBlue300, grey800} from 'material-ui/styles/colors';
 
 class CodeInput extends React.Component {
 	render() {
-		const { value } = this.props;
+		let { value } = this.props;
+		value += "";
 
 		return <MuiThemeProvider muiTheme={getMuiTheme()}>
 			<div style={{width:"100%", display:"inline-block"}}>
@@ -46,12 +28,16 @@ class CodeInput extends React.Component {
 					style={{width:"80%", display:"inline-block"}}
 					disabled={true}
 					fullWidth={true}
+					hintStyle={{
+						color: this.props.activated ? grey900 : grey400
+					}}
 					hintText={value} />
 				<IconButton
 					onClick={this.props.onClickCodeEdit}
-					iconClassName="edit_function material-icons"
+					iconClassName="material-icons edit_code_property"
 					tooltipPosition="top-center"
 					tooltip="edit in text editor"
+					iconStyle={{ color: grey800 }}
 					style={{width:"20%", display:"inline-block", textAlign:"right"}}
 					children={<span className="">edit</span>}
 				/>
@@ -64,7 +50,6 @@ class CodeInput extends React.Component {
 const mapDispatchToProps = (dispatch, ownProps) => ({
 	onClickCodeEdit: (e, value) => {
 		dispatch(updateCodeInput(ownProps.name.replace(/\:/g, "."), {
-			value: ownProps.defaultvalue,
 			root: ownProps.rootMemberName || ownProps.name
 		}));
 	}

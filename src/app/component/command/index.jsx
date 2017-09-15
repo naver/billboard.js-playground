@@ -52,12 +52,6 @@ class Controller extends React.Component {
 		</div>);
 	}
 
-	componentDidUpdate() {
-		//if(!this.state.error){
-		//	this.props.reflectCode(this.state.original);
-		//}
-	}
-
 	getParsed(value) {
 		let parsed;
 		try {
@@ -80,10 +74,13 @@ class Controller extends React.Component {
 		} else {
 			this.setState({
 				error: false,
-				text: value
+				text: value,
 			});
-			this.props.reflectCode(parsed);
-			this.props.onChange(parsed);
+			this.props.reflectCode({ value: parsed });
+			this.props.onChange({
+				prev: this.state.original,
+				value: parsed
+			});
 		}
 	}
 }
@@ -94,11 +91,11 @@ Controller.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
-	reflectCode: (text) => {
-		dispatch(reflectCommandToDatatable(text));
+	reflectCode: (value) => {
+		dispatch(reflectCommandToDatatable(value));
 	},
-	onChange: text => {
-		dispatch(updateCommand(text))
+	onChange: value => {
+		dispatch(updateCommand(value))
 	},
 });
 

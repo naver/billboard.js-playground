@@ -16,7 +16,6 @@ const icon = {
 
 const labelSelect = {
 	fontSize : "14px"
-	//color: lightBlue300,
 }
 
 const label = {

@@ -8,37 +8,43 @@ import { connect } from "react-redux";
 import {
 	showGuideCard, resetGui, updateConfigureInfo, hideGuideCard
 } from "../../actions";
+import CodeMirror from "../command/codemirror";
+import * as color from 'material-ui/styles/colors';
 
 const styles = {
 	chip: {
-		display:"inline-block",
+		display: "inline-block",
 		paddingBottom: "8px",
-		paddingRight: "8px",
+		paddingRight: "8px"
 	},
 	wrapper: {
-		display: 'flex',
-		flexWrap: 'wrap',
+		display: "flex",
+		flexWrap: "wrap"
 	},
+
+	cardHeader: {
+		color: color.grey800,
+		padding: 0
+	},
+
+	cardText: {
+		padding: "0",
+		margin: "0 16px",
+		marginBottom: "20px",
+		borderTop : "1px solid #E0E0E0"
+	}
 };
 
 class PropertyCard extends React.Component {
-	shouldComponentUpdate(nextProps) {
 
-		const chipequal = (a = [], b = []) => {
-			if(a.length > 0 && b.length > 0 && a.length === b.length){
-				 const result = a.filter((value) => {
-					return b.indexOf(value) < 0;
-				});
-				return result.length === 0;
-			} else {
-				return false;
-			}
-		};
+	componentDidMount() {
+		PR && PR.prettyPrint();
+	}
 
-		if(nextProps.name === this.props.name && chipequal(nextProps.chip.concat([]), this.props.chip.concat([]))){
-			return false;
-		} else {
-			return true;
+	componentDidUpdate() {
+		if(this.pp){
+			this.pp.className = "prettyprint";
+			PR && PR.prettyPrint();
 		}
 	}
 
@@ -57,10 +63,17 @@ class PropertyCard extends React.Component {
 				display: "inline-block",
 				width: "95%"
 			}}>
-				{chip.map((v) => {
-					return <div key={v} style={styles.chip}>
-						<Chip key={v} onClick={() => this.props.onClickChip(v)} onRequestDelete={() => this.props.onClickDelete(v)}>{v}</Chip>
-					</div>;
+				{chip.map(({name, optional}) => {
+					if(optional){
+						return <div key={name} style={styles.chip}>
+							<Chip onClick={() => this.props.onClickChip(name)} onRequestDelete={() => this.props.onClickDelete(name)}>{name}</Chip>
+						</div>
+					} else {
+						return <div key={name} style={styles.chip}>
+							<Chip onClick={() => this.props.onClickChip(name)}>{name}</Chip>
+						</div>
+					}
+
 				})}
 			</div>
 			<div style={{
@@ -73,37 +86,49 @@ class PropertyCard extends React.Component {
 		</CardActions>);
 	}
 
-	render() {
-		const attr = this.props.attributes;
-		const openDocIcon = (<FontIcon onClick={(e) => this.onClickOpenDoc()} className="material-icons">open_in_new</FontIcon>);
+	getExample() {
+		const example = this.props.attributes.examples;
 
+		return example ? (<CardText style={styles.cardText}>
+			<div className="text_title">example</div>
+			<div className="example"><pre ref={(p) => {this.pp = p;}} className="prettyprint">{example}</pre></div>
+		</CardText>) : "";
+	}
+
+	getDescription() {
+		return (<CardText style={styles.cardText}>
+			<div className="text_title">description</div>
+			<div className="text_content">{this.props.attributes.description}</div>
+		</CardText>);
+	}
+
+	render() {
+		const openDocIcon = (<FontIcon onClick={(e) => this.onClickOpenDoc()} className="material-icons">open_in_new</FontIcon>);
+		const attr = this.props.attributes;
+		const name = attr.name;
 		const type = attr.type.names.join(" | ");
-		const examples = attr.examples && attr.examples.join("<br>");
-		const {name, description} = attr;
+		const defaultvalue = attr.defaultvalue;
 
 		return (
 			<div ref={(d) => { this.wrapper = d; }}>
-				<Card>
+				<Card className="guide_card">
 					{this.getActiveOption()}
 					<CardHeader
-						style={{padding:0}}
+						style={styles.cardHeader}
 						showExpandableButton={true}
 						expandable={false}
 						openIcon={openDocIcon}
-						closeIcon={openDocIcon}>
-						<CardTitle title={name} subtitle="Card subtitle" />
+						closeIcon={openDocIcon} >
+						<CardTitle title={name} subtitle={`${type} (default value : ${defaultvalue})`} />
 					</CardHeader>
-					<CardText>
-						<div ref={(d) => { this.descriptionWrapper = d; }}></div>
-					</CardText>
-					<CardText>
-						{type}
-						{examples}
-					</CardText>
+					{this.getDescription()}
+					{this.getExample()}
 				</Card>
 			</div>
 		);
 	}
+
+
 }
 
 const mapStateToProps = state => ({

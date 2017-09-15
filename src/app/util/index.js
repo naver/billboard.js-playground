@@ -1,4 +1,5 @@
-export const namespaceToObject = (keys, lastValue, obj = {}) => {
+export const namespaceToObject = (ns, lastValue, obj = {}) => {
+	const keys = ns.split(".");
 	obj[keys.pop()] = lastValue;
 
 	keys.reverse().forEach(key => {
@@ -63,6 +64,48 @@ export const objectFlatten = (obj) => {
 	return flattenObject(obj);
 };
 
+
+export const hasProperty = (name) => {
+	const keys = name.split(".");
+	let configure = initDocumentConfigure;
+	let attr = {};
+
+	_.each(keys, (key) => {
+		if(configure !== undefined){
+			const cof = configure[key] || {};
+
+			attr = cof.attributes;
+			configure = cof.properties;
+		} else {
+			attr = undefined;
+		}
+	});
+
+	return !!attr;
+};
+
+
+export const objectToKeys = (obj, root = "") => {
+	const keys = _.keys(obj);
+	const arr = [];
+
+	if(keys.length > 0){
+		_.each(keys, key => {
+			const parent = root == "" ? key : root + "." + key;
+			if(hasProperty(parent)){
+				arr.push(objectToKeys(obj[key], parent));
+			} else {
+				arr.indexOf(root) < 0 && arr.push(root);
+			}
+		});
+	} else {
+		arr.push(root);
+	}
+
+	return _.flatten(arr);
+};
+
+
 export const strinifyContainsFunction = (obj) => {
 	function replacer(key, value) {
 		if(typeof value == "function"){
@@ -75,3 +118,43 @@ export const strinifyContainsFunction = (obj) => {
 
 	return text;
 }
+
+
+export const typeValid = (types, value) => {
+	if(value === undefined || value === "undefined"){
+		return undefined;
+	}
+
+	if(types.indexOf("number") > -1) {
+		if(isNaN(value)){
+			//console.log("TODO => " + value);
+			return value;
+		} else {
+			return value*1;
+		}
+	}
+
+	if(types.indexOf("array") > -1){
+		const array = JSON.parse(value+="");
+		return array;
+	}
+
+	if(types.indexOf("function") > -1){
+		return value;
+	}
+
+	if(types.indexOf("boolean") > -1){
+		return value;
+	}
+
+	if(types.indexOf("string") > -1){
+		return value;
+	}
+
+	if(types.indexOf("object") > -1){
+		return value;
+	}
+
+	return value;
+
+};

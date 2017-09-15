@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Bungee);/*
+@import url(https://fonts.googleapis.com/css?family=Bungee);@import url(https://fonts.googleapis.com/css?family=Roboto:400,500);/*
 html5doctor.com Reset Stylesheet
 v1.6.1
 Last Updated: 2010-09-17
@@ -654,6 +654,11 @@ html {
   height: auto;
   position: absolute; }
 
+.guide_card .ReactCodeMirror {
+  width: auto;
+  height: auto;
+  position: relative; }
+
 .CodeMirror {
   width: 100%;
   height: 100%; }
@@ -722,11 +727,17 @@ html {
   font-weight: 500; }
 
 .property .material-icons {
-  opacity: 0;
   font-size: 20px;
   padding-left: 10px; }
 
-.property:hover .material-icons.info {
+.property .property_info {
+  top: 6px;
+  padding-left: 12px; }
+
+.property .property_info, .property .edit_code_property {
+  opacity: 0; }
+
+.property:hover .property_info, .property:hover .edit_code_property {
   opacity: 1; }
 
 .property_type {
@@ -781,5 +792,91 @@ html {
   opacity: 0; }
 
 /**  app.css **/
+.guide_card .example {
+  padding: 10px !important;
+  background: #F5F5F5;
+  font-size: 13px; }
+
+.guide_card .text_title {
+  font-weight: 500;
+  margin-bottom: 9px;
+  margin-top: 22px;
+  font-family: 'Roboto', sans-serif; }
+
+.text_content {
+  font-weight: 400;
+  font-family: 'Roboto', sans-serif; }
+
+/*! Color themes for Google Code Prettify | MIT License | github.com/jmblog/color-themes-for-google-code-prettify */
+.prettyprint {
+  font-family: Menlo, "Bitstream Vera Sans Mono", "DejaVu Sans Mono", Monaco, Consolas, monospace;
+  border: 0 !important; }
+
+.pln {
+  color: #333; }
+
+/* Specify class=linenums on a pre to get line numbering */
+ol.linenums {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: #cccccc; }
+
+li.L0,
+li.L1,
+li.L2,
+li.L3,
+li.L4,
+li.L5,
+li.L6,
+li.L7,
+li.L8,
+li.L9 {
+  padding-left: 1em;
+  background-color: #fff;
+  list-style-type: decimal; }
+
+@media screen {
+  /* string content */
+  .str {
+    color: #d14; }
+  /* keyword */
+  .kwd {
+    color: #333; }
+  /* comment */
+  .com {
+    color: #998; }
+  /* type name */
+  .typ {
+    color: #458; }
+  /* literal value */
+  .lit {
+    color: #458; }
+  /* punctuation */
+  .pun {
+    color: #333; }
+  /* lisp open bracket */
+  .opn {
+    color: #333; }
+  /* lisp close bracket */
+  .clo {
+    color: #333; }
+  /* markup tag name */
+  .tag {
+    color: #000080; }
+  /* markup attribute name */
+  .atn {
+    color: #008080; }
+  /* markup attribute value */
+  .atv {
+    color: #d14; }
+  /* declaration */
+  .dec {
+    color: #333; }
+  /* variable name */
+  .var {
+    color: #008080; }
+  /* function name */
+  .fun {
+    color: #900; } }
 
 /*# sourceMappingURL=app.bundle.css.map*/

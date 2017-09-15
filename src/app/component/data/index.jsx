@@ -14,7 +14,7 @@ import {
 import * as _ from "lodash";
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { updateData, addKeyToData, addValueToData, removeValueToData, removeKeyToData, reflectedDataToCommand, updateHeader, updateCell } from "../../actions";
+import { updateData, addKeyToData, addValueToData, removeValueFromTable, removeKeyFromTable, reflectedDataToCommand, updateHeader, updateCell } from "../../actions";
 import { deepCopy} from "../../util";
 
 const cellStyle = {
@@ -223,10 +223,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 		dispatch(reflectedDataToCommand(latest));
 	},
 	deleteData : (rowIndex) => {
-		dispatch(removeValueToData(rowIndex));
+		dispatch(removeValueFromTable(rowIndex));
 	},
 	deleteKey : (columnKey) => {
-		dispatch(removeKeyToData(columnKey));
+		dispatch(removeKeyFromTable(columnKey));
 	},
 	addKey: (newDataObject) => {
 		dispatch(addKeyToData(newDataObject));
