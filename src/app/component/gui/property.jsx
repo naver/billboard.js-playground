@@ -89,6 +89,7 @@ class InputProperty extends React.Component {
 			return <span style={{}}></span>;
 		};
 
+
 		return (<MuiThemeProvider muiTheme={getMuiTheme()}>
 			<ListItem
 				className={className}
@@ -113,7 +114,7 @@ class InputProperty extends React.Component {
 			case "number" :
 				return <ConnectedNumber {...option} />;
 			case "array" :
-				return <ConnectedCollection {...option} />;
+				return ""; //<ConnectedCollection {...option} />;
 			case "function" :
 				return <ConnectedCode {...option} />;
 			default :

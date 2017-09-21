@@ -38,11 +38,24 @@ class Member extends React.Component {
 			if (option.properties) {
 				items = items.concat(this.child(option.properties));
 			} else {
-				items.push(<Property
-					key={option.attributes.name}
-					rootMemberName={this.state.attributes.name}
-					{...option.attributes} level={1}
-				/>);
+				const name = option.attributes.type.names;
+
+				if(name.indexOf("Array") > -1 || name.indexOf("Object") > -1){
+					//items.push(<Property
+					//	style={{display : "none"}}
+					//	key={option.attributes.name}
+					//	rootMemberName={this.state.attributes.name}
+					//	{...option.attributes} level={1}
+					///>);
+				} else {
+					items.push(<Property
+						key={option.attributes.name}
+						rootMemberName={this.state.attributes.name}
+						{...option.attributes} level={1}
+					/>);
+				}
+
+
 			}
 		});
 

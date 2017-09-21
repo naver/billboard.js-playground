@@ -26,6 +26,11 @@ html {
     position: relative;
 }
 
+.muidocs-icon-custom-github:before {
+    content: "github";
+}
+
+
 .CodeMirror {
     width: 100%;
     height: 100%;
@@ -38,7 +43,35 @@ html {
     background: #ffd9d9;
 }
 
-.chart, .tabviews {
+.bbtitle {
+    width : 60%;
+    height : 10%;
+    margin : 0;
+    left : 0;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 25px;
+}
+
+.bbtitle .logo {
+    width: 145px;
+    height: 33px;
+    margin-left : 10px;
+    background-repeat :no-repeat;
+    position: relative;
+    top: 9px;
+    box-sizing: content-box;
+    background-color: #fff;
+    border-style: none;
+}
+
+.chart {
+    width : 60%;
+    height : 40%;
+    margin : 0;
+    left : 0;
+}
+.tabviews {
     width : 60%;
     height : 50%;
     margin : 0;
