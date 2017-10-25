@@ -7,7 +7,7 @@
 - directly access to description, default value, example etc.
 - export to code pen and share
 
-![ezgif-1-fe002beaf6.gif](https://yobi.navercorp.com/files/0a705587-5e5f-1faf-815e-83b26fdf4dd3)
+![demo](https://user-images.githubusercontent.com/3433156/32003963-a68fce54-b9db-11e7-8694-8241c2b06a20.gif)
 
 
 
