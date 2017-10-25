@@ -5,14 +5,13 @@ import {
 	stringToFunction,
 	objectFlatten
 } from "../../util";
-
 import {
 	formattedDocument as initDocument
 } from "../../configure";
-
 import {
 	convertColumnsToData
 } from "./convert";
+import * as _ from "lodash";
 
 const dataToFormatedData = (format, data) => {
 	if (format === "columns") {

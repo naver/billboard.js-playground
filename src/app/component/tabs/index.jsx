@@ -1,7 +1,7 @@
 import React from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
-import { Command } from "./command";
-import { Data } from "./data";
+import { Command } from "../command";
+import { Data } from "../data";
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import  * as color from "material-ui/styles/colors";

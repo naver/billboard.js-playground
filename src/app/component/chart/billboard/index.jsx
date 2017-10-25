@@ -1,6 +1,6 @@
 import React, { PropTypes } from "react";
 import connect from "react-watcher";
-import { bb } from "billboard.js";
+import * as bb  from "billboard.js";
 import CONFIGURE_PROPTYPES from "./proptypes";
 import { deepCopy } from "./util";
 

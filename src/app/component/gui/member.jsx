@@ -1,13 +1,10 @@
 import React, { PropTypes } from "react";
-import _ from "underscore";
-import { connect } from "react-redux";
+import { ListItem } from "material-ui/List";
+import getMuiTheme from "material-ui/styles/getMuiTheme";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import { deepOrange300 } from "material-ui/styles/colors";
+import * as _ from "lodash";
 import Property from "./property";
-import Subheader from 'material-ui/Subheader';
-import Divider from 'material-ui/Divider';
-import {List, ListItem} from 'material-ui/List';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {yellow200, deepOrange200, deepOrange300, deepOrange400,deepOrange500, deepOrange700, grey900, grey50, grey200, yellow500, red600, deepOrange600, greenA200} from 'material-ui/styles/colors';
 
 class Member extends React.Component {
 	componentWillMount() {
@@ -18,7 +15,7 @@ class Member extends React.Component {
 		this.setState(nextProps);
 	}
 
-	shouldComponentUpdate(nextProps, nextState) {
+	shouldComponentUpdate(nextProps) {
 		const roots = nextProps.lastUpdateRoot || [];
 
 		if(roots.indexOf(this.props.attributes.name) > -1){
@@ -29,33 +26,37 @@ class Member extends React.Component {
 	}
 
 	child(properties) {
-		let number = 0;
 		let items = [];
 
 		_.map(properties, (option) => {
-			number++;
-
 			if (option.properties) {
 				items = items.concat(this.child(option.properties));
 			} else {
 				const name = option.attributes.type.names;
 
-				if(name.indexOf("Array") > -1 || name.indexOf("Object") > -1){
+				if (name.indexOf("Array") > -1) {
+					console.log(option.attributes.name);
+					console.log(option.attributes.defaultvalue);
+					console.log(option.attributes.examples);
 					//items.push(<Property
 					//	style={{display : "none"}}
 					//	key={option.attributes.name}
 					//	rootMemberName={this.state.attributes.name}
 					//	{...option.attributes} level={1}
 					///>);
+				} else if (name.indexOf("Object") > -1) {
+					
+					// console.log(option.attributes.name);
+					// console.log(option.attributes.defaultvalue);
+					// console.log(option.attributes.examples);
 				} else {
 					items.push(<Property
 						key={option.attributes.name}
 						rootMemberName={this.state.attributes.name}
-						{...option.attributes} level={1}
+						level={1}
+						{...option.attributes}
 					/>);
 				}
-
-
 			}
 		});
 
@@ -77,9 +78,9 @@ class Member extends React.Component {
 					borderBottomWidth: "2px",
 					borderBottomColor: `${deepOrange300}`
 				}}
+				initiallyOpen
 				className="member"
 				primaryText={member.name}
-				initiallyOpen={true}
 				nestedItems={this.child(properties)}
 			/>
 		</MuiThemeProvider>;

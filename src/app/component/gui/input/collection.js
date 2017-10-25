@@ -3,38 +3,16 @@ import * as _ from "lodash";
 import TextField from 'material-ui/TextField';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import IconButton from 'material-ui/IconButton';
 
 import { connect } from "react-redux";
 import {
 	updateGui, resetGui
 } from "../../../actions";
-import FontIcon from 'material-ui/FontIcon';
-import {red600, green200, blue300, blue500, grey100, grey400, lightBlue100, lightBlue300} from 'material-ui/styles/colors';
-
-
-const iconSelect = {
-	fill: lightBlue300,
-};
-
-const icon = {
-	fill: grey400
-};
-
-const labelSelect = {
-	fontSize : "14px"
-	//color: lightBlue300,
-}
-
-const label = {
-	fontSize : "14px",
-	color: grey400
-}
 
 class ArrayInput extends React.Component {
 	render() {
-		const { value, onChange, valueoptions , name } = this.props;
+		const { value } = this.props;
 		let returnValue;
 		const edit = <span className="">add</span>
 

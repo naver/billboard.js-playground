@@ -33,3 +33,4 @@ export {
 	CONFIGURE_PROPTYPES
 };
 export default Chart;
+

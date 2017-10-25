@@ -1,16 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import FontIcon from 'material-ui/FontIcon';
-import ContentClear from 'material-ui/svg-icons/content/clear';
 import {
 	deepOrange300,
 	grey500
 } from 'material-ui/styles/colors';
-import {List, ListItem} from 'material-ui/List';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {
-	updateGui, resetGui
+	resetGui
 } from "../../../actions";
 
 

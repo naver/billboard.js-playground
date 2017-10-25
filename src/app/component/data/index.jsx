@@ -1,6 +1,6 @@
-import TextField from 'material-ui/TextField';
+import TextField from "material-ui/TextField";
 import React, { PropTypes } from "react";
-import FontIcon from 'material-ui/FontIcon';
+import FontIcon from "material-ui/FontIcon";
 import { connect } from "react-redux";
 import {
 	Table,
@@ -8,14 +8,20 @@ import {
 	TableHeader,
 	TableHeaderColumn,
 	TableRow,
-	TableFooter,
-	TableRowColumn,
-} from 'material-ui/Table';
+	TableRowColumn
+} from "material-ui/Table";
 import * as _ from "lodash";
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { updateData, addKeyToData, addValueToData, removeValueFromTable, removeKeyFromTable, reflectedDataToCommand, updateHeader, updateCell } from "../../actions";
-import { deepCopy} from "../../util";
+import getMuiTheme from "material-ui/styles/getMuiTheme";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import {
+	addKeyToData,
+	addValueToData,
+	removeValueFromTable,
+	removeKeyFromTable,
+	reflectedDataToCommand,
+	updateHeader,
+	updateCell
+} from "../../actions";
 
 const cellStyle = {
 	width: "50px",
@@ -25,7 +31,7 @@ const cellStyle = {
 const tableProps = {
 	bodyStyle: {
 		overflowX: "initial",
-		overflowY: "initial",
+		overflowY: "initial"
 	},
 	selectable: false,
 	multiSelectable: false
@@ -39,10 +45,10 @@ const tableHeaderProps = {
 const textFieldProps = {
 	fullWidth: true,
 	underlineStyle: {
-		borderColor: "transparent",
+		borderColor: "transparent"
 	},
 	underlineFocusStyle: {
-		borderColor: "transparent",
+		borderColor: "transparent"
 	},
 	inputStyle: {
 		textAlign: "center"
@@ -50,57 +56,16 @@ const textFieldProps = {
 };
 
 class DataTableController extends React.Component {
-	componentWillReceiveProps(nextProps) {
-		this.setState({
-			fromCode: nextProps.data.fromCode
-		});
-	}
-
 	componentDidUpdate() {
 		this.props.reflectedData(this.props.data);
 	}
 
-	getHeaderTextField(headerKey, columnIndex) {
-		const removeButton = this.getRemoveButton("column", headerKey);
-		return (<div>
-			{removeButton}
-			<TextField
-				name={`${columnIndex}${headerKey}`}
-				value={headerKey}
-				onChange={(e, value) => {this.props.onChangeHeader(value, columnIndex-1)}}
-				{...textFieldProps}
-			/>
-		</div>);
-	}
-
-	getTextField(value, rowIndex, columnIndex) {
-		const header = this.props.data.header[columnIndex-1];
-		return (<TextField
-			name={`${rowIndex}_${columnIndex}`}
-			value={value}
-			onChange={(e, value) => {this.props.onChangeData(value, rowIndex, header)}}
-			{...textFieldProps}
-		/>);
-	}
-
-	getRemoveButton(deleteType, targetInfo) {
-		return (<FontIcon onClick={(e) => this.onClickDelete(deleteType, targetInfo)} className="material-icons">
-			remove_circle
-		</FontIcon>);
-	}
-
-	getAddButton(addType) {
-		return (<FontIcon onClick={(e) => this.onClickAdd(addType)} className="material-icons">
-			add_circle
-		</FontIcon>);
-	}
-
 	onClickDelete(deleteType, targetInfo) {
-		if(deleteType === "column"){
+		if (deleteType === "column") {
 			this.props.deleteKey(targetInfo);
 		}
 
-		if(deleteType === "row"){
+		if (deleteType === "row") {
 			this.props.deleteData(targetInfo);
 		}
 	}
@@ -112,10 +77,8 @@ class DataTableController extends React.Component {
 
 		if (addType === "column") {
 			const newLength = rows.length;
-			const newKey = `data${headers.length+1}`;
-			const value = Array.apply(null, Array(newLength)).map(function () {
-				return parseInt((Math.random() * 100), 10);
-			});
+			const newKey = `data${headers.length + 1}`;
+			const value = Array(...Array(newLength)).map(() => parseInt((Math.random() * 100), 10));
 			data = {
 				name: newKey,
 				value
@@ -127,6 +90,47 @@ class DataTableController extends React.Component {
 			});
 			this.props.addData(data);
 		}
+	}
+
+	getTextField(value, rowIndex, columnIndex) {
+		const header = this.props.data.header[columnIndex - 1];
+		return (<TextField
+			name={`${rowIndex}_${columnIndex}`}
+			value={value}
+			onChange={(e, v) => { this.props.onChangeData(v, rowIndex, header); }}
+			{...textFieldProps}
+		/>);
+	}
+
+	getRemoveButton(deleteType, targetInfo) {
+		return (<div className="remove-data">
+			<FontIcon
+				className="material-icons"
+				onClick={() => this.onClickDelete(deleteType, targetInfo)} >
+				remove_circle
+			</FontIcon>
+		</div>);
+	}
+
+	getAddButton(addType) {
+		return (<div className={`add-data ${addType}`}>
+			<FontIcon onClick={() => this.onClickAdd(addType)} className="material-icons">
+				add_circle
+			</FontIcon>
+		</div>);
+	}
+
+	getHeaderTextField(headerKey, columnIndex) {
+		const removeButton = this.getRemoveButton("column", headerKey);
+		return (<div className="header-text">
+			{removeButton}
+			<TextField
+				name={`${columnIndex}${headerKey}`}
+				value={headerKey}
+				onChange={(e, value) => { this.props.onChangeHeader(value, columnIndex - 1); }}
+				{...textFieldProps}
+			/>
+		</div>);
 	}
 
 	getHeader(keys) {
@@ -155,11 +159,9 @@ class DataTableController extends React.Component {
 
 	getBody(tableData) {
 		return (<TableBody displayRowCheckbox={false}>
-			{tableData.map((row, rowIndex) => {
-				return (<TableRow key={rowIndex} className="table-row">
-					{this.getBodyRow(row, rowIndex)}
-				</TableRow>);
-			})}
+			{tableData.map((row, rowIndex) => (<TableRow key={rowIndex} className="table-row">
+				{this.getBodyRow(row, rowIndex)}
+			</TableRow>))}
 			<TableRow>
 				<TableRowColumn style={cellStyle}>
 					{this.getAddButton("row")}
@@ -169,9 +171,7 @@ class DataTableController extends React.Component {
 	}
 
 	getBodyRow(row, rowIndex) {
-		const values = this.props.data.header.map(header => {
-			return row[header];
-		});
+		const values = this.props.data.header.map(header => row[header]);
 		values.unshift("");
 		values.push("");
 
@@ -193,7 +193,7 @@ class DataTableController extends React.Component {
 		const header = this.getHeader(data.header);
 		const body = this.getBody(data.body);
 
-		return (<div className="dataTable">
+		return (<div className="data-table">
 			<MuiThemeProvider muiTheme={getMuiTheme()}>
 				<Table {...tableProps}>
 					{header}
@@ -205,14 +205,14 @@ class DataTableController extends React.Component {
 }
 
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
 	onChangeHeader: (value, columnIndex) => {
 		dispatch(updateHeader({
 			value,
 			column: columnIndex
 		}));
 	},
-	onChangeData : (value, rowIndex, header) => {
+	onChangeData: (value, rowIndex, header) => {
 		dispatch(updateCell({
 			value,
 			header,
@@ -222,10 +222,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 	reflectedData: (latest) => {
 		dispatch(reflectedDataToCommand(latest));
 	},
-	deleteData : (rowIndex) => {
+	deleteData: (rowIndex) => {
 		dispatch(removeValueFromTable(rowIndex));
 	},
-	deleteKey : (columnKey) => {
+	deleteKey: (columnKey) => {
 		dispatch(removeKeyFromTable(columnKey));
 	},
 	addKey: (newDataObject) => {
@@ -236,11 +236,30 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 	}
 });
 
-const mapStateToProps = state => {
-	return {
-		data: state.data
-	};
+DataTableController.defaultProps = {
+	data: {
+		header: [],
+		body: []
+	}
 };
+
+DataTableController.propTypes = {
+	onChangeHeader: PropTypes.func.isRequired,
+	onChangeData: PropTypes.func.isRequired,
+	addKey: PropTypes.func.isRequired,
+	addData: PropTypes.func.isRequired,
+	deleteKey: PropTypes.func.isRequired,
+	deleteData: PropTypes.func.isRequired,
+	reflectedData: PropTypes.func.isRequired,
+	data: PropTypes.shape({
+		header: PropTypes.arrayOf(PropTypes.string),
+		body: PropTypes.arrayOf(PropTypes.object)
+	})
+};
+
+const mapStateToProps = state => ({
+	data: state.data
+});
 
 const Data = connect(mapStateToProps, mapDispatchToProps)(DataTableController);
 

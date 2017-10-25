@@ -1,11 +1,10 @@
 import React, { PropTypes } from "react";
-import * as _ from "lodash";
 import TextField from 'material-ui/TextField';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { connect } from "react-redux";
 import { updateGui, resetGui } from "../../../actions";
-import {red600, green200, blue300, blue500, grey100, grey900, grey400, lightBlue100, lightBlue300} from 'material-ui/styles/colors';
+import { grey900, grey400, lightBlue300} from 'material-ui/styles/colors';
 import ConnectedRadio from "./radio";
 
 const underlineFocusStyle = {

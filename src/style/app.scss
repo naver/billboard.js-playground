@@ -14,6 +14,7 @@ html {
     height: 100%;
 }
 
+
 .ReactCodeMirror {
     width: 100%;
     height: auto;
@@ -54,6 +55,7 @@ html {
 }
 
 .bbtitle .logo {
+    display: inline-block;
     width: 145px;
     height: 33px;
     margin-left : 10px;
@@ -63,6 +65,7 @@ html {
     box-sizing: content-box;
     background-color: #fff;
     border-style: none;
+    background-image : url(logo.svg) !important;
 }
 
 .chart {
@@ -71,6 +74,7 @@ html {
     margin : 0;
     left : 0;
 }
+
 .tabviews {
     width : 60%;
     height : 50%;
@@ -78,14 +82,42 @@ html {
     left : 0;
 }
 
-.textConfigure, .dataTable {
+.textConfigure, .data-table {
     width : 100%;
 }
 
-.layer_wrapper {
-    padding : 10px;
+.data-table .remove-data {
+    text-align: center;
+    opacity:0;
 }
 
+.data-table .add-data {
+    position: relative;
+    text-align: center;
+}
+
+.data-table .add-data.column{
+    top: 33px;
+}
+
+.data-table .add-data .row{
+    top: 3px;
+}
+
+.data-table .header-text:hover .remove-data{
+    opacity:1;
+}
+.data-table .table-row:hover .remove-data {
+    opacity:1;
+}
+
+.layer_wrapper {
+    margin: 10px;
+}
+
+.bb {
+    height : 100%;
+}
 
 .inputConfigure {
     width : 40%;
@@ -283,7 +315,6 @@ li.L9 {
 }
 
 @media screen {
-
     /* string content */
 
     .str {

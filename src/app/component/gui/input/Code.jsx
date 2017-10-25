@@ -1,17 +1,14 @@
 import React, { PropTypes } from "react";
-import * as _ from "lodash";
 import TextField from 'material-ui/TextField';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import IconButton from 'material-ui/IconButton';
 
 import { connect } from "react-redux";
 import {
-	updateGui, resetGui, updateCodeInput
+	updateCodeInput
 } from "../../../actions";
-import FontIcon from 'material-ui/FontIcon';
-import {grey900, grey400, red600, green200, blue300, blue500, grey100, lightBlue100, lightBlue300, grey800} from 'material-ui/styles/colors';
+import {grey900, grey400, lightBlue300, grey800} from 'material-ui/styles/colors';
 
 class CodeInput extends React.Component {
 	render() {

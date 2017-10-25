@@ -28,8 +28,8 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var PropTypes = require('prop-types');
 var className = require('classnames');
-var debounce = require('lodash.debounce');
-var isEqual = require('lodash.isequal');
+var debounce = require('lodash').debounce;
+var isEqual = require('lodash').isEqual;
 var createReactClass = require('create-react-class');
 
 function normalizeLineEndings(str) {

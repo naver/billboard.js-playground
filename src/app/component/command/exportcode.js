@@ -4,7 +4,6 @@ const beautify = require('js-beautify').js_beautify;
 import IconButton from 'material-ui/IconButton';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import  * as color from 'material-ui/styles/colors';
 const URL = {
 	d3v4 : "https://cdnjs.cloudflare.com/ajax/libs/d3/4.10.2/d3.js",
 	bbjs : "https://cdnjs.cloudflare.com/ajax/libs/billboard.js/1.0.1/billboard.js",

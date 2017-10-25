@@ -22,17 +22,15 @@
     "padded-blocks": ["error", "never"],
     "no-tabs": "off",
     "react/jsx-indent": ["error",
-      "tab",
-      {
-        "SwitchCase": 1,
-        "MemberExpression": 1
-      }
+      "tab"
     ],
     "react/jsx-indent-props": ["error", "tab"],
     "quotes": ["error", "double", {
       "avoidEscape": true,
       "allowTemplateLiterals": true
     }],
+    "jsx-closing-bracket-location" : [1, {"selfClosing": "props-aligned", "nonEmpty": "after-props"}],
+    "react/forbid-prop-types": ["error", { "forbid": [] }],
     "react/prefer-stateless-function": [0, { "ignorePureComponents": true }],
     "comma-dangle" : ["error", {
       "functions": "ignore"

@@ -1,7 +1,7 @@
 import React, { PropTypes } from "react";
 import CodeMirror from "./codemirror";
 import { connect } from "react-redux";
-import { updateCommand, recentConfigureUpdate, reflectCommandToDatatable } from "../../actions";
+import { updateCommand, reflectCommandToDatatable } from "../../actions";
 import ExportCode from "./exportcode";
 var beautify_js = require('js-beautify').js_beautify;
 

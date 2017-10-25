@@ -1,5 +1,5 @@
 import React, { PropTypes } from "react";
-import _ from "underscore";
+import * as _ from "lodash";
 import { connect } from "react-redux";
 import Property from "./property";
 import Member from "./member";
@@ -18,7 +18,6 @@ class Control extends React.Component {
 
 		_.map(this.props,  (option) => {
 			if (option.kind === "member") {
-				const member = option.attributes;
 				const properties = option.properties;
 
 				if (properties) {

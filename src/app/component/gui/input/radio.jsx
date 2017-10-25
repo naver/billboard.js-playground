@@ -1,9 +1,8 @@
 import React, { PropTypes } from "react";
 import { connect } from "react-redux";
-import getMuiTheme from "material-ui/styles/getMuiTheme";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
-import {red600, green200, blue300, blue500, grey100, grey400, lightBlue100, lightBlue300} from 'material-ui/styles/colors';
+import { grey400,  lightBlue300} from 'material-ui/styles/colors';
 import { updateGui, resetGui } from "../../../actions";
 
 const iconSelect = {
