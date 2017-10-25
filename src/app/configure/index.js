@@ -1,9 +1,7 @@
-import * as _ from "lodash";
-import * as rawDocument from "./resources/document.json";
-import * as presetDocument from "./resources/preset.json";
-import { deepCopy, objectFlatten, typeValid } from "../util";
+import * as rawDocument from "./resources/document";
+import * as presetDocument from "./resources/preset";
+import { deepCopy, typeValid } from "../util";
 import * as template from "./resources/template";
-
 const keysFromDocument = [];
 
 const getDefaultAttributes = (name) => {

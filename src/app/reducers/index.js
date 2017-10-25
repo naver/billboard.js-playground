@@ -1,5 +1,4 @@
 import { combineReducers } from "redux";
-import * as _ from "lodash";
 import {
 	namespaceToObject,
 	deepCopy,

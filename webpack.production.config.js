@@ -1,6 +1,7 @@
 const webpack = require("webpack");
 const path = require("path");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
 const config = {
 	context: `${__dirname}/`,
@@ -36,7 +37,6 @@ const config = {
 				}, {
 					loader: "sass-loader"
 				}],
-					// use style-loader in development
 				fallback: "style-loader"
 			})
 		}, {
@@ -109,7 +109,7 @@ const config = {
 			umd: "react-dom"
 		}
 	},
-	devtool: "cheap-module-source-map",
+	devtool: "cheap-eval-source-map",
 	devServer: {
 		contentBase: `${__dirname}/`,
 		hot: true,
@@ -122,7 +122,11 @@ const config = {
 			jQuery: "jquery"
 		}),
 		new ExtractTextPlugin("app.bundle.css"),
-		new webpack.HotModuleReplacementPlugin()
+		new webpack.HotModuleReplacementPlugin(),
+		new UglifyJsPlugin({
+			drop_console: true,
+			sourceMap: true
+		})
 	]
 };
 

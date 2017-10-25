@@ -4,8 +4,7 @@ import { Command } from "../command";
 import { Data } from "../data";
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import  * as color from "material-ui/styles/colors";
-
+import  {grey100, grey400, deepOrange300} from "material-ui/styles/colors";
 
 class TabViews extends React.Component {
 	componentWillMount(props) {
@@ -18,14 +17,14 @@ class TabViews extends React.Component {
 		return (<div className="tabviews">
 			<MuiThemeProvider muiTheme={getMuiTheme({
 				tabs: {
-					  backgroundColor: color.grey100,
-					  textColor: color.grey400,
-					  selectedTextColor: color.deepOrange300
+					  backgroundColor: grey100,
+					  textColor: grey400,
+					  selectedTextColor: deepOrange300
 					}
 				})}>
 				<Tabs
 					inkBarStyle={{
-						backgroundColor: color.deepOrange300
+						backgroundColor: deepOrange300
 					}}
 					value={this.state.target}
 					onChange={(e) => this.onChangeTab(e)}>

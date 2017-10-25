@@ -11,7 +11,6 @@ import {
 import {
 	convertColumnsToData
 } from "./convert";
-import * as _ from "lodash";
 
 const dataToFormatedData = (format, data) => {
 	if (format === "columns") {

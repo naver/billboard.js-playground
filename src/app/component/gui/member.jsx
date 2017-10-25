@@ -35,9 +35,9 @@ class Member extends React.Component {
 				const name = option.attributes.type.names;
 
 				if (name.indexOf("Array") > -1) {
-					console.log(option.attributes.name);
-					console.log(option.attributes.defaultvalue);
-					console.log(option.attributes.examples);
+					// console.log(option.attributes.name);
+					// console.log(option.attributes.defaultvalue);
+					// console.log(option.attributes.examples);
 					//items.push(<Property
 					//	style={{display : "none"}}
 					//	key={option.attributes.name}

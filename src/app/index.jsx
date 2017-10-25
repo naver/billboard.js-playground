@@ -28,3 +28,5 @@ ReactDOM.render(
 	</Provider>,
 	root
 );
+
+document.body.className = "";
