@@ -101,7 +101,7 @@ module.exports = {
       },
       "type" : {
         "attributes" : {
-          "valueoptions" : ["line", "spline", "step", "area", "area-spine", "area-step", "bar", "scatter", "pie", "donut", "gauge"]
+          "valueoptions" : ["line", "spline", "step", "area", "area-spline", "area-step", "bar", "scatter", "pie", "donut", "gauge"]
         }
       }
     }
