@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import getMuiTheme from "material-ui/styles/getMuiTheme";
 import Slider from "material-ui/Slider";
-import  * as color from "material-ui/styles/colors";
+import * as color from "material-ui/styles/colors";
 
 import {
 	updateGui, resetGui
@@ -41,10 +41,10 @@ class InputNumber extends React.Component {
 		const textStyle = deepCopy({}, ValueTextStyle);
 
 		props.min = props.min || 0;
-		props.max = props.max || 1;
+		props.max = props.max || 100;
 		textStyle.color = props.activated ? color.grey900 : color.grey400;
 
-		if (isNaN(props.value)) {
+		if (props.docid && isNaN(props.value)) {
 			props.value = props.defaultvalue || undefined;
 
 			return (<div>
@@ -63,28 +63,25 @@ class InputNumber extends React.Component {
 				</MuiThemeProvider>
 				<span className="number_guide" style={textStyle}>undefined</span>
 			</div>);
-		} else {
-			props.value *= 1;
-
-			return (<div>
-				<MuiThemeProvider muiTheme={getMuiTheme({ slider: SliderStyleTheme })}>
-					<Slider
-						axis={"x"}
-						required={false}
-						sliderStyle={SliderStyle}
-						style={Style}
-						value={props.value}
-						min={props.min}
-						max={props.max}
-						step={props.step}
-						onChange={props.onChange}
-					/>
-				</MuiThemeProvider>
-				<span className="number_guide" style={textStyle}>{props.value}</span>
-			</div>);
 		}
+		props.value *= 1;
 
-
+		return (<div>
+			<MuiThemeProvider muiTheme={getMuiTheme({ slider: SliderStyleTheme })}>
+				<Slider
+					axis={"x"}
+					required={false}
+					sliderStyle={SliderStyle}
+					style={Style}
+					value={props.value}
+					min={props.min}
+					max={props.max}
+					step={props.step}
+					onChange={props.onChange}
+				/>
+			</MuiThemeProvider>
+			<span className="number_guide" style={textStyle}>{props.value}</span>
+		</div>);
 	}
 }
 

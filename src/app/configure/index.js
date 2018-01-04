@@ -60,13 +60,13 @@ const documentToObject = (defaultDocumentOption) => {
 
 	_.each(defaultDocumentOption, ({ id, examples, name, type, kind, defaultvalue, description, properties, optional }) => {
 		if (kind === "member") {
-			if (name.indexOf(":") > -1) {
+			if (name.indexOf("․") > -1) {
 				const target = {
 					type: type,
 					defaultvalue: defaultvalue,
 					value: defaultvalue,
 					docid: name,
-					name: name.replace(/\:/g, "."),
+					name: name.replace(/\․/g, "."),
 					description: description,
 					optional: optional,
 					activated: false,
