@@ -4,9 +4,9 @@
   "description": "playground for billboard.js",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --open",
-    "build": "webpack --env production --config ./webpack.production.config.js",
-    "extract:document": "jsdoc2md --json node_modules/billboard.js/src/config/Options.js > src/app/document.json"
+    "start": "npm run extract:document && webpack-dev-server --open",
+    "build": "npm run extract:document && webpack --env production --config ./webpack.production.config.js",
+    "extract:document": "echo module.exports = > src/app/configure/resources/document.js && jsdoc2md --json node_modules/billboard.js/src/config/Options.js >> src/app/configure/resources/document.js"
   },
   "repository": {
     "type": "git",
