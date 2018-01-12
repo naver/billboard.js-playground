@@ -1,4 +1,5 @@
-module.exports = [
+module.exports =  
+[
   {
     "id": "Options()",
     "longname": "Options",
@@ -20,7 +21,7 @@ module.exports = [
     "meta": {
       "lineno": 5,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
     "order": 0
   },
@@ -30,23 +31,79 @@ module.exports = [
     "name": "bindto",
     "kind": "member",
     "scope": "static",
-    "description": "bindto The CSS selector or the element which the chart will be set to. D3 selection object can be specified. If other chart is set already, it will be replaced with the new one (only one chart can be set in one element).<br><br>\rIf this option is not specified, the chart will be generated but not be set. Instead, we can access the element by chart.element and set it by ourselves.<br>\r- **NOTE:**\r > When chart is not binded, bb starts observing if chart.element is binded by MutationObserver.\r > In this case, polyfill is required in IE9 and IE10 becuase they do not support MutationObserver.\r > On the other hand, if chart always will be binded, polyfill will not be required because MutationObserver will never be called.",
+    "description": "Specify the CSS selector or the element which the chart will be set to. D3 selection object can be specified also.\rIf other chart is set already, it will be replaced with the new one (only one chart can be set in one element).<br><br>\rIf this option is not specified, the chart will be generated but not be set. Instead, we can access the element by chart.element and set it by ourselves.<br>\r- **NOTE:**\r > When chart is not bound, it'll start observing if `chart.element` is bound by MutationObserver.<br>\r > In this case, polyfill is required in IE9 and IE10 because they do not support MutationObserver.<br>\r > On the other hand, if chart always will be bound, polyfill will not be required because MutationObserver will never be called.",
     "memberof": "Options",
     "examples": [
-      "bindto: \"#myContainer\"\r\r// or element\rbindto: document.getElementById(\"myContainer\")\r\r// or D3 selection object\rbindto: d3.select(\"#myContainer\")"
+      "bindto: \"#myContainer\"\r\r// or HTMLElement\rbindto: document.getElementById(\"myContainer\")\r\r// or D3 selection object\rbindto: d3.select(\"#myContainer\")\r\r// or to change default classname\rbindto: {\r element: \"#chart\",\r classname: \"bill-board\"  // ex) <div id='chart' class='bill-board'>\r}"
     ],
-    "type": {
-      "names": [
-        "String"
-      ]
-    },
     "defaultvalue": "#chart",
+    "properties": [
+      {
+        "type": {
+          "names": [
+            "String",
+            "HTMLElement",
+            "d3.selection"
+          ]
+        },
+        "defaultvalue": "#chart",
+        "description": "Specify the element where chart will be drawn.",
+        "name": "bindto"
+      },
+      {
+        "type": {
+          "names": [
+            "String",
+            "HTMLElement",
+            "d3.selection"
+          ]
+        },
+        "defaultvalue": "#chart",
+        "description": "Specify the element where chart will be drawn.",
+        "name": "bindto.element"
+      },
+      {
+        "type": {
+          "names": [
+            "String"
+          ]
+        },
+        "optional": true,
+        "defaultvalue": "bb",
+        "description": "Specify the class name of bind element.<br>\r    **NOTE:** When class name isn't `bb`, then you also need to update the default CSS to be rendered correctly.",
+        "name": "bindto.classname"
+      }
+    ],
     "meta": {
       "lineno": 14,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
     "order": 2
+  },
+  {
+    "id": "Options.clipPath",
+    "longname": "Options.clipPath",
+    "name": "clipPath",
+    "kind": "member",
+    "scope": "static",
+    "description": "Set clip-path property of chart element\r- **NOTE:**\r > When is false, chart node element is positioned after the axis node in DOM tree hierarchy.\r > Is to make chart element positioned over axis element.",
+    "memberof": "Options",
+    "examples": [
+      "clipPath: false"
+    ],
+    "type": {
+      "names": [
+        "Boolean"
+      ]
+    },
+    "defaultvalue": "true",
+    "meta": {
+      "lineno": 46,
+      "filename": "Options.js",
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
+    },
+    "order": 3
   },
   {
     "id": "Options.svg",
@@ -77,11 +134,11 @@ module.exports = [
       }
     ],
     "meta": {
-      "lineno": 36,
+      "lineno": 60,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 3
+    "order": 4
   },
   {
     "id": "Options.size",
@@ -122,11 +179,11 @@ module.exports = [
       }
     ],
     "meta": {
-      "lineno": 49,
+      "lineno": 73,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 4
+    "order": 5
   },
   {
     "id": "Options.padding",
@@ -187,11 +244,11 @@ module.exports = [
       }
     ],
     "meta": {
-      "lineno": 66,
+      "lineno": 90,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 5
+    "order": 6
   },
   {
     "id": "Options.resize",
@@ -223,11 +280,11 @@ module.exports = [
       }
     ],
     "meta": {
-      "lineno": 88,
+      "lineno": 112,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 6
+    "order": 7
   },
   {
     "id": "Options.zoom",
@@ -314,11 +371,11 @@ module.exports = [
       }
     ],
     "meta": {
-      "lineno": 101,
+      "lineno": 125,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 7
+    "order": 8
   },
   {
     "id": "Options.interaction",
@@ -329,7 +386,7 @@ module.exports = [
     "description": "Interaction options",
     "memberof": "Options",
     "examples": [
-      "interaction: {\r   enabled: false,\r   inputType: {\r       mouse: true,\r       touch: false\r   }\r}"
+      "interaction: {\r   enabled: false,\r   inputType: {\r       mouse: true,\r       touch: false\r\r       // or declare preventDefault explicitly.\r       // In this case touch inputType is enabled by default\r       touch: {\r           preventDefault: true\r\r           // or threshold pixel value (pixel moved from touchstart to touchmove)\r           preventDefault: 5\r       }\r   }\r}"
     ],
     "type": {
       "names": [
@@ -379,14 +436,26 @@ module.exports = [
         "defaultvalue": true,
         "description": "enable or disable  touch interaction",
         "name": "interaction.inputType.touch"
+      },
+      {
+        "type": {
+          "names": [
+            "Boolean",
+            "Number"
+          ]
+        },
+        "optional": true,
+        "defaultvalue": false,
+        "description": "enable or disable to call event.preventDefault on touchstart & touchmove event. It's usually used to prevent document scrolling.",
+        "name": "interaction.inputType.touch.preventDefault"
       }
     ],
     "meta": {
-      "lineno": 136,
+      "lineno": 160,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 8
+    "order": 9
   },
   {
     "id": "Options.onover",
@@ -406,11 +475,11 @@ module.exports = [
     },
     "defaultvalue": "function(){}",
     "meta": {
-      "lineno": 160,
+      "lineno": 194,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 9
+    "order": 10
   },
   {
     "id": "Options.onout",
@@ -430,11 +499,11 @@ module.exports = [
     },
     "defaultvalue": "function(){}",
     "meta": {
-      "lineno": 173,
+      "lineno": 207,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 10
+    "order": 11
   },
   {
     "id": "Options.onresize",
@@ -454,11 +523,11 @@ module.exports = [
     },
     "defaultvalue": "function(){}",
     "meta": {
-      "lineno": 186,
+      "lineno": 220,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 11
+    "order": 12
   },
   {
     "id": "Options.onresized",
@@ -478,11 +547,35 @@ module.exports = [
     },
     "defaultvalue": "function(){}",
     "meta": {
-      "lineno": 199,
+      "lineno": 233,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 12
+    "order": 13
+  },
+  {
+    "id": "Options.onbeforeinit",
+    "longname": "Options.onbeforeinit",
+    "name": "onbeforeinit",
+    "kind": "member",
+    "scope": "static",
+    "description": "Set a callback to execute before the chart is initialized",
+    "memberof": "Options",
+    "examples": [
+      "onbeforeinit: function() {\r  ...\r}"
+    ],
+    "type": {
+      "names": [
+        "function"
+      ]
+    },
+    "defaultvalue": "function(){}",
+    "meta": {
+      "lineno": 246,
+      "filename": "Options.js",
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
+    },
+    "order": 14
   },
   {
     "id": "Options.oninit",
@@ -502,11 +595,35 @@ module.exports = [
     },
     "defaultvalue": "function(){}",
     "meta": {
-      "lineno": 212,
+      "lineno": 259,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 13
+    "order": 15
+  },
+  {
+    "id": "Options.onafterinit",
+    "longname": "Options.onafterinit",
+    "name": "onafterinit",
+    "kind": "member",
+    "scope": "static",
+    "description": "Set a callback to execute after the chart is initialized",
+    "memberof": "Options",
+    "examples": [
+      "onafterinit: function() {\r  ...\r}"
+    ],
+    "type": {
+      "names": [
+        "function"
+      ]
+    },
+    "defaultvalue": "function(){}",
+    "meta": {
+      "lineno": 272,
+      "filename": "Options.js",
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
+    },
+    "order": 16
   },
   {
     "id": "Options.onrendered",
@@ -526,11 +643,11 @@ module.exports = [
     },
     "defaultvalue": "function(){}",
     "meta": {
-      "lineno": 225,
+      "lineno": 285,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 14
+    "order": 17
   },
   {
     "id": "Options.transition",
@@ -541,7 +658,7 @@ module.exports = [
     "description": "Set duration of transition (in milliseconds) for chart animation.<br><br>\r- **NOTE:** If `0 `or `null` set, transition will be skipped. So, this makes initial rendering faster especially in case you have a lot of data.",
     "memberof": "Options",
     "examples": [
-      "transition: {\r duration: 500\r}"
+      "transition: {\r   duration: 500\r}"
     ],
     "type": {
       "names": [
@@ -562,22 +679,22 @@ module.exports = [
       }
     ],
     "meta": {
-      "lineno": 238,
+      "lineno": 298,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 15
+    "order": 18
   },
   {
-    "id": "Options.data:x",
-    "longname": "Options.data:x",
-    "name": "data:x",
+    "id": "Options.data․x",
+    "longname": "Options.data․x",
+    "name": "data․x",
     "kind": "member",
     "scope": "static",
     "description": "Specify the key of x values in the data.<br><br>\rWe can show the data with non-index x values by this option. This option is required when the type of x axis is timeseries. If this option is set on category axis, the values of the data on the key will be used for category names.",
     "memberof": "Options",
     "examples": [
-      "data: {\r  x: \"date\"\r}"
+      "data․ {\r  x: \"date\"\r}"
     ],
     "type": {
       "names": [
@@ -586,22 +703,22 @@ module.exports = [
     },
     "defaultvalue": "undefined",
     "meta": {
-      "lineno": 252,
+      "lineno": 312,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 16
+    "order": 19
   },
   {
-    "id": "Options.data:xs",
-    "longname": "Options.data:xs",
-    "name": "data:xs",
+    "id": "Options.data․xs",
+    "longname": "Options.data․xs",
+    "name": "data․xs",
     "kind": "member",
     "scope": "static",
     "description": "Specify the keys of the x values for each data.<br><br>\rThis option can be used if we want to show the data that has different x values.",
     "memberof": "Options",
     "examples": [
-      "data: {\r  xs: {\r   data1: \"x1\",\r   data2: \"x2\"\r  }\r}"
+      "data․ {\r  xs: {\r   data1: \"x1\",\r   data2: \"x2\"\r  }\r}"
     ],
     "type": {
       "names": [
@@ -610,22 +727,22 @@ module.exports = [
     },
     "defaultvalue": "{}",
     "meta": {
-      "lineno": 266,
+      "lineno": 326,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 17
+    "order": 20
   },
   {
-    "id": "Options.data:xFormat",
-    "longname": "Options.data:xFormat",
-    "name": "data:xFormat",
+    "id": "Options.data․xFormat",
+    "longname": "Options.data․xFormat",
+    "name": "data․xFormat",
     "kind": "member",
     "scope": "static",
     "description": "Set a format to parse string specifed as x.",
     "memberof": "Options",
     "examples": [
-      "data: {\r  xFormat: \"%Y-%m-%d %H:%M:%S\"\r}"
+      "data․ {\r  xFormat: \"%Y-%m-%d %H:%M:%S\"\r}"
     ],
     "type": {
       "names": [
@@ -637,22 +754,22 @@ module.exports = [
       "[D3's time specifier](https://npm.runkit.com/d3-time-format)"
     ],
     "meta": {
-      "lineno": 283,
+      "lineno": 343,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 18
+    "order": 21
   },
   {
-    "id": "Options.data:xLocaltime",
-    "longname": "Options.data:xLocaltime",
-    "name": "data:xLocaltime",
+    "id": "Options.data․xLocaltime",
+    "longname": "Options.data․xLocaltime",
+    "name": "data․xLocaltime",
     "kind": "member",
     "scope": "static",
     "description": "Set localtime format to parse x axis.",
     "memberof": "Options",
     "examples": [
-      "data: {\r  xLocaltime: false\r}"
+      "data․ {\r  xLocaltime: false\r}"
     ],
     "type": {
       "names": [
@@ -661,22 +778,22 @@ module.exports = [
     },
     "defaultvalue": "true",
     "meta": {
-      "lineno": 297,
+      "lineno": 357,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 19
+    "order": 22
   },
   {
-    "id": "Options.data:xSort",
-    "longname": "Options.data:xSort",
-    "name": "data:xSort",
+    "id": "Options.data․xSort",
+    "longname": "Options.data․xSort",
+    "name": "data․xSort",
     "kind": "member",
     "scope": "static",
     "description": "Sort on x axis.",
     "memberof": "Options",
     "examples": [
-      "data: {\r  xSort: false\r}"
+      "data․ {\r  xSort: false\r}"
     ],
     "type": {
       "names": [
@@ -685,22 +802,22 @@ module.exports = [
     },
     "defaultvalue": "true",
     "meta": {
-      "lineno": 310,
+      "lineno": 370,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 20
+    "order": 23
   },
   {
-    "id": "Options.data:names",
-    "longname": "Options.data:names",
-    "name": "data:names",
+    "id": "Options.data․names",
+    "longname": "Options.data․names",
+    "name": "data․names",
     "kind": "member",
     "scope": "static",
     "description": "Set custom data name.",
     "memberof": "Options",
     "examples": [
-      "data: {\r  names: {\r    data1: \"Data Name 1\",\r    data2: \"Data Name 2\"\r  }\r}"
+      "data․ {\r  names: {\r    data1: \"Data Name 1\",\r    data2: \"Data Name 2\"\r  }\r}"
     ],
     "type": {
       "names": [
@@ -709,22 +826,22 @@ module.exports = [
     },
     "defaultvalue": "{}",
     "meta": {
-      "lineno": 324,
+      "lineno": 384,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 21
+    "order": 24
   },
   {
-    "id": "Options.data:classes",
-    "longname": "Options.data:classes",
-    "name": "data:classes",
+    "id": "Options.data․classes",
+    "longname": "Options.data․classes",
+    "name": "data․classes",
     "kind": "member",
     "scope": "static",
     "description": "Set custom data class.<br><br>\rIf this option is specified, the element g for the data has an additional class that has the prefix 'bb-target-' (eg. bb-target-additional-data1-class).",
     "memberof": "Options",
     "examples": [
-      "data: {\r  classes: {\r    data1: \"additional-data1-class\",\r    data2: \"additional-data2-class\"\r  }\r}"
+      "data․ {\r  classes: {\r    data1: \"additional-data1-class\",\r    data2: \"additional-data2-class\"\r  }\r}"
     ],
     "type": {
       "names": [
@@ -733,22 +850,22 @@ module.exports = [
     },
     "defaultvalue": "{}",
     "meta": {
-      "lineno": 340,
+      "lineno": 400,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 22
+    "order": 25
   },
   {
-    "id": "Options.data:groups",
-    "longname": "Options.data:groups",
-    "name": "data:groups",
+    "id": "Options.data․groups",
+    "longname": "Options.data․groups",
+    "name": "data․groups",
     "kind": "member",
     "scope": "static",
     "description": "Set groups for the data for stacking.",
     "memberof": "Options",
     "examples": [
-      "data: {\r  groups: [\r    [\"data1\", \"data2\"],\r    [\"data3\"]\r  ]\r}"
+      "data․ {\r  groups: [\r    [\"data1\", \"data2\"],\r    [\"data3\"]\r  ]\r}"
     ],
     "type": {
       "names": [
@@ -757,22 +874,22 @@ module.exports = [
     },
     "defaultvalue": "[]",
     "meta": {
-      "lineno": 357,
+      "lineno": 417,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 23
+    "order": 26
   },
   {
-    "id": "Options.data:axes",
-    "longname": "Options.data:axes",
-    "name": "data:axes",
+    "id": "Options.data․axes",
+    "longname": "Options.data․axes",
+    "name": "data․axes",
     "kind": "member",
     "scope": "static",
     "description": "Set y axis the data related to. y and y2 can be used.",
     "memberof": "Options",
     "examples": [
-      "data: {\raxes: {\r    data1: \"y\",\r    data2: \"y2\"\r  }\r}"
+      "data․ {\r  axes: {\r    data1: \"y\",\r    data2: \"y2\"\r  }\r}"
     ],
     "type": {
       "names": [
@@ -781,22 +898,22 @@ module.exports = [
     },
     "defaultvalue": "{}",
     "meta": {
-      "lineno": 373,
+      "lineno": 433,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 24
+    "order": 27
   },
   {
-    "id": "Options.data:type",
-    "longname": "Options.data:type",
-    "name": "data:type",
+    "id": "Options.data․type",
+    "longname": "Options.data․type",
+    "name": "data․type",
     "kind": "member",
     "scope": "static",
-    "description": "Set chart type at once.<br><br>\rIf this option is specified, the type will be applied to every data. This setting can be overwritten by data.types.<br><br>\r**Available Values:**\r- line\r- spline\r- step\r- area\r- area-spline\r- area-step\r- bar\r- scatter\r- pie\r- donut\r- gauge",
+    "description": "Set chart type at once.<br><br>\rIf this option is specified, the type will be applied to every data. This setting can be overwritten by data.types.<br><br>\r**Available Values:**\r- area\r- area-spline\r- area-step\r- bar\r- bubble\r- donut\r- gauge\r- line\r- pie\r- scatter\r- spline\r- step",
     "memberof": "Options",
     "examples": [
-      "data: {\r type: \"bar\"\r}"
+      "data․ {\r type: \"bar\"\r}"
     ],
     "type": {
       "names": [
@@ -805,22 +922,22 @@ module.exports = [
     },
     "defaultvalue": "line",
     "meta": {
-      "lineno": 389,
+      "lineno": 449,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 25
+    "order": 28
   },
   {
-    "id": "Options.data:types",
-    "longname": "Options.data:types",
-    "name": "data:types",
+    "id": "Options.data․types",
+    "longname": "Options.data․types",
+    "name": "data․types",
     "kind": "member",
     "scope": "static",
     "description": "Set chart type for each data.<br>\rThis setting overwrites data.type setting.",
     "memberof": "Options",
     "examples": [
-      "data: {\r  types: {\r    data1: \"bar\",\r    data2: \"spline\"\r  }\r}"
+      "data․ {\r  types: {\r    data1: \"bar\",\r    data2: \"spline\"\r  }\r}"
     ],
     "type": {
       "names": [
@@ -829,95 +946,118 @@ module.exports = [
     },
     "defaultvalue": "{}",
     "meta": {
-      "lineno": 415,
+      "lineno": 476,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
-    },
-    "order": 26
-  },
-  {
-    "id": "Options.data:labels:format",
-    "longname": "Options.data:labels:format",
-    "name": "data:labels:format",
-    "kind": "member",
-    "scope": "static",
-    "description": "Set formatter function for data labels.<br>\rThe formatter function receives 4 arguments such as v, id, i, j and it must return a string that will be shown as the label. The arguments are:<br>\r - `v` is the value of the data point where the label is shown.\r - `id` is the id of the data where the label is shown.\r - `i` is the index of the data point where the label is shown.\r - `j` is the sub index of the data point where the label is shown.<br><br>\rFormatter function can be defined for each data by specifying as an object and D3 formatter function can be set (ex. d3.format('$'))",
-    "memberof": "Options",
-    "examples": [
-      "data: {\r  labels: {\r    format: function(v, id, i, j) { ... }\r    // it's possible to set for each data\r    //format: {\r    //    data1: function(v, id, i, j) { ... },\r    //    ...\r    //}\r  }\r}"
-    ],
-    "type": {
-      "names": [
-        "Object"
-      ]
-    },
-    "defaultvalue": "{}",
-    "meta": {
-      "lineno": 443,
-      "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
-    },
-    "order": 27
-  },
-  {
-    "id": "Options.data:labels",
-    "longname": "Options.data:labels",
-    "name": "data:labels",
-    "kind": "member",
-    "scope": "static",
-    "description": "Show labels on each data points.",
-    "memberof": "Options",
-    "examples": [
-      "data: {\r  labels: true\r}"
-    ],
-    "type": {
-      "names": [
-        "Boolean"
-      ]
-    },
-    "defaultvalue": "false",
-    "meta": {
-      "lineno": 432,
-      "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
-    },
-    "order": 28
-  },
-  {
-    "id": "Options.data:order",
-    "longname": "Options.data:order",
-    "name": "data:order",
-    "kind": "member",
-    "scope": "static",
-    "description": "This option changes the order of stacking the data and pieces of pie/donut. If `null` specified, it will be the order the data loaded. If function specified, it will be used to sort the data and it will recieve the data as argument.<br><br>\r **Available Values:**\r - desc\r - asc\r - function(data1, data2) { ... }\r - null",
-    "memberof": "Options",
-    "examples": [
-      "data: {\r  order: \"asc\"\r}"
-    ],
-    "type": {
-      "names": [
-        "String",
-        "function"
-      ]
-    },
-    "defaultvalue": "desc",
-    "meta": {
-      "lineno": 469,
-      "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
     "order": 29
   },
   {
-    "id": "Options.data:regions",
-    "longname": "Options.data:regions",
-    "name": "data:regions",
+    "id": "Options.data․labels",
+    "longname": "Options.data․labels",
+    "name": "data․labels",
+    "kind": "member",
+    "scope": "static",
+    "description": "Set labels options",
+    "memberof": "Options",
+    "examples": [
+      "data․ {\r  labels: true,\r\r  // or set specific options\r  labels: {\r    format: function(v, id, i, j) { ... },\r    // it's possible to set for each data\r    //format: {\r    //    data1: function(v, id, i, j) { ... },\r    //    ...\r    //},\r    position: {\r       x: -10,\r       y: 10\r    }\r  }\r}"
+    ],
+    "type": {
+      "names": [
+        "Object"
+      ]
+    },
+    "defaultvalue": "{}",
+    "properties": [
+      {
+        "type": {
+          "names": [
+            "Boolean"
+          ]
+        },
+        "optional": true,
+        "defaultvalue": false,
+        "description": "Show or hide labels on each data points",
+        "name": "donut.labels"
+      },
+      {
+        "type": {
+          "names": [
+            "function"
+          ]
+        },
+        "optional": true,
+        "defaultvalue": "{}",
+        "description": "Set formatter function for data labels.<br>\rThe formatter function receives 4 arguments such as v, id, i, j and it must return a string that will be shown as the label. The arguments are:<br>\r - `v` is the value of the data point where the label is shown.\r - `id` is the id of the data where the label is shown.\r - `i` is the index of the data point where the label is shown.\r - `j` is the sub index of the data point where the label is shown.<br><br>\rFormatter function can be defined for each data by specifying as an object and D3 formatter function can be set (ex. d3.format('$'))",
+        "name": "donut.labels.format"
+      },
+      {
+        "type": {
+          "names": [
+            "Number"
+          ]
+        },
+        "optional": true,
+        "defaultvalue": 0,
+        "description": "x coordinate position, relative the original.",
+        "name": "donut.labels.position.x"
+      },
+      {
+        "type": {
+          "names": [
+            "NUmber"
+          ]
+        },
+        "optional": true,
+        "defaultvalue": 0,
+        "description": "y coordinate position, relative the original.",
+        "name": "donut.labels.position.y"
+      }
+    ],
+    "meta": {
+      "lineno": 493,
+      "filename": "Options.js",
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
+    },
+    "order": 30
+  },
+  {
+    "id": "Options.data․order",
+    "longname": "Options.data․order",
+    "name": "data․order",
+    "kind": "member",
+    "scope": "static",
+    "description": "This option changes the order of stacking data and pieces of pie/donut.\r - If `null` specified, it will be the order the data loaded.\r - If function specified, it will be used as [Array.sort compareFunction](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#Parameters)<br><br>\r\r **Available Values:**\r - `desc`: In descending order\r - `asc`: In ascending order\r - `null`: It keeps the data load order\r - `function(data1, data2) { ... }`: Array.sort compareFunction",
+    "memberof": "Options",
+    "examples": [
+      "data․ {\r  // in descending order (default)\r  order: \"desc\"\r\r  // in ascending order\r  order: \"asc\"\r\r  // keeps data input order\r  order: null\r\r  // specifying sort function\r  order: function(a, b) {\r      // param data passed format\r      {\r         id: \"data1\", id_org: \"data1\", values: [\r             {x: 5, value: 250, id: \"data1\", index: 5, name: \"data1\"},\r             ...\r         ]\r      }\r  }\r}"
+    ],
+    "type": {
+      "names": [
+        "String",
+        "function",
+        "null"
+      ]
+    },
+    "defaultvalue": "desc",
+    "meta": {
+      "lineno": 533,
+      "filename": "Options.js",
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
+    },
+    "order": 31
+  },
+  {
+    "id": "Options.data․regions",
+    "longname": "Options.data․regions",
+    "name": "data․regions",
     "kind": "member",
     "scope": "static",
     "description": "Define regions for each data.<br><br>\rThe values must be an array for each data and it should include an object that has start, end, style. If start is not set, the start will be the first data point. If end is not set, the end will be the last data point.<br>\rCurrently this option supports only line chart and dashed style. If this option specified, the line will be dashed only in the regions.",
     "memberof": "Options",
     "examples": [
-      "data: {\r  regions: {\r    data1: [{\r        \"start\": 1,\r        \"end\": 2,\r        \"style\": \"dashed\"\r    }, {\r        \"start\":3\r    }],\r    ...\r  }\r}"
+      "data․ {\r  regions: {\r    data1: [{\r        \"start\": 1,\r        \"end\": 2,\r        \"style\": \"dashed\"\r    }, {\r        \"start\":3\r    }],\r    ...\r  }\r}"
     ],
     "type": {
       "names": [
@@ -926,22 +1066,22 @@ module.exports = [
     },
     "defaultvalue": "{}",
     "meta": {
-      "lineno": 487,
+      "lineno": 572,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 30
+    "order": 32
   },
   {
-    "id": "Options.data:color",
-    "longname": "Options.data:color",
-    "name": "data:color",
+    "id": "Options.data․color",
+    "longname": "Options.data․color",
+    "name": "data․color",
     "kind": "member",
     "scope": "static",
     "description": "Set color converter function.<br><br>\rThis option should a function and the specified function receives color (e.g. '#ff0000') and d that has data parameters like id, value, index, etc. And it must return a string that represents color (e.g. '#00ff00').",
     "memberof": "Options",
     "examples": [
-      "data: {\r  color: function(color, d) { ... }\r}"
+      "data․ {\r  color: function(color, d) { ... }\r}"
     ],
     "type": {
       "names": [
@@ -950,22 +1090,22 @@ module.exports = [
     },
     "defaultvalue": "undefined",
     "meta": {
-      "lineno": 511,
+      "lineno": 596,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 31
+    "order": 33
   },
   {
-    "id": "Options.data:colors",
-    "longname": "Options.data:colors",
-    "name": "data:colors",
+    "id": "Options.data․colors",
+    "longname": "Options.data․colors",
+    "name": "data․colors",
     "kind": "member",
     "scope": "static",
     "description": "Set color for each data.",
     "memberof": "Options",
     "examples": [
-      "data: {\r  colors: {\r    data1: \"#ff0000\",\r    ...\r  }\r}"
+      "data․ {\r  colors: {\r    data1: \"#ff0000\",\r    ...\r  }\r}"
     ],
     "type": {
       "names": [
@@ -974,22 +1114,22 @@ module.exports = [
     },
     "defaultvalue": "{}",
     "meta": {
-      "lineno": 525,
+      "lineno": 610,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 32
+    "order": 34
   },
   {
-    "id": "Options.data:hide",
-    "longname": "Options.data:hide",
-    "name": "data:hide",
+    "id": "Options.data․hide",
+    "longname": "Options.data․hide",
+    "name": "data․hide",
     "kind": "member",
     "scope": "static",
     "description": "Hide each data when the chart appears.<br><br>\rIf true specified, all of data will be hidden. If multiple ids specified as an array, those will be hidden.",
     "memberof": "Options",
     "examples": [
-      "data: {\r  // all of data will be hidden\r  hide: true\r  // specified data will be hidden\r  hide: [\"data1\", ...]\r}"
+      "data․ {\r  // all of data will be hidden\r  hide: true\r  // specified data will be hidden\r  hide: [\"data1\", ...]\r}"
     ],
     "type": {
       "names": [
@@ -999,22 +1139,22 @@ module.exports = [
     },
     "defaultvalue": "false",
     "meta": {
-      "lineno": 541,
+      "lineno": 626,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 33
+    "order": 35
   },
   {
-    "id": "Options.data:selection:enabled",
-    "longname": "Options.data:selection:enabled",
-    "name": "data:selection:enabled",
+    "id": "Options.data․selection․enabled",
+    "longname": "Options.data․selection․enabled",
+    "name": "data․selection․enabled",
     "kind": "member",
     "scope": "static",
     "description": "Set data selection enabled.<br><br>\rIf this option is set true, we can select the data points and get/set its state of selection by API (e.g. select, unselect, selected).",
     "memberof": "Options",
     "examples": [
-      "data: {\r    selection: {\r      enabled: true\r  }\r}"
+      "data․ {\r    selection․ {\r      enabled: true\r  }\r}"
     ],
     "type": {
       "names": [
@@ -1023,22 +1163,22 @@ module.exports = [
     },
     "defaultvalue": "false",
     "meta": {
-      "lineno": 559,
+      "lineno": 644,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 34
+    "order": 36
   },
   {
-    "id": "Options.data:selection:grouped",
-    "longname": "Options.data:selection:grouped",
-    "name": "data:selection:grouped",
+    "id": "Options.data․selection․grouped",
+    "longname": "Options.data․selection․grouped",
+    "name": "data․selection․grouped",
     "kind": "member",
     "scope": "static",
     "description": "Set grouped selection enabled.<br><br>\rIf this option set true, multiple data points that have same x value will be selected by one selection.",
     "memberof": "Options",
     "examples": [
-      "data: {\r    selection: {\r      grouped: true\r  }\r}"
+      "data․ {\r    selection․ {\r      grouped: true\r  }\r}"
     ],
     "type": {
       "names": [
@@ -1047,22 +1187,22 @@ module.exports = [
     },
     "defaultvalue": "false",
     "meta": {
-      "lineno": 575,
+      "lineno": 660,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 35
+    "order": 37
   },
   {
-    "id": "Options.data:selection:isselectable",
-    "longname": "Options.data:selection:isselectable",
-    "name": "data:selection:isselectable",
+    "id": "Options.data․selection․isselectable",
+    "longname": "Options.data․selection․isselectable",
+    "name": "data․selection․isselectable",
     "kind": "member",
     "scope": "static",
     "description": "Set a callback for each data point to determine if it's selectable or not.<br><br>\rThe callback will receive d as an argument and it has some parameters like id, value, index. This callback should return boolean.",
     "memberof": "Options",
     "examples": [
-      "data: {\r    selection: {\r      isselectable: function(d) { ... }\r  }\r}"
+      "data․ {\r    selection․ {\r      isselectable: function(d) { ... }\r  }\r}"
     ],
     "type": {
       "names": [
@@ -1071,22 +1211,22 @@ module.exports = [
     },
     "defaultvalue": "function() { return true; }",
     "meta": {
-      "lineno": 591,
+      "lineno": 676,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 36
+    "order": 38
   },
   {
-    "id": "Options.data:selection:multiple",
-    "longname": "Options.data:selection:multiple",
-    "name": "data:selection:multiple",
+    "id": "Options.data․selection․multiple",
+    "longname": "Options.data․selection․multiple",
+    "name": "data․selection․multiple",
     "kind": "member",
     "scope": "static",
     "description": "Set multiple data points selection enabled.<br><br>\rIf this option set true, multile data points can have the selected state at the same time. If false set, only one data point can have the selected state and the others will be unselected when the new data point is selected.",
     "memberof": "Options",
     "examples": [
-      "data: {\r    selection: {\r      multiple: false\r  }\r}"
+      "data․ {\r    selection․ {\r      multiple: false\r  }\r}"
     ],
     "type": {
       "names": [
@@ -1095,22 +1235,22 @@ module.exports = [
     },
     "defaultvalue": "true",
     "meta": {
-      "lineno": 607,
+      "lineno": 692,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 37
+    "order": 39
   },
   {
-    "id": "Options.data:selection:draggable",
-    "longname": "Options.data:selection:draggable",
-    "name": "data:selection:draggable",
+    "id": "Options.data․selection․draggable",
+    "longname": "Options.data․selection․draggable",
+    "name": "data․selection․draggable",
     "kind": "member",
     "scope": "static",
     "description": "Enable to select data points by dragging.<br><br>\rIf this option set true, data points can be selected by dragging.\r**NOTE:** If this option set true, scrolling on the chart will be disabled because dragging event will handle the event.",
     "memberof": "Options",
     "examples": [
-      "data: {\r    selection: {\r      draggable: true\r  }\r}"
+      "data․ {\r    selection․ {\r      draggable: true\r  }\r}"
     ],
     "type": {
       "names": [
@@ -1119,22 +1259,22 @@ module.exports = [
     },
     "defaultvalue": "false",
     "meta": {
-      "lineno": 623,
+      "lineno": 708,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 38
+    "order": 40
   },
   {
-    "id": "Options.data:onclick",
-    "longname": "Options.data:onclick",
-    "name": "data:onclick",
+    "id": "Options.data․onclick",
+    "longname": "Options.data․onclick",
+    "name": "data․onclick",
     "kind": "member",
     "scope": "static",
     "description": "Set a callback for click event on each data point.<br><br>\rThis callback will be called when each data point clicked and will receive d and element as the arguments. d is the data clicked and element is the element clicked. In this callback, this will be the Chart object.",
     "memberof": "Options",
     "examples": [
-      "data: {\r    onclick: function(d, element) { ... }\r}"
+      "data․ {\r    onclick: function(d, element) { ... }\r}"
     ],
     "type": {
       "names": [
@@ -1143,22 +1283,22 @@ module.exports = [
     },
     "defaultvalue": "function() {}",
     "meta": {
-      "lineno": 640,
+      "lineno": 725,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 39
+    "order": 41
   },
   {
-    "id": "Options.data:onover",
-    "longname": "Options.data:onover",
-    "name": "data:onover",
+    "id": "Options.data․onover",
+    "longname": "Options.data․onover",
+    "name": "data․onover",
     "kind": "member",
     "scope": "static",
     "description": "Set a callback for mouse/touch over event on each data point.<br><br>\rThis callback will be called when mouse cursor or via touch moves onto each data point and will receive d as the argument. d is the data where mouse cursor moves onto. In this callback, this will be the Chart object.",
     "memberof": "Options",
     "examples": [
-      "data: {\r    onover: function(d) { ... }\r}"
+      "data․ {\r    onover: function(d) { ... }\r}"
     ],
     "type": {
       "names": [
@@ -1167,22 +1307,22 @@ module.exports = [
     },
     "defaultvalue": "function() {}",
     "meta": {
-      "lineno": 654,
+      "lineno": 739,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 40
+    "order": 42
   },
   {
-    "id": "Options.data:onout",
-    "longname": "Options.data:onout",
-    "name": "data:onout",
+    "id": "Options.data․onout",
+    "longname": "Options.data․onout",
+    "name": "data․onout",
     "kind": "member",
     "scope": "static",
     "description": "Set a callback for mouse/touch out event on each data point.<br><br>\rThis callback will be called when mouse cursor or via touch moves out each data point and will receive d as the argument. d is the data where mouse cursor moves out. In this callback, this will be the Chart object.",
     "memberof": "Options",
     "examples": [
-      "data: {\r    onout: function(d) { ... }\r}"
+      "data․ {\r    onout: function(d) { ... }\r}"
     ],
     "type": {
       "names": [
@@ -1191,22 +1331,22 @@ module.exports = [
     },
     "defaultvalue": "function() {}",
     "meta": {
-      "lineno": 668,
+      "lineno": 753,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 41
+    "order": 43
   },
   {
-    "id": "Options.data:onselected",
-    "longname": "Options.data:onselected",
-    "name": "data:onselected",
+    "id": "Options.data․onselected",
+    "longname": "Options.data․onselected",
+    "name": "data․onselected",
     "kind": "member",
     "scope": "static",
     "description": "Set a callback for on data selection.",
     "memberof": "Options",
     "examples": [
-      "data: {\r    onselected: function(d) { ... }\r}"
+      "data․ {\r    onselected: function(d, element) {\r       // d - ex) {x: 4, value: 150, id: \"data1\", index: 4, name: \"data1\"}\r       // element - <circle>\r       ...\r   }\r}"
     ],
     "type": {
       "names": [
@@ -1215,22 +1355,22 @@ module.exports = [
     },
     "defaultvalue": "function() {}",
     "meta": {
-      "lineno": 682,
+      "lineno": 767,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 42
+    "order": 44
   },
   {
-    "id": "Options.data:onunselected",
-    "longname": "Options.data:onunselected",
-    "name": "data:onunselected",
+    "id": "Options.data․onunselected",
+    "longname": "Options.data․onunselected",
+    "name": "data․onunselected",
     "kind": "member",
     "scope": "static",
     "description": "Set a callback for on data un-selection.",
     "memberof": "Options",
     "examples": [
-      "data: {\r    onunselected: function(d) { ... }\r}"
+      "onunselected: function(d, element) {\r       // d - ex) {x: 4, value: 150, id: \"data1\", index: 4, name: \"data1\"}\r       // element - <circle>\r       ...\r   }"
     ],
     "type": {
       "names": [
@@ -1239,22 +1379,70 @@ module.exports = [
     },
     "defaultvalue": "function() {}",
     "meta": {
-      "lineno": 695,
+      "lineno": 784,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 43
+    "order": 45
   },
   {
-    "id": "Options.data:url",
-    "longname": "Options.data:url",
-    "name": "data:url",
+    "id": "Options.data․onmin",
+    "longname": "Options.data․onmin",
+    "name": "data․onmin",
+    "kind": "member",
+    "scope": "static",
+    "description": "Set a callback for minimum data",
+    "memberof": "Options",
+    "examples": [
+      "onmin: function(data) {\r       // data - ex) [{x: 3, value: 400, id: \"data1\", index: 3}, ... ]\r       ...\r   }"
+    ],
+    "type": {
+      "names": [
+        "function"
+      ]
+    },
+    "defaultvalue": "undefined",
+    "meta": {
+      "lineno": 799,
+      "filename": "Options.js",
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
+    },
+    "order": 46
+  },
+  {
+    "id": "Options.data․onmax",
+    "longname": "Options.data․onmax",
+    "name": "data․onmax",
+    "kind": "member",
+    "scope": "static",
+    "description": "Set a callback for maximum data",
+    "memberof": "Options",
+    "examples": [
+      "onmax: function(data) {\r       // data - ex) [{x: 3, value: 400, id: \"data1\", index: 3}, ... ]\r       ...\r   }"
+    ],
+    "type": {
+      "names": [
+        "function"
+      ]
+    },
+    "defaultvalue": "undefined",
+    "meta": {
+      "lineno": 813,
+      "filename": "Options.js",
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
+    },
+    "order": 47
+  },
+  {
+    "id": "Options.data․url",
+    "longname": "Options.data․url",
+    "name": "data․url",
     "kind": "member",
     "scope": "static",
     "description": "Load a CSV or JSON file from a URL. NOTE that this will not work if loading via the \"file://\" protocol as the most browsers will block XMLHTTPRequests.",
     "memberof": "Options",
     "examples": [
-      "data: {\r    url: \"/data/c3_test.csv\"\r}"
+      "data․ {\r    url: \"/data/c3_test.csv\"\r}"
     ],
     "type": {
       "names": [
@@ -1263,49 +1451,49 @@ module.exports = [
     },
     "defaultvalue": "undefined",
     "meta": {
-      "lineno": 708,
+      "lineno": 827,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 44
+    "order": 48
   },
   {
-    "id": "Options.data:json",
-    "longname": "Options.data:json",
-    "name": "data:json",
+    "id": "Options.data․json",
+    "longname": "Options.data․json",
+    "name": "data․json",
     "kind": "member",
     "scope": "static",
     "description": "Parse a JSON object for data. See also data.keys.",
     "memberof": "Options",
     "examples": [
-      "data: {\r    json: [\r      {name: \"www.site1.com\", upload: 200, download: 200, total: 400},\r      {name: \"www.site2.com\", upload: 100, download: 300, total: 400},\r      {name: \"www.site3.com\", upload: 300, download: 200, total: 500},\r      {name: \"www.site4.com\", upload: 400, download: 100, total: 500}\r    ],\r    keys: {\r      // x: \"name\", // it's possible to specify 'x' when category axis\r      value: [\"upload\", \"download\"]\r    }\r}"
+      "data․ {\r    json: [\r      {name: \"www.site1.com\", upload: 200, download: 200, total: 400},\r      {name: \"www.site2.com\", upload: 100, download: 300, total: 400},\r      {name: \"www.site3.com\", upload: 300, download: 200, total: 500},\r      {name: \"www.site4.com\", upload: 400, download: 100, total: 500}\r    ],\r    keys: {\r      // x: \"name\", // it's possible to specify 'x' when category axis\r      value: [\"upload\", \"download\"]\r    }\r}"
     ],
     "type": {
       "names": [
-        "Array"
+        "Object"
       ]
     },
     "defaultvalue": "undefined",
     "see": [
-      "data:keys"
+      "data․keys"
     ],
     "meta": {
-      "lineno": 722,
+      "lineno": 841,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 45
+    "order": 49
   },
   {
-    "id": "Options.data:rows",
-    "longname": "Options.data:rows",
-    "name": "data:rows",
+    "id": "Options.data․rows",
+    "longname": "Options.data․rows",
+    "name": "data․rows",
     "kind": "member",
     "scope": "static",
     "description": "Load data from a multidimensional array, with the first element containing the data names, the following containing related data in that order.",
     "memberof": "Options",
     "examples": [
-      "data: {\r  rows: [\r    [\"A\", \"B\", \"C\"],\r    [90, 120, 300],\r    [40, 160, 240],\r    [50, 200, 290],\r    [120, 160, 230],\r    [80, 130, 300],\r    [90, 220, 320]\r  ]\r}"
+      "data․ {\r  rows: [\r    [\"A\", \"B\", \"C\"],\r    [90, 120, 300],\r    [40, 160, 240],\r    [50, 200, 290],\r    [120, 160, 230],\r    [80, 130, 300],\r    [90, 220, 320]\r  ]\r}"
     ],
     "type": {
       "names": [
@@ -1314,22 +1502,22 @@ module.exports = [
     },
     "defaultvalue": "undefined",
     "meta": {
-      "lineno": 745,
+      "lineno": 864,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 46
+    "order": 50
   },
   {
-    "id": "Options.data:columns",
-    "longname": "Options.data:columns",
-    "name": "data:columns",
+    "id": "Options.data․columns",
+    "longname": "Options.data․columns",
+    "name": "data․columns",
     "kind": "member",
     "scope": "static",
     "description": "Load data from a multidimensional array, with each element containing an array consisting of a datum name and associated data values.",
     "memberof": "Options",
     "examples": [
-      "data: {\r  columns: [\r     [\"data1\", 30, 20, 50, 40, 60, 50],\r     [\"data2\", 200, 130, 90, 240, 130, 220],\r     [\"data3\", 300, 200, 160, 400, 250, 250]\r  ]\r}"
+      "data․ {\r  columns: [\r     [\"data1\", 30, 20, 50, 40, 60, 50],\r     [\"data2\", 200, 130, 90, 240, 130, 220],\r     [\"data3\", 300, 200, 160, 400, 250, 250]\r  ]\r}"
     ],
     "type": {
       "names": [
@@ -1338,22 +1526,22 @@ module.exports = [
     },
     "defaultvalue": "undefined",
     "meta": {
-      "lineno": 766,
+      "lineno": 885,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 47
+    "order": 51
   },
   {
-    "id": "Options.data:mimeType",
-    "longname": "Options.data:mimeType",
-    "name": "data:mimeType",
+    "id": "Options.data․mimeType",
+    "longname": "Options.data․mimeType",
+    "name": "data․mimeType",
     "kind": "member",
     "scope": "static",
     "description": "Used if loading JSON via data.url.",
     "memberof": "Options",
     "examples": [
-      "data: {\r   {\r      mimeType: \"json\"\r   }\r}"
+      "data․ {\r   {\r      mimeType: \"json\"\r   }\r}"
     ],
     "type": {
       "names": [
@@ -1362,22 +1550,22 @@ module.exports = [
     },
     "defaultvalue": "undefined",
     "meta": {
-      "lineno": 783,
+      "lineno": 902,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 48
+    "order": 52
   },
   {
-    "id": "Options.data:keys",
-    "longname": "Options.data:keys",
-    "name": "data:keys",
+    "id": "Options.data․keys",
+    "longname": "Options.data․keys",
+    "name": "data․keys",
     "kind": "member",
     "scope": "static",
     "description": "Choose which JSON object keys correspond to desired data.",
     "memberof": "Options",
     "examples": [
-      "data: {\r    json: [\r      {name: \"www.site1.com\", upload: 200, download: 200, total: 400},\r      {name: \"www.site2.com\", upload: 100, download: 300, total: 400},\r      {name: \"www.site3.com\", upload: 300, download: 200, total: 500},\r      {name: \"www.site4.com\", upload: 400, download: 100, total: 500}\r    ],\r    keys: {\r      // x: \"name\", // it's possible to specify 'x' when category axis\r      value: [\"upload\", \"download\"]\r    }\r}"
+      "data․ {\r    json: [\r      {name: \"www.site1.com\", upload: 200, download: 200, total: 400},\r      {name: \"www.site2.com\", upload: 100, download: 300, total: 400},\r      {name: \"www.site3.com\", upload: 300, download: 200, total: 500},\r      {name: \"www.site4.com\", upload: 400, download: 100, total: 500}\r    ],\r    keys: {\r      // x: \"name\", // it's possible to specify 'x' when category axis\r      value: [\"upload\", \"download\"]\r    }\r}"
     ],
     "type": {
       "names": [
@@ -1386,22 +1574,22 @@ module.exports = [
     },
     "defaultvalue": "undefined",
     "meta": {
-      "lineno": 798,
+      "lineno": 917,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 49
+    "order": 53
   },
   {
-    "id": "Options.data:empty:label:text",
-    "longname": "Options.data:empty:label:text",
-    "name": "data:empty:label:text",
+    "id": "Options.data․empty․label․text",
+    "longname": "Options.data․empty․label․text",
+    "name": "data․empty․label․text",
     "kind": "member",
     "scope": "static",
     "description": "Set text displayed when empty data.",
     "memberof": "Options",
     "examples": [
-      "data: {\r  empty: {\r    label: {\r      text: \"No Data\"\r    }\r  }\r}"
+      "data․ {\r  empty: {\r    label: {\r      text: \"No Data\"\r    }\r  }\r}"
     ],
     "type": {
       "names": [
@@ -1410,11 +1598,11 @@ module.exports = [
     },
     "defaultvalue": "\"\"",
     "meta": {
-      "lineno": 820,
+      "lineno": 939,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 50
+    "order": 54
   },
   {
     "id": "Options.subchart",
@@ -1466,11 +1654,11 @@ module.exports = [
       }
     ],
     "meta": {
-      "lineno": 837,
+      "lineno": 956,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 51
+    "order": 55
   },
   {
     "id": "Options.color",
@@ -1481,7 +1669,7 @@ module.exports = [
     "description": "Set color of the data values",
     "memberof": "Options",
     "examples": [
-      "color: {\r     pattern: [\"#1f77b4\", \"#aec7e8\", ...]\r }"
+      "color: {\r     pattern: [\"#1f77b4\", \"#aec7e8\", ...],\r\r     // Set colors' patterns\r     // it should return an array of SVGPatternElement\r     tiles: function() {\r        var pattern = document.createElementNS(\"http://www.w3.org/2000/svg\", \"pattern\");\r        var g = document.createElementNS(\"http://www.w3.org/2000/svg\", \"g\");\r        var circle1 = document.createElementNS(\"http://www.w3.org/2000/svg\", \"circle\");\r\r        pattern.setAttribute(\"patternUnits\", \"userSpaceOnUse\");\r        pattern.setAttribute(\"width\", \"32\");\r        pattern.setAttribute(\"height\", \"32\");\r\r        g.style.fill = \"#000\";\r        g.style.opacity = \"0.2\";\r\r        circle1.setAttribute(\"cx\", \"3\");\r        circle1.setAttribute(\"cy\", \"3\");\r        circle1.setAttribute(\"r\", \"3\");\r\r        g.appendChild(circle1);\r        pattern.appendChild(g);\r\r        return [pattern];\r     }\r }"
     ],
     "type": {
       "names": [
@@ -1498,6 +1686,16 @@ module.exports = [
         "optional": true,
         "description": "custom color pattern",
         "name": "color.pattern"
+      },
+      {
+        "type": {
+          "names": [
+            "function"
+          ]
+        },
+        "optional": true,
+        "description": "if defined, allows use svg's patterns to fill data area. It should return an array of [SVGPatternElement](https://developer.mozilla.org/en-US/docs/Web/API/SVGPatternElement).\r - **Note:** The pattern element's id will be defined as `bb-colorize-pattern-$COLOR-VALUE`.<br>\r   ex. When color pattern value is `['red', '#fff']` and defined 2 patterns,then ids for pattern elements are:<br>\r   - `bb-colorize-pattern-red`\r   - `bb-colorize-pattern-fff`",
+        "name": "color.tiles"
       },
       {
         "type": {
@@ -1532,7 +1730,7 @@ module.exports = [
       {
         "type": {
           "names": [
-            "Number"
+            "Array"
           ]
         },
         "optional": true,
@@ -1542,11 +1740,11 @@ module.exports = [
       }
     ],
     "meta": {
-      "lineno": 860,
+      "lineno": 979,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 52
+    "order": 56
   },
   {
     "id": "Options.legend",
@@ -1557,7 +1755,7 @@ module.exports = [
     "description": "Legend options",
     "memberof": "Options",
     "examples": [
-      "legend: {\r     show: true,\r     hide: true,\r     //or hide: \"data1\"\r     //or hide: [\"data1\", \"data2\"]\r     position: \"bottom\",  // bottom, right, inset\r     inset: {\r         anchor: \"top-right\"  // top-left, top-right, bottom-left, bottom-right\r         x: 20,\r         y: 10,\r         step: 2\r     },\r     onclick: function(id) { ... },\r     onover: function(id) { ... },\r     onout: function(id) { ... }\r }"
+      "legend: {\r     show: true,\r     hide: true,\r     //or hide: \"data1\"\r     //or hide: [\"data1\", \"data2\"]\r     contents: {\r         bindto: \"#legend\",   // <ul id='legend'></ul>\r\r         // will be as: <li style='background-color:#1f77b4'>data1</li>\r         template: \"<li style='background-color:{=COLOR}'>{=TITLE}</li>\"\r\r         // or using function\r         template: function(title, color) {\r              // if you want omit some legend, return falsy value\r              if (title !== \"data1\") {\r                   return \"<li style='background-color:\"+ color +\">\"+ title +\"</li>\";\r              }\r         }\r     },\r     position: \"bottom\",  // bottom, right, inset\r     inset: {\r         anchor: \"top-right\"  // top-left, top-right, bottom-left, bottom-right\r         x: 20,\r         y: 10,\r         step: 2\r     },\r     equally: false,\r     padding: 10,\r     item: {\r         onclick: function(id) { ... },\r         onover: function(id) { ... },\r         onout: function(id) { ... },\r\r         // set tile's size\r         tile: {\r             width: 20,\r             height: 15\r         }\r     }\r }"
     ],
     "type": {
       "names": [
@@ -1590,6 +1788,28 @@ module.exports = [
       {
         "type": {
           "names": [
+            "String",
+            "HTMLElement"
+          ]
+        },
+        "optional": true,
+        "description": "Set CSS selector or element reference to bind legend items.",
+        "name": "legend.contents.bindto"
+      },
+      {
+        "type": {
+          "names": [
+            "String",
+            "function"
+          ]
+        },
+        "optional": true,
+        "description": "Set item's template.<br>\r     If set string value, within template the 'color' and 'title' can be replaced using template-like syntax string:\r     - {=COLOR}: data color value\r     - {=TITLE}: data title value",
+        "name": "legend.contents.template"
+      },
+      {
+        "type": {
+          "names": [
             "String"
           ]
         },
@@ -1608,6 +1828,28 @@ module.exports = [
         "defaultvalue": "{anchor: 'top-left',x: 10,y: 0,step: undefined}",
         "description": "Change inset legend attributes.<br>\r     This option accepts object that has the keys anchor, x, y and step.\r     anchor decides the position of the legend. These anchors are available:\r     - top-left\r     - top-right\r     - bottom-left\r     - bottom-right\r x and y set the position of the legend based on the anchor.<br>\r step defines the max step the lagend has (e.g. If 2 set and legend has 3 legend item, the legend 2 columns).",
         "name": "legend.inset"
+      },
+      {
+        "type": {
+          "names": [
+            "Boolean"
+          ]
+        },
+        "optional": true,
+        "defaultvalue": false,
+        "description": "Set to all items have same width size.",
+        "name": "legend.equally"
+      },
+      {
+        "type": {
+          "names": [
+            "Boolean"
+          ]
+        },
+        "optional": true,
+        "defaultvalue": 0,
+        "description": "Set padding value",
+        "name": "legend.padding"
       },
       {
         "type": {
@@ -1638,19 +1880,41 @@ module.exports = [
         "optional": true,
         "description": "Set mouse/touch out event handler to the legend item.",
         "name": "legend.item.onout"
+      },
+      {
+        "type": {
+          "names": [
+            "Number"
+          ]
+        },
+        "optional": true,
+        "defaultvalue": 10,
+        "description": "Set width of item tile element",
+        "name": "legend.item.tile.width"
+      },
+      {
+        "type": {
+          "names": [
+            "Number"
+          ]
+        },
+        "optional": true,
+        "defaultvalue": 10,
+        "description": "Set height of item tile element",
+        "name": "legend.item.tile.height"
       }
     ],
     "meta": {
-      "lineno": 878,
+      "lineno": 1027,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 53
+    "order": 57
   },
   {
-    "id": "Options.axis:rotated",
-    "longname": "Options.axis:rotated",
-    "name": "axis:rotated",
+    "id": "Options.axis․rotated",
+    "longname": "Options.axis․rotated",
+    "name": "axis․rotated",
     "kind": "member",
     "scope": "static",
     "description": "Switch x and y axis position.",
@@ -1665,16 +1929,16 @@ module.exports = [
     },
     "defaultvalue": "false",
     "meta": {
-      "lineno": 933,
+      "lineno": 1117,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 54
+    "order": 58
   },
   {
-    "id": "Options.axis:x:show",
-    "longname": "Options.axis:x:show",
-    "name": "axis:x:show",
+    "id": "Options.axis․x․show",
+    "longname": "Options.axis․x․show",
+    "name": "axis․x․show",
     "kind": "member",
     "scope": "static",
     "description": "Show or hide x axis.",
@@ -1689,16 +1953,16 @@ module.exports = [
     },
     "defaultvalue": "true",
     "meta": {
-      "lineno": 946,
+      "lineno": 1130,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 55
+    "order": 59
   },
   {
-    "id": "Options.axis:x:type",
-    "longname": "Options.axis:x:type",
-    "name": "axis:x:type",
+    "id": "Options.axis․x․type",
+    "longname": "Options.axis․x․type",
+    "name": "axis․x․type",
     "kind": "member",
     "scope": "static",
     "description": "Set type of x axis.<br><br>\r**Available Values:**\r- timeseries\r- category\r- indexed",
@@ -1713,16 +1977,16 @@ module.exports = [
     },
     "defaultvalue": "indexed",
     "meta": {
-      "lineno": 961,
+      "lineno": 1145,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 56
+    "order": 60
   },
   {
-    "id": "Options.axis:x:localtime",
-    "longname": "Options.axis:x:localtime",
-    "name": "axis:x:localtime",
+    "id": "Options.axis․x․localtime",
+    "longname": "Options.axis․x․localtime",
+    "name": "axis․x․localtime",
     "kind": "member",
     "scope": "static",
     "description": "Set how to treat the timezone of x values.<br>\rIf true, treat x value as localtime. If false, convert to UTC internally.",
@@ -1737,16 +2001,16 @@ module.exports = [
     },
     "defaultvalue": "true",
     "meta": {
-      "lineno": 980,
+      "lineno": 1164,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 57
+    "order": 61
   },
   {
-    "id": "Options.axis:x:categories",
-    "longname": "Options.axis:x:categories",
-    "name": "axis:x:categories",
+    "id": "Options.axis․x․categories",
+    "longname": "Options.axis․x․categories",
+    "name": "axis․x․categories",
     "kind": "member",
     "scope": "static",
     "description": "Set category names on category axis.\rThis must be an array that includes category names in string. If category names are included in the date by data.x option, this is not required.",
@@ -1761,16 +2025,16 @@ module.exports = [
     },
     "defaultvalue": "[]",
     "meta": {
-      "lineno": 996,
+      "lineno": 1180,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 58
+    "order": 62
   },
   {
-    "id": "Options.axis:x:tick:centered",
-    "longname": "Options.axis:x:tick:centered",
-    "name": "axis:x:tick:centered",
+    "id": "Options.axis․x․tick․centered",
+    "longname": "Options.axis․x․tick․centered",
+    "name": "axis․x․tick․centered",
     "kind": "member",
     "scope": "static",
     "description": "Centerise ticks on category axis.",
@@ -1785,16 +2049,16 @@ module.exports = [
     },
     "defaultvalue": "false",
     "meta": {
-      "lineno": 1012,
+      "lineno": 1196,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 59
+    "order": 63
   },
   {
-    "id": "Options.axis:x:tick:format",
-    "longname": "Options.axis:x:tick:format",
-    "name": "axis:x:tick:format",
+    "id": "Options.axis․x․tick․format",
+    "longname": "Options.axis․x․tick․format",
+    "name": "axis․x․tick․format",
     "kind": "member",
     "scope": "static",
     "description": "A function to format tick value. Format string is also available for timeseries data.",
@@ -1809,16 +2073,16 @@ module.exports = [
     },
     "defaultvalue": "undefined",
     "meta": {
-      "lineno": 1029,
+      "lineno": 1213,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 60
+    "order": 64
   },
   {
-    "id": "Options.axis:x:tick:culling",
-    "longname": "Options.axis:x:tick:culling",
-    "name": "axis:x:tick:culling",
+    "id": "Options.axis․x․tick․culling",
+    "longname": "Options.axis․x․tick․culling",
+    "name": "axis․x․tick․culling",
     "kind": "member",
     "scope": "static",
     "description": "Setting for culling ticks.<br><br>\rIf true is set, the ticks will be culled, then only limitted tick text will be shown. This option does not hide the tick lines. If false is set, all of ticks will be shown.<br><br>\rWe can change the number of ticks to be shown by axis.x.tick.culling.max.",
@@ -1828,21 +2092,21 @@ module.exports = [
     ],
     "type": {
       "names": [
-        "function"
+        "Boolean"
       ]
     },
     "defaultvalue": "- true for indexed axis and timeseries axis\r- false for category axis",
     "meta": {
-      "lineno": 1048,
+      "lineno": 1232,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 61
+    "order": 65
   },
   {
-    "id": "Options.axis:x:tick:culling:max",
-    "longname": "Options.axis:x:tick:culling:max",
-    "name": "axis:x:tick:culling:max",
+    "id": "Options.axis․x․tick․culling․max",
+    "longname": "Options.axis․x․tick․culling․max",
+    "name": "axis․x․tick․culling․max",
     "kind": "member",
     "scope": "static",
     "description": "The number of tick texts will be adjusted to less than this value.",
@@ -1857,16 +2121,16 @@ module.exports = [
     },
     "defaultvalue": "10",
     "meta": {
-      "lineno": 1069,
+      "lineno": 1253,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 62
+    "order": 66
   },
   {
-    "id": "Options.axis:x:tick:count",
-    "longname": "Options.axis:x:tick:count",
-    "name": "axis:x:tick:count",
+    "id": "Options.axis․x․tick․count",
+    "longname": "Options.axis․x․tick․count",
+    "name": "axis․x․tick․count",
     "kind": "member",
     "scope": "static",
     "description": "The number of x axis ticks to show.<br><br>\rThis option hides tick lines together with tick text. If this option is used on timeseries axis, the ticks position will be determined precisely and not nicely positioned (e.g. it will have rough second value).",
@@ -1881,16 +2145,16 @@ module.exports = [
     },
     "defaultvalue": "undefined",
     "meta": {
-      "lineno": 1088,
+      "lineno": 1272,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 63
+    "order": 67
   },
   {
-    "id": "Options.axis:x:tick:fit",
-    "longname": "Options.axis:x:tick:fit",
-    "name": "axis:x:tick:fit",
+    "id": "Options.axis․x․tick․fit",
+    "longname": "Options.axis․x․tick․fit",
+    "name": "axis․x․tick․fit",
     "kind": "member",
     "scope": "static",
     "description": "Fit x axis ticks.<br><br>\rIf true set, the ticks will be positioned nicely. If false set, the ticks will be positioned according to x value of the data points.",
@@ -1905,16 +2169,16 @@ module.exports = [
     },
     "defaultvalue": "true",
     "meta": {
-      "lineno": 1106,
+      "lineno": 1290,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 64
+    "order": 68
   },
   {
-    "id": "Options.axis:x:tick:values",
-    "longname": "Options.axis:x:tick:values",
-    "name": "axis:x:tick:values",
+    "id": "Options.axis․x․tick․values",
+    "longname": "Options.axis․x․tick․values",
+    "name": "axis․x․tick․values",
     "kind": "member",
     "scope": "static",
     "description": "Set the x values of ticks manually.<br><br>\rIf this option is provided, the position of the ticks will be determined based on those values. This option works with timeseries data and the x values will be parsed accoding to the type of the value and data.xFormat option.",
@@ -1929,16 +2193,16 @@ module.exports = [
     },
     "defaultvalue": "null",
     "meta": {
-      "lineno": 1124,
+      "lineno": 1308,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 65
+    "order": 69
   },
   {
-    "id": "Options.axis:x:tick:rotate",
-    "longname": "Options.axis:x:tick:rotate",
-    "name": "axis:x:tick:rotate",
+    "id": "Options.axis․x․tick․rotate",
+    "longname": "Options.axis․x․tick․rotate",
+    "name": "axis․x․tick․rotate",
     "kind": "member",
     "scope": "static",
     "description": "Rotate x axis tick text.<br>\rIf you set negative value, it will rotate to opposite direction.",
@@ -1953,16 +2217,16 @@ module.exports = [
     },
     "defaultvalue": "0",
     "meta": {
-      "lineno": 1142,
+      "lineno": 1326,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 66
+    "order": 70
   },
   {
-    "id": "Options.axis:x:tick:outer",
-    "longname": "Options.axis:x:tick:outer",
-    "name": "axis:x:tick:outer",
+    "id": "Options.axis․x․tick․outer",
+    "longname": "Options.axis․x․tick․outer",
+    "name": "axis․x․tick․outer",
     "kind": "member",
     "scope": "static",
     "description": "Show x axis outer tick.",
@@ -1977,16 +2241,16 @@ module.exports = [
     },
     "defaultvalue": "true",
     "meta": {
-      "lineno": 1160,
+      "lineno": 1344,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 67
+    "order": 71
   },
   {
-    "id": "Options.axis:x:tick:multiline",
-    "longname": "Options.axis:x:tick:multiline",
-    "name": "axis:x:tick:multiline",
+    "id": "Options.axis․x․tick․multiline",
+    "longname": "Options.axis․x․tick․multiline",
+    "name": "axis․x․tick․multiline",
     "kind": "member",
     "scope": "static",
     "description": "Set tick text to be multiline",
@@ -2001,16 +2265,16 @@ module.exports = [
     },
     "defaultvalue": "true",
     "meta": {
-      "lineno": 1177,
+      "lineno": 1361,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 68
+    "order": 72
   },
   {
-    "id": "Options.axis:x:tick:width",
-    "longname": "Options.axis:x:tick:width",
-    "name": "axis:x:tick:width",
+    "id": "Options.axis․x․tick․width",
+    "longname": "Options.axis․x․tick․width",
+    "name": "axis․x․tick․width",
     "kind": "member",
     "scope": "static",
     "description": "Set tick width",
@@ -2025,16 +2289,16 @@ module.exports = [
     },
     "defaultvalue": "null",
     "meta": {
-      "lineno": 1195,
+      "lineno": 1379,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 69
+    "order": 73
   },
   {
-    "id": "Options.axis:x:max",
-    "longname": "Options.axis:x:max",
-    "name": "axis:x:max",
+    "id": "Options.axis․x․max",
+    "longname": "Options.axis․x․max",
+    "name": "axis․x․max",
     "kind": "member",
     "scope": "static",
     "description": "Set max value of x axis range.",
@@ -2049,16 +2313,16 @@ module.exports = [
     },
     "defaultvalue": "undefined",
     "meta": {
-      "lineno": 1212,
+      "lineno": 1396,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 70
+    "order": 74
   },
   {
-    "id": "Options.axis:x:min",
-    "longname": "Options.axis:x:min",
-    "name": "axis:x:min",
+    "id": "Options.axis․x․min",
+    "longname": "Options.axis․x․min",
+    "name": "axis․x․min",
     "kind": "member",
     "scope": "static",
     "description": "Set min value of x axis range.",
@@ -2073,16 +2337,16 @@ module.exports = [
     },
     "defaultvalue": "undefined",
     "meta": {
-      "lineno": 1227,
+      "lineno": 1411,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 71
+    "order": 75
   },
   {
-    "id": "Options.axis:x:padding",
-    "longname": "Options.axis:x:padding",
-    "name": "axis:x:padding",
+    "id": "Options.axis․x․padding",
+    "longname": "Options.axis․x․padding",
+    "name": "axis․x․padding",
     "kind": "member",
     "scope": "static",
     "description": "Set padding for x axis.<br><br>\rIf this option is set, the range of x axis will increase/decrease according to the values.\rIf no padding is needed in the rage of x axis, 0 should be set.\r- **NOTE:**\r  The padding values aren't based on pixels. It differs according axis types<br>\r  - **category:** The unit of tick value\r    ex. the given value `1`, is same as the width of 1 tick width\r  - **timeseries:** Numeric time value\r    ex. the given value `1000*60*60*24`, which is numeric time equivalent of a day, is same as the width of 1 tick width",
@@ -2097,16 +2361,16 @@ module.exports = [
     },
     "defaultvalue": "{}",
     "meta": {
-      "lineno": 1242,
+      "lineno": 1426,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 72
+    "order": 76
   },
   {
-    "id": "Options.axis:x:height",
-    "longname": "Options.axis:x:height",
-    "name": "axis:x:height",
+    "id": "Options.axis․x․height",
+    "longname": "Options.axis․x․height",
+    "name": "axis․x․height",
     "kind": "member",
     "scope": "static",
     "description": "Set height of x axis.<br><br>\rThe height of x axis can be set manually by this option. If you need more space for x axis, please use this option for that. The unit is pixel.",
@@ -2121,22 +2385,22 @@ module.exports = [
     },
     "defaultvalue": "undefined",
     "meta": {
-      "lineno": 1273,
+      "lineno": 1457,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 73
+    "order": 77
   },
   {
-    "id": "Options.axis:x:extent",
-    "longname": "Options.axis:x:extent",
-    "name": "axis:x:extent",
+    "id": "Options.axis․x․extent",
+    "longname": "Options.axis․x․extent",
+    "name": "axis․x․extent",
     "kind": "member",
     "scope": "static",
     "description": "Set default extent for subchart and zoom. This can be an array or function that returns an array.",
     "memberof": "Options",
     "examples": [
-      "axis: {\r  x: {\r    // [[x0, y0], [x1, y1]], where [x0, y0] is the top-left corner and [x1, y1] is the bottom-right corner\r    // https://github.com/d3/d3-brush/blob/master/src/brush.js#L521\r    extent: [[0, 0], [200, 60]]\r  }\r}"
+      "axis: {\r  x: {\r    // [[x0, y0], [x1, y1]], where [x0, y0] is the top-left corner and [x1, y1] is the bottom-right corner\r    // https://github.com/d3/d3-brush/blob/master/src/brush.js#L521\r    extent: [\r        [0, 0], [200, 60]\r    ]\r  }\r}"
     ],
     "type": {
       "names": [
@@ -2145,19 +2409,19 @@ module.exports = [
     },
     "defaultvalue": "undefined",
     "meta": {
-      "lineno": 1289,
+      "lineno": 1473,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 74
+    "order": 78
   },
   {
-    "id": "Options.axis:x:label",
-    "longname": "Options.axis:x:label",
-    "name": "axis:x:label",
+    "id": "Options.axis․x․label",
+    "longname": "Options.axis․x․label",
+    "name": "axis․x․label",
     "kind": "member",
     "scope": "static",
-    "description": "Set label on x axis.<br><br>\r You can set x axis label and change its position by this option. string and object can be passed and we can change the poisiton by passing object that has position key. Available position differs according to the axis direction (vertical or horizontal). If string set, the position will be the default.\r - If it's horizontal axis:\r   - inner-right [default]\r   - inner-center\r   - inner-left\r   - outer-right\r   - outer-center\r   - outer-left\r - If it's vertical axis:\r   - inner-top [default]\r   - inner-middle\r   - inner-bottom\r   - outer-top\r   - outer-middle\r   - outer-bottom",
+    "description": "Set label on x axis.<br><br>\r You can set x axis label and change its position by this option. string and object can be passed and we can change the poisiton by passing object that has position key. Available position differs according to the axis direction (vertical or horizontal). If string set, the position will be the default.\r - **If it's horizontal axis:**\r   - inner-right [default]\r   - inner-center\r   - inner-left\r   - outer-right\r   - outer-center\r   - outer-left\r - **If it's vertical axis:**\r   - inner-top [default]\r   - inner-middle\r   - inner-bottom\r   - outer-top\r   - outer-middle\r   - outer-bottom",
     "memberof": "Options",
     "examples": [
       "axis: {\r  x: {\r    label: \"Your X Axis\"\r  }\r}\r\raxis: {\r  x: {\r    label: {\r       text: \"Your X Axis\",\r       position: \"outer-center\"\r    }\r  }\r}"
@@ -2170,16 +2434,16 @@ module.exports = [
     },
     "defaultvalue": "undefined",
     "meta": {
-      "lineno": 1306,
+      "lineno": 1492,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 75
+    "order": 79
   },
   {
-    "id": "Options.axis:y:show",
-    "longname": "Options.axis:y:show",
-    "name": "axis:y:show",
+    "id": "Options.axis․y․show",
+    "longname": "Options.axis․y․show",
+    "name": "axis․y․show",
     "kind": "member",
     "scope": "static",
     "description": "Show or hide y axis.",
@@ -2194,16 +2458,16 @@ module.exports = [
     },
     "defaultvalue": "true",
     "meta": {
-      "lineno": 1345,
+      "lineno": 1531,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 76
+    "order": 80
   },
   {
-    "id": "Options.axis:y:type",
-    "longname": "Options.axis:y:type",
-    "name": "axis:y:type",
+    "id": "Options.axis․y․type",
+    "longname": "Options.axis․y․type",
+    "name": "axis․y․type",
     "kind": "member",
     "scope": "static",
     "description": "Set type of y axis.<br><br>\r**Available Values:**\r  - timeseries\r  - category\r  - indexed",
@@ -2218,16 +2482,16 @@ module.exports = [
     },
     "defaultvalue": "undefined",
     "meta": {
-      "lineno": 1360,
+      "lineno": 1546,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 77
+    "order": 81
   },
   {
-    "id": "Options.axis:y:max",
-    "longname": "Options.axis:y:max",
-    "name": "axis:y:max",
+    "id": "Options.axis․y․max",
+    "longname": "Options.axis․y․max",
+    "name": "axis․y․max",
     "kind": "member",
     "scope": "static",
     "description": "Set max value of y axis.\r- **NOTE:** Padding will be added based on this value, so if you don't need the padding, please set axis.y.padding to disable it (e.g. axis.y.padding = 0).",
@@ -2242,16 +2506,16 @@ module.exports = [
     },
     "defaultvalue": "undefined",
     "meta": {
-      "lineno": 1379,
+      "lineno": 1565,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 78
+    "order": 82
   },
   {
-    "id": "Options.axis:y:min",
-    "longname": "Options.axis:y:min",
-    "name": "axis:y:min",
+    "id": "Options.axis․y․min",
+    "longname": "Options.axis․y․min",
+    "name": "axis․y․min",
     "kind": "member",
     "scope": "static",
     "description": "Set min value of y axis.\r- **NOTE:**\r  Padding will be added based on this value, so if you don't need the padding, please set axis.y.padding to disable it (e.g. axis.y.padding = 0).",
@@ -2266,16 +2530,16 @@ module.exports = [
     },
     "defaultvalue": "undefined",
     "meta": {
-      "lineno": 1395,
+      "lineno": 1581,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 79
+    "order": 83
   },
   {
-    "id": "Options.axis:y:inverted",
-    "longname": "Options.axis:y:inverted",
-    "name": "axis:y:inverted",
+    "id": "Options.axis․y․inverted",
+    "longname": "Options.axis․y․inverted",
+    "name": "axis․y․inverted",
     "kind": "member",
     "scope": "static",
     "description": "Change the direction of y axis.<br><br>\rIf true set, the direction will be from the top to the bottom.",
@@ -2290,16 +2554,16 @@ module.exports = [
     },
     "defaultvalue": "false",
     "meta": {
-      "lineno": 1412,
+      "lineno": 1598,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 80
+    "order": 84
   },
   {
-    "id": "Options.axis:y:center",
-    "longname": "Options.axis:y:center",
-    "name": "axis:y:center",
+    "id": "Options.axis․y․center",
+    "longname": "Options.axis․y․center",
+    "name": "axis․y․center",
     "kind": "member",
     "scope": "static",
     "description": "Set center value of y axis.",
@@ -2314,16 +2578,16 @@ module.exports = [
     },
     "defaultvalue": "undefined",
     "meta": {
-      "lineno": 1428,
+      "lineno": 1614,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 81
+    "order": 85
   },
   {
-    "id": "Options.axis:y:inner",
-    "longname": "Options.axis:y:inner",
-    "name": "axis:y:inner",
+    "id": "Options.axis․y․inner",
+    "longname": "Options.axis․y․inner",
+    "name": "axis․y․inner",
     "kind": "member",
     "scope": "static",
     "description": "Show y axis inside of the chart.",
@@ -2338,16 +2602,16 @@ module.exports = [
     },
     "defaultvalue": "false",
     "meta": {
-      "lineno": 1443,
+      "lineno": 1629,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 82
+    "order": 86
   },
   {
-    "id": "Options.axis:y:label",
-    "longname": "Options.axis:y:label",
-    "name": "axis:y:label",
+    "id": "Options.axis․y․label",
+    "longname": "Options.axis․y․label",
+    "name": "axis․y․label",
     "kind": "member",
     "scope": "static",
     "description": "Set label on y axis.<br><br>\rYou can set y axis label and change its position by this option. This option works in the same way as axis.x.label.",
@@ -2363,16 +2627,16 @@ module.exports = [
     },
     "defaultvalue": "{}",
     "meta": {
-      "lineno": 1458,
+      "lineno": 1644,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 83
+    "order": 87
   },
   {
-    "id": "Options.axis:y:format",
-    "longname": "Options.axis:y:format",
-    "name": "axis:y:format",
+    "id": "Options.axis․y․format",
+    "longname": "Options.axis․y․format",
+    "name": "axis․y․format",
     "kind": "member",
     "scope": "static",
     "description": "Set formatter for y axis tick text.<br><br>\rThis option accepts d3.format object as well as a function you define.",
@@ -2387,16 +2651,16 @@ module.exports = [
     },
     "defaultvalue": "undefined",
     "meta": {
-      "lineno": 1483,
+      "lineno": 1669,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 84
+    "order": 88
   },
   {
-    "id": "Options.axis:y:tick:outer",
-    "longname": "Options.axis:y:tick:outer",
-    "name": "axis:y:tick:outer",
+    "id": "Options.axis․y․tick․outer",
+    "longname": "Options.axis․y․tick․outer",
+    "name": "axis․y․tick․outer",
     "kind": "member",
     "scope": "static",
     "description": "Show y axis outer tick.",
@@ -2411,16 +2675,16 @@ module.exports = [
     },
     "defaultvalue": "true",
     "meta": {
-      "lineno": 1503,
+      "lineno": 1689,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 85
+    "order": 89
   },
   {
-    "id": "Options.axis:y:tick:values",
-    "longname": "Options.axis:y:tick:values",
-    "name": "axis:y:tick:values",
+    "id": "Options.axis․y․tick․values",
+    "longname": "Options.axis․y․tick․values",
+    "name": "axis․y․tick․values",
     "kind": "member",
     "scope": "static",
     "description": "Set y axis tick values manually.",
@@ -2435,16 +2699,16 @@ module.exports = [
     },
     "defaultvalue": "null",
     "meta": {
-      "lineno": 1520,
+      "lineno": 1706,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 86
+    "order": 90
   },
   {
-    "id": "Options.axis:y:tick:count",
-    "longname": "Options.axis:y:tick:count",
-    "name": "axis:y:tick:count",
+    "id": "Options.axis․y․tick․count",
+    "longname": "Options.axis․y․tick․count",
+    "name": "axis․y․tick․count",
     "kind": "member",
     "scope": "static",
     "description": "Set the number of y axis ticks.<br><br>\r- **NOTE:** The position of the ticks will be calculated precisely, so the values on the ticks will not be rounded nicely. In the case, axis.y.tick.format or axis.y.tick.values will be helpful.",
@@ -2459,16 +2723,16 @@ module.exports = [
     },
     "defaultvalue": "undefined",
     "meta": {
-      "lineno": 1538,
+      "lineno": 1724,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 87
+    "order": 91
   },
   {
-    "id": "Options.axis:y:tick:time",
-    "longname": "Options.axis:y:tick:time",
-    "name": "axis:y:tick:time",
+    "id": "Options.axis․y․tick․time",
+    "longname": "Options.axis․y․tick․time",
+    "name": "axis․y․tick․time",
     "kind": "member",
     "scope": "static",
     "description": "Set the number of y axis ticks.<br><br>\r**NOTE:** The position of the ticks will be calculated precisely, so the values on the ticks will not be rounded nicely. In the case, axis.y.tick.format or axis.y.tick.values will be helpful.",
@@ -2495,19 +2759,19 @@ module.exports = [
     ],
     "access": "private",
     "meta": {
-      "lineno": 1556,
+      "lineno": 1742,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 88
+    "order": 92
   },
   {
-    "id": "Options.axis:y:padding",
-    "longname": "Options.axis:y:padding",
-    "name": "axis:y:padding",
+    "id": "Options.axis․y․padding",
+    "longname": "Options.axis․y․padding",
+    "name": "axis․y․padding",
     "kind": "member",
     "scope": "static",
-    "description": "Set padding for y axis.<br><br>\rYou can set padding for y axis to create more space on the edge of the axis. This option accepts object and it can include top and bottom. top, bottom will be treated as pixels.",
+    "description": "Set padding for y axis.<br><br>\rYou can set padding for y axis to create more space on the edge of the axis.\rThis option accepts object and it can include top and bottom. top, bottom will be treated as pixels.\r\r**NOTE:** For area and bar type charts, [area.zerobased](#.area) or [bar.zerobased](#.bar) options should be set to 'false` to get padded bottom.",
     "memberof": "Options",
     "examples": [
       "axis: {\r  y: {\r    padding: {\r      top: 0,\r      bottom: 0\r    }\r  }\r}"
@@ -2519,16 +2783,16 @@ module.exports = [
     },
     "defaultvalue": "{}",
     "meta": {
-      "lineno": 1580,
+      "lineno": 1766,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 89
+    "order": 93
   },
   {
-    "id": "Options.axis:y:default",
-    "longname": "Options.axis:y:default",
-    "name": "axis:y:default",
+    "id": "Options.axis․y․default",
+    "longname": "Options.axis․y․default",
+    "name": "axis․y․default",
     "kind": "member",
     "scope": "static",
     "description": "Set default range of y axis.<br><br>\rThis option set the default value for y axis when there is no data on init.",
@@ -2543,16 +2807,16 @@ module.exports = [
     },
     "defaultvalue": "undefined",
     "meta": {
-      "lineno": 1599,
+      "lineno": 1788,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 90
+    "order": 94
   },
   {
-    "id": "Options.axis:y2:show",
-    "longname": "Options.axis:y2:show",
-    "name": "axis:y2:show",
+    "id": "Options.axis․y2․show",
+    "longname": "Options.axis․y2․show",
+    "name": "axis․y2․show",
     "kind": "member",
     "scope": "static",
     "description": "Show or hide y2 axis.",
@@ -2567,16 +2831,16 @@ module.exports = [
     },
     "defaultvalue": "false",
     "meta": {
-      "lineno": 1615,
+      "lineno": 1804,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 91
+    "order": 95
   },
   {
-    "id": "Options.axis:y2:max",
-    "longname": "Options.axis:y2:max",
-    "name": "axis:y2:max",
+    "id": "Options.axis․y2․max",
+    "longname": "Options.axis․y2․max",
+    "name": "axis․y2․max",
     "kind": "member",
     "scope": "static",
     "description": "Set max value of y2 axis.",
@@ -2591,16 +2855,16 @@ module.exports = [
     },
     "defaultvalue": "undefined",
     "meta": {
-      "lineno": 1630,
+      "lineno": 1819,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 92
+    "order": 96
   },
   {
-    "id": "Options.axis:y2:min",
-    "longname": "Options.axis:y2:min",
-    "name": "axis:y2:min",
+    "id": "Options.axis․y2․min",
+    "longname": "Options.axis․y2․min",
+    "name": "axis․y2․min",
     "kind": "member",
     "scope": "static",
     "description": "Set min value of y2 axis.",
@@ -2615,16 +2879,16 @@ module.exports = [
     },
     "defaultvalue": "undefined",
     "meta": {
-      "lineno": 1645,
+      "lineno": 1834,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 93
+    "order": 97
   },
   {
-    "id": "Options.axis:y2:inverted",
-    "longname": "Options.axis:y2:inverted",
-    "name": "axis:y2:inverted",
+    "id": "Options.axis․y2․inverted",
+    "longname": "Options.axis․y2․inverted",
+    "name": "axis․y2․inverted",
     "kind": "member",
     "scope": "static",
     "description": "Change the direction of y2 axis.<br><br>\rIf true set, the direction will be from the top to the bottom.",
@@ -2639,16 +2903,16 @@ module.exports = [
     },
     "defaultvalue": "false",
     "meta": {
-      "lineno": 1660,
+      "lineno": 1849,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 94
+    "order": 98
   },
   {
-    "id": "Options.axis:y2:center",
-    "longname": "Options.axis:y2:center",
-    "name": "axis:y2:center",
+    "id": "Options.axis․y2․center",
+    "longname": "Options.axis․y2․center",
+    "name": "axis․y2․center",
     "kind": "member",
     "scope": "static",
     "description": "Set center value of y2 axis.",
@@ -2663,16 +2927,16 @@ module.exports = [
     },
     "defaultvalue": "undefined",
     "meta": {
-      "lineno": 1676,
+      "lineno": 1865,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 95
+    "order": 99
   },
   {
-    "id": "Options.axis:y2:inner",
-    "longname": "Options.axis:y2:inner",
-    "name": "axis:y2:inner",
+    "id": "Options.axis․y2․inner",
+    "longname": "Options.axis․y2․inner",
+    "name": "axis․y2․inner",
     "kind": "member",
     "scope": "static",
     "description": "Show y2 axis inside of the chart.",
@@ -2687,16 +2951,16 @@ module.exports = [
     },
     "defaultvalue": "false",
     "meta": {
-      "lineno": 1691,
+      "lineno": 1880,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 96
+    "order": 100
   },
   {
-    "id": "Options.axis:y2:label",
-    "longname": "Options.axis:y2:label",
-    "name": "axis:y2:label",
+    "id": "Options.axis․y2․label",
+    "longname": "Options.axis․y2․label",
+    "name": "axis․y2․label",
     "kind": "member",
     "scope": "static",
     "description": "Set label on y2 axis.<br><br>\rYou can set y2 axis label and change its position by this option. This option works in the same way as axis.x.label.",
@@ -2712,16 +2976,16 @@ module.exports = [
     },
     "defaultvalue": "{}",
     "meta": {
-      "lineno": 1706,
+      "lineno": 1895,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 97
+    "order": 101
   },
   {
-    "id": "Options.axis:y2:tick:format",
-    "longname": "Options.axis:y2:tick:format",
-    "name": "axis:y2:tick:format",
+    "id": "Options.axis․y2․tick․format",
+    "longname": "Options.axis․y2․tick․format",
+    "name": "axis․y2․tick․format",
     "kind": "member",
     "scope": "static",
     "description": "Set formatter for y2 axis tick text.<br><br>\rThis option works in the same way as axis.y.format.",
@@ -2736,16 +3000,16 @@ module.exports = [
     },
     "defaultvalue": "undefined",
     "meta": {
-      "lineno": 1731,
+      "lineno": 1920,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 98
+    "order": 102
   },
   {
-    "id": "Options.axis:y2:tick:outer",
-    "longname": "Options.axis:y2:tick:outer",
-    "name": "axis:y2:tick:outer",
+    "id": "Options.axis․y2․tick․outer",
+    "longname": "Options.axis․y2․tick․outer",
+    "name": "axis․y2․tick․outer",
     "kind": "member",
     "scope": "static",
     "description": "Show or hide y2 axis outer tick.",
@@ -2760,16 +3024,16 @@ module.exports = [
     },
     "defaultvalue": "true",
     "meta": {
-      "lineno": 1750,
+      "lineno": 1939,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 99
+    "order": 103
   },
   {
-    "id": "Options.axis:y2:tick:values",
-    "longname": "Options.axis:y2:tick:values",
-    "name": "axis:y2:tick:values",
+    "id": "Options.axis․y2․tick․values",
+    "longname": "Options.axis․y2․tick․values",
+    "name": "axis․y2․tick․values",
     "kind": "member",
     "scope": "static",
     "description": "Set y2 axis tick values manually.",
@@ -2784,16 +3048,16 @@ module.exports = [
     },
     "defaultvalue": "null",
     "meta": {
-      "lineno": 1767,
+      "lineno": 1956,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 100
+    "order": 104
   },
   {
-    "id": "Options.axis:y2:tick:count",
-    "longname": "Options.axis:y2:tick:count",
-    "name": "axis:y2:tick:count",
+    "id": "Options.axis․y2․tick․count",
+    "longname": "Options.axis․y2․tick․count",
+    "name": "axis․y2․tick․count",
     "kind": "member",
     "scope": "static",
     "description": "Set the number of y2 axis ticks.\r- **NOTE:** This works in the same way as axis.y.tick.count.",
@@ -2808,16 +3072,16 @@ module.exports = [
     },
     "defaultvalue": "undefined",
     "meta": {
-      "lineno": 1784,
+      "lineno": 1973,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 101
+    "order": 105
   },
   {
-    "id": "Options.axis:y2:padding",
-    "longname": "Options.axis:y2:padding",
-    "name": "axis:y2:padding",
+    "id": "Options.axis․y2․padding",
+    "longname": "Options.axis․y2․padding",
+    "name": "axis․y2․padding",
     "kind": "member",
     "scope": "static",
     "description": "Set the number of y2 axis ticks.\r- **NOTE:** This works in the same way as axis.y.tick.count.",
@@ -2827,21 +3091,21 @@ module.exports = [
     ],
     "type": {
       "names": [
-        "Number"
+        "Object"
       ]
     },
     "defaultvalue": "{}",
     "meta": {
-      "lineno": 1802,
+      "lineno": 1991,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 102
+    "order": 106
   },
   {
-    "id": "Options.axis:y2:default",
-    "longname": "Options.axis:y2:default",
-    "name": "axis:y2:default",
+    "id": "Options.axis․y2․default",
+    "longname": "Options.axis․y2․default",
+    "name": "axis․y2․default",
     "kind": "member",
     "scope": "static",
     "description": "Set default range of y2 axis.<br><br>\rThis option set the default value for y2 axis when there is no data on init.",
@@ -2856,11 +3120,11 @@ module.exports = [
     },
     "defaultvalue": "undefined",
     "meta": {
-      "lineno": 1821,
+      "lineno": 2010,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 103
+    "order": 107
   },
   {
     "id": "Options.grid",
@@ -2871,7 +3135,7 @@ module.exports = [
     "description": "Set related options",
     "memberof": "Options",
     "examples": [
-      "grid: {\r  x: {\r    show: true,\r    lines: [\r      {value: 2, text: \"Label on 2\"},\r      {value: 5, text: \"Label on 5\", class: \"label-5\"}\r      {value: 6, text: \"Label on 6\", position: \"start\"}\r    ]\r  },\r\t y: {\r    show: true,\r    lines: [\r      {value: 100, text: \"Label on 100\"},\r      {value: 200, text: \"Label on 200\", class: \"label-200\"}\r      {value: 300, text: \"Label on 300\", position: 'middle'}\r    ],\r    ticks: 5\r  },\r  focus: {\r     show: false\r  },\r  lines: {\r     front: false\r  }\r}"
+      "grid: {\r  x: {\r    show: true,\r    lines: [\r      {value: 2, text: \"Label on 2\"},\r      {value: 5, text: \"Label on 5\", class: \"label-5\"}\r      {value: 6, text: \"Label on 6\", position: \"start\"}\r    ]\r  },\r  y: {\r    show: true,\r    lines: [\r      {value: 100, text: \"Label on 100\"},\r      {value: 200, text: \"Label on 200\", class: \"label-200\"}\r      {value: 300, text: \"Label on 300\", position: 'middle'}\r    ],\r    ticks: 5\r  },\r  focus: {\r     show: false\r  },\r  lines: {\r     front: false\r  }\r}"
     ],
     "type": {
       "names": [
@@ -2889,18 +3153,18 @@ module.exports = [
         "optional": true,
         "defaultvalue": false,
         "description": "Show grids along x axis.",
-        "name": "grid.x.show"
+        "name": "x.show"
       },
       {
         "type": {
           "names": [
-            "Array"
+            "Boolean"
           ]
         },
         "optional": true,
         "defaultvalue": "[]",
         "description": "Show additional grid lines along x axis.<br>\r This option accepts array including object that has value, text, position and class. text, position and class are optional. For position, start, middle and end (default) are available.\r If x axis is category axis, value can be category name. If x axis is timeseries axis, value can be date string, Date object and unixtime integer.",
-        "name": "grid.x.lines"
+        "name": "x.lines"
       },
       {
         "type": {
@@ -2911,28 +3175,28 @@ module.exports = [
         "optional": true,
         "defaultvalue": false,
         "description": "Show grids along x axis.",
-        "name": "grid.y.show"
+        "name": "y.show"
       },
       {
         "type": {
           "names": [
-            "Array"
+            "Boolean"
           ]
         },
         "optional": true,
         "defaultvalue": "[]",
         "description": "Show additional grid lines along y axis.<br>\r This option accepts array including object that has value, text, position and class.",
-        "name": "grid.y.lines"
+        "name": "y.lines"
       },
       {
         "type": {
           "names": [
-            "Number"
+            "Boolean"
           ]
         },
         "optional": true,
         "defaultvalue": 10,
-        "name": "grid.y.ticks"
+        "name": "y.ticks"
       },
       {
         "type": {
@@ -2943,7 +3207,7 @@ module.exports = [
         "optional": true,
         "defaultvalue": true,
         "description": "Show grids when focus.",
-        "name": "grid.focus.show"
+        "name": "focus.show"
       },
       {
         "type": {
@@ -2953,15 +3217,15 @@ module.exports = [
         },
         "optional": true,
         "defaultvalue": true,
-        "name": "grid.lines.front"
+        "name": "lines.front"
       }
     ],
     "meta": {
-      "lineno": 1837,
+      "lineno": 2026,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 104
+    "order": 108
   },
   {
     "id": "Options.point",
@@ -2972,7 +3236,7 @@ module.exports = [
     "description": "Set point options",
     "memberof": "Options",
     "examples": [
-      "point: {\r     show: false,\r     r: 5,\r     focus: {\r         expand: {\r             enabled: true,\r             r: 1\r         }\r     },\r     select: {\r         r: 3\r     }\r }"
+      "point: {\r     show: false,\r     r: 5,\r\r     // or customize the radius\r     r: function(d) {\r         ...\r         return r;\r     },\r\r     focus: {\r         expand: {\r             enabled: true,\r             r: 1\r         }\r     },\r     select: {\r         r: 3\r     },\r\r     // valid values are \"circle\" or \"rectangle\"\r     type: \"rectangle\",\r\r     // or indicate as pattern\r     pattern: [\r       \"circle\",\r       \"rectangle\",\r       \"<polygon points='0 6 4 0 -4 0'></polygon>\"\r    ],\r }"
     ],
     "type": {
       "names": [
@@ -2994,12 +3258,13 @@ module.exports = [
       {
         "type": {
           "names": [
-            "Number"
+            "Number",
+            "function"
           ]
         },
         "optional": true,
         "defaultvalue": 2.5,
-        "description": "The radius size of each point.",
+        "description": "The radius size of each point.<br>\r - **Note:** Disabled for 'bubble' type",
         "name": "point.r"
       },
       {
@@ -3016,12 +3281,12 @@ module.exports = [
       {
         "type": {
           "names": [
-            "Number"
+            "Boolean"
           ]
         },
         "optional": true,
         "defaultvalue": "point.r*1.75",
-        "description": "The radius size of each point on focus.",
+        "description": "The radius size of each point on focus.<br>\r - **Note:** For 'bubble' type, the default is `bubbleSize*1.15`",
         "name": "point.focus.expand.r"
       },
       {
@@ -3034,14 +3299,36 @@ module.exports = [
         "defaultvalue": "point.r*4",
         "description": "The radius size of each point on selected.",
         "name": "point.select.r"
+      },
+      {
+        "type": {
+          "names": [
+            "String"
+          ]
+        },
+        "optional": true,
+        "defaultvalue": "\"circle\"",
+        "description": "The type of point to be drawn<br>\r- **Note:**\r - If chart has 'bubble' type, only circle can be used.\r - For IE, non circle point expansions are not supported due to lack of transform support.\r- **Available Values:**\r - circle\r - rectangle",
+        "name": "point.type"
+      },
+      {
+        "type": {
+          "names": [
+            "Array"
+          ]
+        },
+        "optional": true,
+        "defaultvalue": "[]",
+        "description": "The type of point or svg shape as string, to be drawn for each line<br>\r- **Note:**\r - This is an `experimental` feature and can have some unexpected behaviors.\r - If chart has 'bubble' type, only circle can be used.\r - For IE, non circle point expansions are not supported due to lack of transform support.\r- **Available Values:**\r - circle\r - rectangle\r - svg shape tag interpreted as string<br>\r   (ex. `<polygon points='2.5 0 0 5 5 5'></polygon>`)",
+        "name": "point.pattern"
       }
     ],
     "meta": {
-      "lineno": 1889,
+      "lineno": 2078,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 105
+    "order": 109
   },
   {
     "id": "Options.line",
@@ -3052,7 +3339,7 @@ module.exports = [
     "description": "Set line options",
     "memberof": "Options",
     "examples": [
-      "line: {\r     connectNull: true,\r     step: {\r         type: \"step-after\"\r     }\r }"
+      "line: {\r     connectNull: true,\r     classes: [\r         \"line-class1\",\r         \"line-class2\"\r     ],\r     step: {\r         type: \"step-after\"\r     }\r }"
     ],
     "type": {
       "names": [
@@ -3074,21 +3361,31 @@ module.exports = [
       {
         "type": {
           "names": [
+            "Array"
+          ]
+        },
+        "optional": true,
+        "description": "If set, used to set a css class on each line.",
+        "name": "line.classes"
+      },
+      {
+        "type": {
+          "names": [
             "Boolean"
           ]
         },
         "optional": true,
         "defaultvalue": "step",
         "description": "Change step type for step chart.<br>\r**Available values:**\r- step\r- step-before\r- step-after",
-        "name": "line.step_type"
+        "name": "line.step.type"
       }
     ],
     "meta": {
-      "lineno": 1921,
+      "lineno": 2148,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 106
+    "order": 110
   },
   {
     "id": "Options.bar",
@@ -3150,11 +3447,48 @@ module.exports = [
       }
     ],
     "meta": {
-      "lineno": 1944,
+      "lineno": 2177,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 107
+    "order": 111
+  },
+  {
+    "id": "Options.bubble",
+    "longname": "Options.bubble",
+    "name": "bubble",
+    "kind": "member",
+    "scope": "static",
+    "description": "Set bubble options",
+    "memberof": "Options",
+    "examples": [
+      "bubble: {\r     // ex) If 100 is the highest value among data bound, the representation bubble of 100 will have radius of 50.\r     // And the lesser will have radius relatively from tha max value.\r     maxR: 50,\r\r     // or set radius callback\r     maxR: function(d) {\r         // ex. of d param - {x: Fri Oct 06 2017 00:00:00 GMT+0900, value: 80, id: \"data2\", index: 5}\r         ...\r         return Math.sqrt(d.value * 2);\r     }\r }"
+    ],
+    "type": {
+      "names": [
+        "Object"
+      ]
+    },
+    "properties": [
+      {
+        "type": {
+          "names": [
+            "Number",
+            "function"
+          ]
+        },
+        "optional": true,
+        "defaultvalue": 35,
+        "description": "Set the max bubble radius value",
+        "name": "bubble.maxR"
+      }
+    ],
+    "meta": {
+      "lineno": 2202,
+      "filename": "Options.js",
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
+    },
+    "order": 112
   },
   {
     "id": "Options.area",
@@ -3196,11 +3530,11 @@ module.exports = [
       }
     ],
     "meta": {
-      "lineno": 1969,
+      "lineno": 2224,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 108
+    "order": 113
   },
   {
     "id": "Options.pie",
@@ -3211,7 +3545,7 @@ module.exports = [
     "description": "Set pie options",
     "memberof": "Options",
     "examples": [
-      "pie: {\r     label: {\r         show: false,\r         format: function(value, ratio, id) {\r             return d3.format(\"$\")(value);\r         },\r         threshold: 0.1\r     },\r     expand: false,\r     padAngle: 0.1\r }"
+      "pie: {\r     label: {\r         show: false,\r         format: function(value, ratio, id) {\r             return d3.format(\"$\")(value);\r         },\r         threshold: 0.1,\r\r         // set ratio callback. Should return ratio value\r         ratio: function(d, radius, h) {\r         \t...\r         \treturn ratio;\r         },\r         // or set ratio number\r         ratio: 0.5\r     },\r     expand: false,\r     padAngle: 0.1\r }"
     ],
     "type": {
       "names": [
@@ -3254,6 +3588,17 @@ module.exports = [
       {
         "type": {
           "names": [
+            "Number",
+            "function"
+          ]
+        },
+        "optional": true,
+        "description": "Set ratio of labels position.",
+        "name": "pie.label.ratio"
+      },
+      {
+        "type": {
+          "names": [
             "Boolean"
           ]
         },
@@ -3275,11 +3620,11 @@ module.exports = [
       }
     ],
     "meta": {
-      "lineno": 1985,
+      "lineno": 2240,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 109
+    "order": 114
   },
   {
     "id": "Options.gauge",
@@ -3290,7 +3635,7 @@ module.exports = [
     "description": "Set gauge options",
     "memberof": "Options",
     "examples": [
-      "gauge: {\r     label: {\r         show: false,\r         format: function(value, ratio) {\r             return value;\r         }\r     },\r     expand: false,\r     min: -100,\r     max: 200,\r     units: \"%\",\r     width: 10\r }"
+      "gauge: {\r     fullCircle: false,\r     label: {\r         show: false,\r         format: function(value, ratio) {\r             return value;\r         },\r         extents: function(value, isMax) {\r             return (isMax ? \"Max:\" : \"Min:\") + value;\r         }\r     },\r     expand: false,\r\r     // or set duration\r     expand: {\r         duration: 20\r     },\r     min: -100,\r     max: 200,\r     units: \"%\",\r     width: 10\r }"
     ],
     "type": {
       "names": [
@@ -3306,6 +3651,7 @@ module.exports = [
         },
         "optional": true,
         "defaultvalue": false,
+        "description": "Show full circle as donut. When set to 'true', the max label will not be showed due to start and end points are same location.",
         "name": "gauge.fullCircle"
       },
       {
@@ -3332,6 +3678,16 @@ module.exports = [
       {
         "type": {
           "names": [
+            "function"
+          ]
+        },
+        "optional": true,
+        "description": "Set customized min/max label text.",
+        "name": "gauge.label.extents"
+      },
+      {
+        "type": {
+          "names": [
             "Boolean"
           ]
         },
@@ -3348,6 +3704,7 @@ module.exports = [
         },
         "optional": true,
         "defaultvalue": 50,
+        "description": "Set the expand transition time in milliseconds.",
         "name": "gauge.expand.duration"
       },
       {
@@ -3404,11 +3761,11 @@ module.exports = [
       }
     ],
     "meta": {
-      "lineno": 2016,
+      "lineno": 2280,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 110
+    "order": 115
   },
   {
     "id": "Options.donut",
@@ -3419,7 +3776,7 @@ module.exports = [
     "description": "Set donut options",
     "memberof": "Options",
     "examples": [
-      "donut: {\r     label: {\r         show: false,\r         format: function(value, ratio, id) {\r             return d3.format(\"$\")(value);\r         },\r         threshold: 0.1\r     },\r     expand: false,\r     width: 10,\r     title: \"Donut Title\",\r     padAngle: 0.2\r }"
+      "donut: {\r     label: {\r         show: false,\r         format: function(value, ratio, id) {\r             return d3.format(\"$\")(value);\r         },\r         threshold: 0.1,\r\r         // set ratio callback. Should return ratio value\r         ratio: function(d, radius, h) {\r         \t...\r         \treturn ratio;\r         },\r         // or set ratio number\r         ratio: 0.5\r     },\r     expand: false,\r     width: 10,\r     padAngle: 0.2,\r     title: \"Donut Title\"\r\r     // title with line break\r     title: \"Title1\\nTitle2\"\r }"
     ],
     "type": {
       "names": [
@@ -3462,6 +3819,17 @@ module.exports = [
       {
         "type": {
           "names": [
+            "Number",
+            "function"
+          ]
+        },
+        "optional": true,
+        "description": "Set ratio of labels position.",
+        "name": "donut.label.ratio"
+      },
+      {
+        "type": {
+          "names": [
             "Boolean"
           ]
         },
@@ -3488,7 +3856,7 @@ module.exports = [
         },
         "optional": true,
         "defaultvalue": "\"\"",
-        "description": "Set title of donut chart.",
+        "description": "Set title of donut chart. Use `\\n` character to enter line break.",
         "name": "donut.title"
       },
       {
@@ -3504,11 +3872,11 @@ module.exports = [
       }
     ],
     "meta": {
-      "lineno": 2058,
+      "lineno": 2333,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 111
+    "order": 116
   },
   {
     "id": "Options.spline",
@@ -3539,11 +3907,11 @@ module.exports = [
       }
     ],
     "meta": {
-      "lineno": 2095,
+      "lineno": 2382,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 112
+    "order": 117
   },
   {
     "id": "Options.regions",
@@ -3554,7 +3922,7 @@ module.exports = [
     "description": "Show rectangles inside the chart.<br><br>\rThis option accepts array including object that has axis, start, end and class. The keys start, end and class are optional.\raxis must be x, y or y2. start and end should be the value where regions start and end. If not specified, the edge values will be used. If timeseries x axis, date string, Date object and unixtime integer can be used. If class is set, the region element will have it as class.",
     "memberof": "Options",
     "examples": [
-      "regions: [\r\t {\r\t     axis: \"x\",\r\t     start: 1,\r\t     end: 4,\r\t     class: \"region-1-4\"\r\t }\r ]"
+      "regions: [\r   {\r\t    axis: \"x\",\r\t    start: 1,\r\t    end: 4,\r\t    class: \"region-1-4\"\r   }\r ]"
     ],
     "type": {
       "names": [
@@ -3563,11 +3931,11 @@ module.exports = [
     },
     "defaultvalue": "[]",
     "meta": {
-      "lineno": 2110,
+      "lineno": 2397,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 113
+    "order": 118
   },
   {
     "id": "Options.tooltip",
@@ -3578,7 +3946,7 @@ module.exports = [
     "description": "Tooltip options",
     "memberof": "Options",
     "examples": [
-      "tooltip: {\r     show: true,\r     grouped: false,\r     format: {\r         title: function(x) { return \"Data \" + x; },\r         name: function(name, ratio, id, index) { return name; },\r         value: function(value, ratio, id, index) { return ratio; }\r     },\r     position: function(data, width, height, element) {\r         return {top: 0, left: 0}\r     },\r     contents: function(d, defaultTitleFormat, defaultValueFormat, color) {\r         return ... // formatted html as you want\r     }\r }"
+      "tooltip: {\r     show: true,\r     grouped: false,\r     format: {\r         title: function(x) { return \"Data \" + x; },\r         name: function(name, ratio, id, index) { return name; },\r         value: function(value, ratio, id, index) { return ratio; }\r     },\r     position: function(data, width, height, element) {\r         return {top: 0, left: 0}\r     },\r     contents: function(d, defaultTitleFormat, defaultValueFormat, color) {\r         return ... // formatted html as you want\r     },\r\r     // sort tooltip data value display in ascending order\r     order: \"asc\",\r\r     // specifying sort function\r     order: function(a, b) {\r        // param data passed format\r        {x: 5, value: 250, id: \"data1\", index: 5, name: \"data1\"}\r          ...\r     }\r }"
     ],
     "type": {
       "names": [
@@ -3657,14 +4025,27 @@ module.exports = [
         "optional": true,
         "description": "Set custom HTML for the tooltip.<br>\r Specified function receives data, defaultTitleFormat, defaultValueFormat and color of the data point to show. If tooltip.grouped is true, data includes multiple data points.",
         "name": "tooltip.contents"
+      },
+      {
+        "type": {
+          "names": [
+            "String",
+            "function",
+            "null"
+          ]
+        },
+        "optional": true,
+        "defaultvalue": null,
+        "description": "Set tooltip data display order.<br><br>\r **Available Values:**\r - `desc`: In descending data value order\r - `asc`: In ascending data value order\r - `null`: It keeps the data display order<br>\r    **NOTE:** When `data.groups` is set, the order will follow as the stacked graph order.<br>\r     If want to order as data bound, set any value rather than asc, desc or null. (ex. empty string \"\")\r - `function(data1, data2) { ... }`: [Array.sort compareFunction](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#Parameters)",
+        "name": "tooltip.order"
       }
     ],
     "meta": {
-      "lineno": 2130,
+      "lineno": 2417,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 114
+    "order": 119
   },
   {
     "id": "Options.title",
@@ -3744,10 +4125,10 @@ module.exports = [
       }
     ],
     "meta": {
-      "lineno": 2184,
+      "lineno": 2490,
       "filename": "Options.js",
-      "path": "/Users/Naver/Documents/projects/oss/personal_repo/billboardjs-playground/node_modules/billboard.js/src/config"
+      "path": "C:\\dev\\git\\billboard.js-playground\\node_modules\\billboard.js\\src\\config"
     },
-    "order": 115
+    "order": 120
   }
 ]

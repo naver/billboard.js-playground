@@ -18,11 +18,10 @@ class Member extends React.Component {
 	shouldComponentUpdate(nextProps) {
 		const roots = nextProps.lastUpdateRoot || [];
 
-		if(roots.indexOf(this.props.attributes.name) > -1){
+		if (roots.indexOf(this.props.attributes.name) > -1) {
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	child(properties) {
@@ -31,24 +30,20 @@ class Member extends React.Component {
 		_.map(properties, (option) => {
 			if (option.properties) {
 				items = items.concat(this.child(option.properties));
-			} else {
+			} else if (option.attributes.type) {
 				const name = option.attributes.type.names;
 
 				if (name.indexOf("Array") > -1) {
-					// console.log(option.attributes.name);
-					// console.log(option.attributes.defaultvalue);
-					// console.log(option.attributes.examples);
-					//items.push(<Property
-					//	style={{display : "none"}}
-					//	key={option.attributes.name}
-					//	rootMemberName={this.state.attributes.name}
-					//	{...option.attributes} level={1}
-					///>);
+						// items.push(<Property
+						//	style={{display : "none"}}
+						//	key={option.attributes.name}
+						//	rootMemberName={this.state.attributes.name}
+						//	{...option.attributes} level={1}
+						// />);
 				} else if (name.indexOf("Object") > -1) {
-					
-					// console.log(option.attributes.name);
-					// console.log(option.attributes.defaultvalue);
-					// console.log(option.attributes.examples);
+						// console.log(option.attributes.name);
+						// console.log(option.attributes.defaultvalue);
+						// console.log(option.attributes.examples);
 				} else {
 					items.push(<Property
 						key={option.attributes.name}
@@ -67,7 +62,7 @@ class Member extends React.Component {
 		const member = this.props.attributes;
 		const properties = this.props.properties;
 
-		return <MuiThemeProvider muiTheme={getMuiTheme()}>
+		return (<MuiThemeProvider muiTheme={getMuiTheme()}>
 			<ListItem
 				style={{
 				}}
@@ -83,7 +78,7 @@ class Member extends React.Component {
 				primaryText={member.name}
 				nestedItems={this.child(properties)}
 			/>
-		</MuiThemeProvider>;
+		</MuiThemeProvider>);
 	}
 }
 

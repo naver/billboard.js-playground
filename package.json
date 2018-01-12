@@ -4,9 +4,9 @@
   "description": "playground for billboard.js",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --open",
-    "build": "webpack --env production --config ./webpack.production.config.js",
-    "extract:document": "jsdoc2md --json node_modules/billboard.js/src/config/Options.js > src/app/document.json"
+    "start": "npm run extract:document && webpack-dev-server --open",
+    "build": "npm run extract:document && webpack --env production --config ./webpack.production.config.js",
+    "extract:document": "echo module.exports = > src/app/configure/resources/document.js && jsdoc2md --json node_modules/billboard.js/src/config/Options.js >> src/app/configure/resources/document.js"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,7 @@
   "author": "joohwee.kim",
   "license": "MIT",
   "dependencies": {
-    "billboard.js": "^1.0.1",
+    "billboard.js": "^1.2.0",
     "classnames": "^2.2.5",
     "codemirror": "^5.30.0",
     "create-react-class": "^15.6.2",
@@ -35,10 +35,6 @@
     "redux": "^3.7.2"
   },
   "devDependencies": {
-    "webpack": "^2.6.0",
-    "extract-text-webpack-plugin": "^2.1.2",
-    "postcss": "^6.0.11",
-    "postcss-cssnext": "^3.0.2",
     "babel-core": "^6.24.1",
     "babel-loader": "^6.4.1",
     "babel-plugin-add-module-exports": "^0.2.1",
@@ -47,16 +43,19 @@
     "clean-webpack-plugin": "^0.1.16",
     "css-loader": "^0.28.7",
     "eslint": "^3.19.0",
-    "eslint-config-airbnb": "^15.1.0",
     "eslint-config-naver": "^1.0.0",
     "eslint-loader": "^1.7.1",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^5.0.1",
     "eslint-plugin-react": "^7.4.0",
+    "extract-text-webpack-plugin": "^2.1.2",
     "file-loader": "^0.11.2",
+    "jsdoc-to-markdown": "^3.0.3",
     "node-sass": "^4.5.2",
     "optimize-css-assets-webpack-plugin": "^1.3.0",
     "portscanner": "^2.1.1",
+    "postcss": "^6.0.11",
+    "postcss-cssnext": "^3.0.2",
     "postcss-load-config": "^1.2.0",
     "postcss-loader": "^2.0.6",
     "react-billboardjs": "git://github.com/kjhwee91/react-billboardjs.git",
@@ -70,6 +69,7 @@
     "uglify-js": "^2.8.22",
     "uglifyjs-webpack-plugin": "^0.4.1",
     "url-loader": "^0.5.9",
+    "webpack": "^2.6.0",
     "webpack-cleanup-plugin": "^0.5.1",
     "webpack-dev-server": "^2.4.2",
     "webpack-merge": "^4.1.0",
